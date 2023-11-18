@@ -10,6 +10,7 @@ import {
   FilesIcon,
   Building2Icon,
   BarChart2Icon,
+  UsersIcon,
 } from "lucide-react";
 import Logo from "@/components/svg/Logo_SOW";
 import ThemeToggle from "./ThemeToggle";
@@ -21,6 +22,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import BackButton from "./BackButton";
 async function Navbar() {
   const supabase = createServerComponentClient({ cookies });
   const {
@@ -39,6 +41,11 @@ async function Navbar() {
       tooltip: "Companies",
     },
     {
+      link: "/users",
+      icon: <UsersIcon />,
+      tooltip: "Users",
+    },
+    {
       link: "/reports",
       icon: <BarChart2Icon />,
       tooltip: "Reports",
@@ -48,12 +55,15 @@ async function Navbar() {
     <header className="border-b-2">
       <div className="container mx-auto">
         <nav className="flex items-center justify-between py-4">
-          <div className="inline-flex items-center space-x-4">
-            <Link href={"/documents"}>
+          <div className="inline-flex h-full items-center space-x-4">
+            {/* <Link href={"/documents"}>
               <div className="flex items-center space-x-1">
                 <Logo className="w-6 h-6" />
               </div>
-            </Link>
+            </Link> */}
+            <>
+              <BackButton />
+            </>
             {navIcons.map((item, i) => (
               <React.Fragment key={i}>
                 <TooltipProvider>

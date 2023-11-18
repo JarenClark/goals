@@ -5,6 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+// generate random string of x length
 export function makeRandomId(length: number): string {
   let result = "";
   const characters =
@@ -16,4 +17,17 @@ export function makeRandomId(length: number): string {
     counter += 1;
   }
   return result;
+}
+
+// turns "John Smith" into "JS", etc...
+export function getInitials(name: any) {
+  let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
+
+  let initials = [...name.matchAll(rgx)] || [];
+  
+  initials = (
+    (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
+  ).toUpperCase();
+
+  return initials
 }

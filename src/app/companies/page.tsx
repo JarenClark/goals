@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Image from "next/image";
-import { TypographyH1 } from "@/components/ui/typography";
+import { TypographyH1, TypographyLead } from "@/components/ui/typography";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 export default async function Home() {
@@ -18,27 +18,33 @@ export default async function Home() {
   return (
     <>
       <ProtectedContent>
-      <div className="container py-16">
-        <div className="mb-8 flex items-center justify-between">
-          <TypographyH1>
-            Companies <small> ({count})</small>
-          </TypographyH1>
-          <form>
-            <Input placeholder="Search"></Input>
-          </form>
+        <div className="container py-16">
+          <div className="mb-8">
+            <div className="mb-2 flex items-center justify-between">
+              <TypographyH1>
+                Companies <small> ({count})</small>
+              </TypographyH1>
+              <form>
+                <Input placeholder="Search"></Input>
+              </form>
+            </div>
+            <TypographyLead>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad iste sed non.
+            </TypographyLead>
+          </div>
+
+          <ul className="mb-8 space-y-2">
+            {companies?.map((comp, i) => (
+              <li key={i} className="rounded-sm px-4 py-3  border">
+                <div className="flex items-center justify-between">
+                  <Link href={`/companies/${comp.id}`}>
+                    <span className="text-xl text-teal">{comp.title}</span>
+                  </Link>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul className="mb-8 space-y-2">
-          {companies?.map((comp, i) => (
-            <li key={i} className="rounded-sm px-4 py-3  border">
-              <div className="flex items-center justify-between">
-                <Link href={`/companies/${comp.id}`}>
-                  <span className="text-xl text-teal">{comp.title}</span>
-                </Link>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
       </ProtectedContent>
     </>
   );

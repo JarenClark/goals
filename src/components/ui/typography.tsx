@@ -8,7 +8,7 @@ type Props = {
 
 export function TypographyH1({ children }: Props) {
   return (
-    <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight">
+    <h1 className="scroll-m-20 text-4xl font-semibold tracking-tight">
       {children}
     </h1>
   );
@@ -43,15 +43,14 @@ export function TypographyList({ children }: Props) {
 export function TypographyInlineCode({ children }: Props) {
   return (
     <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-      @radix-ui/react-alert-dialog
+      { children }
     </code>
   );
 }
 export function TypographyLead({ children }: Props) {
   return (
     <p className="text-xl text-muted-foreground">
-      A modal dialog that interrupts the user with important content and expects
-      a response.
+      { children }
     </p>
   );
 }
@@ -59,8 +58,7 @@ export function TypographyLead({ children }: Props) {
 export function TypographyBlockquote({ children }: Props) {
   return (
     <blockquote className="mt-6 border-l-2 pl-6 italic">
-      "After all," he said, "everyone enjoys a good joke, so it's only fair that
-      they should pay for the privilege."
+      { children }
     </blockquote>
   );
 }
