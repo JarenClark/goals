@@ -12,6 +12,7 @@ import React from "react";
 import CompanyLinkName from "@/components/CompanyLinkName";
 import { redirect } from "next/navigation";
 import ProtectedContent from "@/components/ProtectedContent";
+import { TypographyH1 } from "@/components/ui/typography";
 export default async function DocumentPage({
   params,
 }: {
@@ -25,14 +26,16 @@ export default async function DocumentPage({
     .eq("id", params.docId)
     .single();
 
-
   return (
     <ProtectedContent>
-      <div className="container py-20">
+      <div className="container py-16">
+        <div className="mb-8">
+          <TypographyH1>{document?.title}</TypographyH1>
+        </div>
         <Card className="p-4">
-          <CardHeader>
+          {/* <CardHeader>
             <CardTitle>{document?.title}</CardTitle>
-          </CardHeader>
+          </CardHeader> */}
 
           <CardContent>
             {document?.company_ref ? (

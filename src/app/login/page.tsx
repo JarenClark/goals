@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { cookies } from "next/headers";
 import { redirect, useRouter } from "next/navigation";
 import { Loader2Icon } from "lucide-react";
-import Logo from "@/components/Logo";
+import Logo from "@/components/svg/Logo_SOW";
 import { Button } from "@/components/ui/button";
 export default function Login() {
   const router = useRouter();
@@ -27,7 +27,7 @@ export default function Login() {
       }
     };
     handleLoggedInUser();
-  }, []);
+  }, [supabase, router]);
 
   // before our session is fetched
   if (loading)

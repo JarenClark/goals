@@ -1,4 +1,6 @@
+import ProtectedContent from "@/components/ProtectedContent";
 import { Card, CardTitle, CardContent, CardHeader } from "@/components/ui/card";
+import { TypographyH1 } from "@/components/ui/typography";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import React from "react";
@@ -17,15 +19,17 @@ export default async function CompanyPage({
   if (!company) return null;
 
   return (
-    <div className="container py-20">
-      <Card>
-        <CardHeader>
-          <CardTitle>{company.title}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <pre>{JSON.stringify(company, null, 2)}</pre>
-        </CardContent>
-      </Card>
-    </div>
+    <ProtectedContent>
+      <div className="container py-16">
+        <div className="mb-8">
+          <TypographyH1>{company.title}</TypographyH1>
+        </div>
+        <Card>
+          <CardContent>
+            <pre>{JSON.stringify(company, null, 2)}</pre>
+          </CardContent>
+        </Card>
+      </div>
+    </ProtectedContent>
   );
 }

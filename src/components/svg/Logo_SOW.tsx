@@ -1,6 +1,6 @@
 import React from "react";
 
-function Logo({ className }: { className?: string }) {
+function Logo_SOW({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -19,4 +19,4 @@ function Logo({ className }: { className?: string }) {
   );
 }
 
-export default Logo;
+export default Logo_SOW;

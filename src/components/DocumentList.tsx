@@ -11,15 +11,7 @@ type Doc = {
   title: string;
 };
 function DocumentList({ initialDocs }: { initialDocs: Doc[] | null }) {
-  // from state
-  //   const documents = useStore((state) => state.documents);
-  //   {
-  //     documents.map((doc, i) => (
-  //       <li key={i}>
-  //         <Link href={`/documents/${doc.id}`}>{doc.title}</Link>
-  //       </li>
-  //     ));
-  //   }
+  const [docsToShow, setDocsToShow] = useState<Doc[] | null>(null)
 
   return (
     <ul className="mb-8 space-y-2">

@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+//react/no-unescaped-entities
 import React from "react";
 
 type Props = {
@@ -6,7 +8,7 @@ type Props = {
 
 export function TypographyH1({ children }: Props) {
   return (
-    <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+    <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight">
       {children}
     </h1>
   );
