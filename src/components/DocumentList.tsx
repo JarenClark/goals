@@ -16,7 +16,7 @@ function DocumentList({ initialDocs }: { initialDocs: Doc[] | null }) {
   return (
     <ul className="mb-8 space-y-2">
       {initialDocs?.map((doc, i) => (
-        <li key={i} className="rounded-sm px-4 py-3  border">
+        <li key={i} className="rounded-md px-4 py-3  border">
           <div className="flex items-center justify-between">
             <Link href={`/documents/${doc.id}`}>
               <span className="text-xl text-teal">{doc.title}</span>

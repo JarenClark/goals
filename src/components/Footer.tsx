@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import { PlusCircleIcon } from "lucide-react";
 import CreateDocument from "@/components/CreateDocument";
 import { usePathname } from "next/navigation";
@@ -8,17 +8,21 @@ import {
   createClientComponentClient,
 } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { Label } from "@/components/ui/label";
 
 type Props = {};
 
 function Footer({}: Props) {
   const pathname = usePathname();
-  const supabase = createClientComponentClient();
-  // const {
-  //   data: { user },
-  // } = await supabase.auth.getUser();
+  // const supabase = createClientComponentClient();
+  // const [isLoggedIn, setisLoggedIn] = useState<boolean>(false);
+  // useEffect(() => {
+  //   const checkAuth = () => {
+  //     console.log("...");
+  //   };
+  // }, []);
 
-  // if(!user) return null
+  // if(!isLoggedIn) return null
   return (
     <footer className="border-t">
       <div className="container">
@@ -28,8 +32,8 @@ function Footer({}: Props) {
           </div>
         ) : (
           <div className="flex justify-between py-4">
-            <span>SOW Generator</span>
-            <span>{new Date().getFullYear()}</span>
+            <Label>SOW Generator</Label>
+            <Label>That&apos;s Nice {new Date().getFullYear()}</Label>
           </div>
         )}
       </div>

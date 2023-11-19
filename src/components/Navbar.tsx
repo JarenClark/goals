@@ -55,12 +55,8 @@ async function Navbar() {
     <header className="border-b-2">
       <div className="container mx-auto">
         <nav className="flex items-center justify-between py-4">
+        {user ? (
           <div className="inline-flex h-full items-center space-x-4">
-            {/* <Link href={"/documents"}>
-              <div className="flex items-center space-x-1">
-                <Logo className="w-6 h-6" />
-              </div>
-            </Link> */}
             <>
               <BackButton />
             </>
@@ -79,6 +75,7 @@ async function Navbar() {
               </React.Fragment>
             ))}
           </div>
+        ): <div/>}
 
           {/* <div className="flex items-center space-x-2"></div> */}
 
