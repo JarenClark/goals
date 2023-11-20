@@ -57,9 +57,9 @@ async function Navbar() {
         <nav className="flex items-center justify-between py-4">
         {user ? (
           <div className="inline-flex h-full items-center space-x-4">
-            <>
+            {/* <>
               <BackButton />
-            </>
+            </> */}
             {navIcons.map((item, i) => (
               <React.Fragment key={i}>
                 <TooltipProvider>

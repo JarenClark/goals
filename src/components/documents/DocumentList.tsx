@@ -1,8 +1,8 @@
 "use client";
 import { useStore } from "@/store";
 import React, { useState, useRef } from "react";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import Link from "next/link";
 
