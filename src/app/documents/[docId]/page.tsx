@@ -22,17 +22,20 @@ import {
   SettingsIcon,
   UndoIcon,
 } from "lucide-react";
-
+import { Separator } from "@/components/ui/separator";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import DocumentSettingsMenu from "@/components/documents/DocumentSettingsMenu";
+import DocumentSettingsMenuToggler from "@/components/documents/DocumentSettingsMenuToggler";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { Dropdown } from "react-day-picker";
 import DeliverablesTable from "@/components/documents/DeliverablesTable";
+import PaymentSchedule from "@/components/documents/PaymentSchedule";
 
 export default async function DocumentPage({
   params,
@@ -50,6 +53,10 @@ export default async function DocumentPage({
 
   return (
     <ProtectedContent>
+      <div className="p-1 flex justify-center">
+        <DocumentSettingsMenu />
+      </div>
+      {/* HEADER */}
       <div className="container flex justify-between py-2 border-b">
         <div className="flex space-x-2">
           <UndoIcon />
@@ -59,13 +66,15 @@ export default async function DocumentPage({
         <div className="flex space-x-2">
           <EyeIcon />
           <ArrowDownUpIcon />
-          <SettingsIcon />
+          <DocumentSettingsMenuToggler />
           <SaveIcon />
         </div>
       </div>
 
+      {/* EDITOR */}
       <div className="flex">
-        <div className="w-full lg:w-1/3 ">
+        {/* SIDEBAR */}
+        <div className=" bg-secondary border-r min-w-lg w-full max-w-2xl">
           <ScrollArea className="h-[90vh]">
             <div className="p-4">
               <Card>
@@ -80,14 +89,12 @@ export default async function DocumentPage({
                     <AccordionItem value="item-2">
                       <AccordionTrigger>Payment Schedule</AccordionTrigger>
                       <AccordionContent>
-                        PAYMENT SCHEDULE HERE
+                        <PaymentSchedule docId={params.docId}/>
                       </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-3">
                       <AccordionTrigger>Team</AccordionTrigger>
-                      <AccordionContent>
-                        TEAM SELECT HERE
-                      </AccordionContent>
+                      <AccordionContent>TEAM SELECT HERE</AccordionContent>
                     </AccordionItem>
                   </Accordion>
                 </CardContent>
@@ -95,17 +102,15 @@ export default async function DocumentPage({
             </div>
           </ScrollArea>
         </div>
-        <div className="w-full lg:w-2/3">
+        {/* <Separator orientation="vertical"/> */}
+        {/* MAIN */}
+        <div className="">
           <ScrollArea className="h-[90vh]">
             <div className="p-4">
               <div className="container py-16">
+                {/* DELIVERABLES */}
+                <DeliverablesTable content={document.content} />
 
-                <Card className="max-w-4xl">
-                  <CardContent >
-                  <DeliverablesTable content={document.content} />
-
-                  </CardContent>
-                </Card>
                 <Card>
                   <CardContent>
                     {document?.company_ref ? (

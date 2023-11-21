@@ -5,13 +5,14 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import Link from "next/link";
+import { Badge } from "../ui/badge";
 
 type Doc = {
   id: string;
   title: string;
 };
 function DocumentList({ initialDocs }: { initialDocs: Doc[] | null }) {
-  const [docsToShow, setDocsToShow] = useState<Doc[] | null>(null)
+  // const [docsToShow, setDocsToShow] = useState<Doc[] | null>(null)
 
   return (
     <ul className="mb-8 space-y-2">
@@ -21,6 +22,7 @@ function DocumentList({ initialDocs }: { initialDocs: Doc[] | null }) {
             <Link href={`/documents/${doc.id}`}>
               <span className="text-xl text-teal">{doc.title}</span>
             </Link>
+            <Badge>Approved</Badge>
           </div>
         </li>
       ))}

@@ -31,3 +31,9 @@ export function getInitials(name: any) {
 
   return initials
 }
+
+// formats currency
+export const USDollar = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});

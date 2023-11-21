@@ -8,29 +8,35 @@ export type Document = {
 };
 
 interface DocumentsState {
-  documents: Document[];
-  addDocument: (doc: Document) => void;
+  documents?: Document[];
+  addDocument?: (doc: Document) => void;
+  docMenuIsOpen: boolean;
+  setDocMenuIsOpen: (arg: boolean) => void;
 }
 
 export const useStore = create<DocumentsState>()((set) => ({
-  documents: [
-    {
-      id: "abc123",
-      title: "Document Number One ",
-      type: "AOR",
-      year: new Date()
-    },
-    {
-      id: "xyz789",
-      title: "Document Number Two ",
-      type: "AOR",
-      year: new Date()
-    },
-  ],
-  addDocument: (doc) => {
-    console.log('adding doc', doc)
-    set((state) => ({ documents: [...state.documents, doc] }))
-  }
+  // documents: [
+  //   {
+  //     id: "abc123",
+  //     title: "Document Number One ",
+  //     type: "AOR",
+  //     year: new Date(),
+  //   },
+  //   {
+  //     id: "xyz789",
+  //     title: "Document Number Two ",
+  //     type: "AOR",
+  //     year: new Date(),
+  //   },
+  // ],
+  // addDocument: (doc) => {
+  //   console.log("adding doc", doc);
+  //   set((state) => ({ documents: [...state.documents, doc] }));
+  // },
+  docMenuIsOpen: false,
+  setDocMenuIsOpen: (arg) => {
+    set(() => ({ docMenuIsOpen: arg }));
+  },
 }));
 
 // interface UserState {
