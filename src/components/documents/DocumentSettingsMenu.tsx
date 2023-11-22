@@ -18,17 +18,30 @@ import { X } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
-type Props = {};
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import DisplayNameByOldID from "../team/DisplayNameByOldID";
+import { TypographyP } from "../ui/typography";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
 
-function DocumentSettingsMenu({}: Props) {
+
+
+type Props = { doc: any };
+
+function DocumentSettingsMenu({ doc }: Props) {
   const isOpen = useStore((state) => state.docMenuIsOpen);
   const toggle = useStore((state) => state.setDocMenuIsOpen);
   return (
     <>
-      <Sheet open={isOpen} >
+      <Sheet open={isOpen}>
         {/* <SheetOverlay onClick={() => toggle(false)} /> */}
-        <SheetContent className="sm:max-w-sm md:max-w-md lg:max-w-lg">
+        <SheetContent className=" h-full flex flex-col justify-between sm:max-w-sm md:max-w-md lg:max-w-lg">
           <SheetHeader>
             <SheetClose
               onClick={() => toggle(false)}
@@ -43,63 +56,166 @@ function DocumentSettingsMenu({}: Props) {
               Make changes here. Click save when you're done.
             </SheetDescription>
           </SheetHeader>
+          <div className="mt-4"></div>
+          <Tabs defaultValue="details" className="">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="details">Details</TabsTrigger>
+              <TabsTrigger value="revisions">Revisions</TabsTrigger>
+            </TabsList>
+            <TabsContent value="details">
+              <Card className="mt-4">
+                {/* <CardHeader>
+                  <CardTitle>Account</CardTitle>
+                  <CardDescription>
+                    Make changes to your account here. Click save when you're
+                    done.
+                  </CardDescription>
+                </CardHeader> */}
+                <CardContent className="space-y-2">
+                  <ScrollArea>
+                    <div className="space-y-1">
+                      <Label
+                        className="text-muted-foreground"
+                        htmlFor="sow_number"
+                      >
+                        SOW Number
+                      </Label>
+                      <Input id="sow_number" defaultValue={doc.doc_number} />
+                    </div>
+                    <div className="space-y-1">
+                      <Label
+                        className="text-muted-foreground"
+                        htmlFor="username"
+                      >
+                        Company Name
+                      </Label>
+                      <Input id="username" defaultValue={doc.company} />
+                    </div>
+                    <div className="space-y-1">
+                      <Label
+                        className="text-muted-foreground"
+                        htmlFor="sow_number"
+                      >
+                        Contract type
+                      </Label>
+                      <Input id="sow_number" defaultValue={doc.type} />
+                    </div>
+                    <div className="space-y-1">
+                      <Label
+                        className="text-muted-foreground"
+                        htmlFor="username"
+                      >
+                        Custom Type
+                      </Label>
+                      <Input id="username" defaultValue={doc.custom} />
+                    </div>
+                    <div className="space-y-1">
+                      <Label
+                        className="text-muted-foreground"
+                        htmlFor="sow_number"
+                      >
+                        SOW Type
+                      </Label>
+                      <Input id="sow_number" defaultValue={doc.doc_type} />
+                    </div>
+                    <div className="space-y-1">
+                      <Label
+                        className="text-muted-foreground"
+                        htmlFor="username"
+                      >
+                        Contract Year
+                      </Label>
+                      <Input id="username" defaultValue={doc.year} />
+                    </div>
 
-<Tabs defaultValue="account" className="w-[400px]">
-      <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="account">Account</TabsTrigger>
-        <TabsTrigger value="password">Password</TabsTrigger>
-      </TabsList>
-      <TabsContent value="account">
-        <Card>
-          <CardHeader>
-            <CardTitle>Account</CardTitle>
-            <CardDescription>
-              Make changes to your account here. Click save when you're done.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
+                    <div className="space-y-1">
+                      <Label
+                        className="text-muted-foreground"
+                        htmlFor="username"
+                      >
+                        Currency
+                      </Label>
+                    </div>
+                    <div className="space-y-1">
+                      <Label
+                        className="text-muted-foreground"
+                        htmlFor="username"
+                      >
+                        SOW Date
+                      </Label>
+                    </div>
+                    <div className="space-y-1">
+                      <Label
+                        className="text-muted-foreground"
+                        htmlFor="username"
+                      >
+                        Signature Date
+                      </Label>
+                    </div>
+                    <div className="space-y-1">
+                      <Label
+                        className="text-muted-foreground"
+                        htmlFor="username"
+                      >
+                        Address
+                      </Label>
+                    </div>
+                    <div className="space-y-1">
+                      <Label
+                        className="text-muted-foreground"
+                        htmlFor="username"
+                      >
+                        Sales Person
+                      </Label>
+                    </div>
+                    <div className="space-y-1">
+                      <Label
+                        className="text-muted-foreground"
+                        htmlFor="username"
+                      >
+                        Account Management
+                      </Label>
+                    </div>
+                    <div className="space-y-1">
+                      <Label
+                        className="text-muted-foreground"
+                        htmlFor="username"
+                      >
+                        Internal Logo
+                      </Label>
+                    </div>
+                  </ScrollArea>
+                </CardContent>
+                {/* <CardFooter>
+                  <Button>Save changes</Button>
+                </CardFooter> */}
+              </Card>
+            </TabsContent>
+            <TabsContent value="revisions">
+              <Card>
+                <CardContent className="space-y-2">
+                  <div className="text-center mt-4 uppercase tracking-wide text-muted-foreground">
+                    <TypographyP>No Recent Revisions</TypographyP>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+          <SheetFooter className="mt-auto">
+            <div className="w-full">
+              <div className="border-t">
+                <div className="flex my-4">
+                  <div className="">
+                    <Label className="text-muted-foreground">Created by</Label>
+                    <DisplayNameByOldID
+                      italic={true}
+                      old_id={doc.created_by as string}
+                    />
+                  </div>
+                </div>
+              </div>
+              <Button onClick={() => toggle(false)}>Save</Button>
             </div>
-            <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button>Save changes</Button>
-          </CardFooter>
-        </Card>
-      </TabsContent>
-      <TabsContent value="password">
-        <Card>
-          <CardHeader>
-            <CardTitle>Password</CardTitle>
-            <CardDescription>
-              Change your password here. After saving, you'll be logged out.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button>Save password</Button>
-          </CardFooter>
-        </Card>
-      </TabsContent>
-    </Tabs>
-          <SheetFooter>
-            <SheetClose asChild>
-              <Button type="submit">Apply</Button>
-            </SheetClose>
           </SheetFooter>
         </SheetContent>
       </Sheet>

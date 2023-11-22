@@ -50,6 +50,7 @@ function PaymentSchedule({ docId }: Props) {
           </PopoverContent>
         </Popover>
         {/* END */}
+        {/* @wei not sure if this is necessary if we have the other two fields */}
         <Popover>
           <PopoverTrigger asChild>
             <Button

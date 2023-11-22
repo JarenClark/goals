@@ -7,11 +7,19 @@ export type Document = {
   year: Date;
 };
 
+export type PaymentSchedule = {
+  start: Date | null;
+  end?: Date | null;
+  count: number | null;
+}
+
 interface DocumentsState {
   documents?: Document[];
   addDocument?: (doc: Document) => void;
   docMenuIsOpen: boolean;
   setDocMenuIsOpen: (arg: boolean) => void;
+  docPaymentSchedule: PaymentSchedule;
+  setDocPaymentSchedule: (args: PaymentSchedule) => void;
 }
 
 export const useStore = create<DocumentsState>()((set) => ({
@@ -33,9 +41,21 @@ export const useStore = create<DocumentsState>()((set) => ({
   //   console.log("adding doc", doc);
   //   set((state) => ({ documents: [...state.documents, doc] }));
   // },
+  // UI stuff
   docMenuIsOpen: false,
   setDocMenuIsOpen: (arg) => {
     set(() => ({ docMenuIsOpen: arg }));
+  },
+  // DATA stuff
+  docPaymentSchedule: {
+    start: null,
+    end: null,
+    count: null,
+  },
+  setDocPaymentSchedule: ({ ...args }) => {
+    set((state) => ({
+      docPaymentSchedule: { ...state.docPaymentSchedule, args },
+    }));
   },
 }));
 

@@ -11,7 +11,7 @@ export default async function ProtectedContent({ children }: Props) {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-
+// console.log(`session:`, session)
   if (!session) {
     redirect("/login");
   }

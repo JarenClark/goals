@@ -1,14 +1,16 @@
-import CreateDocument from "@/components/CreateDocument";
+//import CreateDocument from "@/components/CreateDocument";
 import DocumentList from "@/components/documents/DocumentList";
 import ProtectedContent from "@/components/ProtectedContent";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+//import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import Image from "next/image";
+//import Image from "next/image";
 import { TypographyH1, TypographyLead } from "@/components/ui/typography";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+
+
 export default async function DocumentsPage({
   searchParams,
 }: {
@@ -20,18 +22,18 @@ export default async function DocumentsPage({
   const page =
     typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
   const perPage = 10;
-
   const start = page == 1 ? 0 : ((page - 1) * perPage) + 1;
   const finish = perPage * page;
 
+  // status filters
+
+  // text search
+
+  // query
   const { data: docs, count } = await supabase
     .from("documents")
-    .select("id, title", { count: "exact" })
+    .select("id, title, status, master", { count: "exact" })
     .range(start, finish);
-
-  //page 1 = 0,10
-  //page 2 == 11, 20
-  // page 3 == 21,30
 
   return (
     <>
@@ -42,9 +44,12 @@ export default async function DocumentsPage({
               <TypographyH1>
                 Documents <small> ({count})</small>
               </TypographyH1>
+
               <form>
+
                 <Input placeholder="Search"></Input>
               </form>
+
             </div>
 
             <TypographyLead>

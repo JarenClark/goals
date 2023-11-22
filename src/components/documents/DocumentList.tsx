@@ -6,10 +6,13 @@ import { Button } from "../ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
+import StatusBadge from "./StatusBadge";
 
 type Doc = {
   id: string;
   title: string;
+  status: string;
+  master: boolean;
 };
 function DocumentList({ initialDocs }: { initialDocs: Doc[] | null }) {
   // const [docsToShow, setDocsToShow] = useState<Doc[] | null>(null)
@@ -22,7 +25,11 @@ function DocumentList({ initialDocs }: { initialDocs: Doc[] | null }) {
             <Link href={`/documents/${doc.id}`}>
               <span className="text-xl text-teal">{doc.title}</span>
             </Link>
-            <Badge>Approved</Badge>
+            {doc.master == true ? (
+              <Badge className=" bg-darkOrange dark:text-white">Master</Badge>
+            ) : (
+              <StatusBadge status={doc.status} />
+            )}
           </div>
         </li>
       ))}

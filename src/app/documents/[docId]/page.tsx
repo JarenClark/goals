@@ -36,7 +36,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Dropdown } from "react-day-picker";
 import DeliverablesTable from "@/components/documents/DeliverablesTable";
 import PaymentSchedule from "@/components/documents/PaymentSchedule";
-
+import Image from "next/image";
+import ContactHTML from "@/components/documents/ContactHTML";
 export default async function DocumentPage({
   params,
 }: {
@@ -51,10 +52,12 @@ export default async function DocumentPage({
 
   if (!document) return null;
 
+  const withoutContent = { ...document };
+  withoutContent.content = {};
   return (
     <ProtectedContent>
       <div className="p-1 flex justify-center">
-        <DocumentSettingsMenu />
+        <DocumentSettingsMenu doc={document} />
       </div>
       {/* HEADER */}
       <div className="container flex justify-between py-2 border-b">
@@ -72,7 +75,7 @@ export default async function DocumentPage({
       </div>
 
       {/* EDITOR */}
-      <div className="flex">
+      <div className="flex w-screen overflow-x-hidden">
         {/* SIDEBAR */}
         <div className=" bg-secondary border-r min-w-lg w-full max-w-2xl">
           <ScrollArea className="h-[90vh]">
@@ -89,7 +92,7 @@ export default async function DocumentPage({
                     <AccordionItem value="item-2">
                       <AccordionTrigger>Payment Schedule</AccordionTrigger>
                       <AccordionContent>
-                        <PaymentSchedule docId={params.docId}/>
+                        <PaymentSchedule docId={params.docId} />
                       </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-3">
@@ -104,13 +107,34 @@ export default async function DocumentPage({
         </div>
         {/* <Separator orientation="vertical"/> */}
         {/* MAIN */}
-        <div className="">
-          <ScrollArea className="h-[90vh]">
+        <div className="w-full lg:max-w-[66vw]">
+          <ScrollArea className="h-[80vh]">
             <div className="p-4">
-              <div className="container py-16">
+              {/**
+               *
+               *
+               * Just seeing the shape of our data
+               *
+               */}
+              <pre>{JSON.stringify(withoutContent, null, 4)}</pre>
+              {/** COMPANY LOGOS */}
+              <div className="max-w-6xl">
+                <div className="flex justify-between">
+                  <Image
+                    src={"/tn_logo.svg"}
+                    width={235}
+                    height={71}
+                    alt={"That's Nice, LLC"}
+                  ></Image>
+
+                  <img src={document.rest.logo} />
+                </div>
+              </div>
+
+              <div className="w-[66vw]">
                 {/* DELIVERABLES */}
                 <DeliverablesTable content={document.content} />
-
+                <ContactHTML h={document.rest.contactHTML} />
                 <Card>
                   <CardContent>
                     {document?.company_ref ? (
