@@ -38,6 +38,9 @@ import DeliverablesTable from "@/components/documents/DeliverablesTable";
 import PaymentSchedule from "@/components/documents/PaymentSchedule";
 import Image from "next/image";
 import ContactHTML from "@/components/documents/ContactHTML";
+import TeamMembersInArrayOfOldIDs from "@/components/team/TeamMembersInArrayOfOldIDs";
+import { useDocumentStore } from "@/store";
+import DocFromState from "@/components/documents/DocFromState";
 export default async function DocumentPage({
   params,
 }: {
@@ -52,8 +55,9 @@ export default async function DocumentPage({
 
   if (!document) return null;
 
-  const withoutContent = { ...document };
-  withoutContent.content = {};
+  const trimmed = { ...document };
+  trimmed.content = {};
+  trimmed.team = null
   return (
     <ProtectedContent>
       <div className="p-1 flex justify-center">
@@ -73,7 +77,9 @@ export default async function DocumentPage({
           <SaveIcon />
         </div>
       </div>
-
+      <div className="flex justify-center">
+        <DocFromState id={params.docId} />
+      </div>
       {/* EDITOR */}
       <div className="flex w-screen overflow-x-hidden">
         {/* SIDEBAR */}
@@ -97,7 +103,9 @@ export default async function DocumentPage({
                     </AccordionItem>
                     <AccordionItem value="item-3">
                       <AccordionTrigger>Team</AccordionTrigger>
-                      <AccordionContent>TEAM SELECT HERE</AccordionContent>
+                      <AccordionContent>
+                        <TeamMembersInArrayOfOldIDs ids={document.team} />
+                      </AccordionContent>
                     </AccordionItem>
                   </Accordion>
                 </CardContent>
@@ -116,7 +124,7 @@ export default async function DocumentPage({
                * Just seeing the shape of our data
                *
                */}
-              <pre>{JSON.stringify(withoutContent, null, 4)}</pre>
+              <pre>{JSON.stringify(trimmed, null, 4)}</pre>
               {/** COMPANY LOGOS */}
               <div className="max-w-6xl">
                 <div className="flex justify-between">

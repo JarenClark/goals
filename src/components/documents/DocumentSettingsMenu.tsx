@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 // import {docMenuIs}
-import { useStore } from "@/store";
+import { useDocumentStore } from "@/store";
 import {
   Sheet,
   SheetClose,
@@ -35,8 +35,8 @@ import { ScrollArea } from "@radix-ui/react-scroll-area";
 type Props = { doc: any };
 
 function DocumentSettingsMenu({ doc }: Props) {
-  const isOpen = useStore((state) => state.docMenuIsOpen);
-  const toggle = useStore((state) => state.setDocMenuIsOpen);
+  const isOpen = useDocumentStore((state) => state.docMenuIsOpen);
+  const toggle = useDocumentStore((state) => state.setDocMenuIsOpen);
   return (
     <>
       <Sheet open={isOpen}>

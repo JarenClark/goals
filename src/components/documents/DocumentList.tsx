@@ -1,5 +1,5 @@
 "use client";
-import { useStore } from "@/store";
+import { useDocumentStore } from "@/store";
 import React, { useState, useRef } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";

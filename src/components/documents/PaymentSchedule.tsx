@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -12,6 +12,7 @@ import { CalendarIcon } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import format from "date-fns/format";
+import { useDocumentStore } from "@/store";
 
 type Props = { docId: string };
 
@@ -19,6 +20,15 @@ function PaymentSchedule({ docId }: Props) {
   const [payments, setPayments] = useState<number>(1);
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
+
+  const doc = useDocumentStore((state) => state.document);
+  const { setDocument } = useDocumentStore();
+  useEffect(() => {
+    setDocument(docId);
+    setStartDate(doc.start_date as Date);
+    setEndDate(doc.rest?.endDate as Date);
+    console.log("end date is", doc.endDate);
+  }, []);
   return (
     <>
       <div className="flex items-end space-x-1">
@@ -34,7 +44,7 @@ function PaymentSchedule({ docId }: Props) {
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
               {startDate ? (
-                format(startDate,'MM/dd/yyyy')
+                format(new Date(startDate), "MM/dd/yyyy")
               ) : (
                 <span>Start Date</span>
               )}
@@ -62,7 +72,7 @@ function PaymentSchedule({ docId }: Props) {
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
               {endDate ? (
-                format(endDate,'MM/dd/yyyy')
+                format(new Date(endDate), "MM/dd/yyyy")
               ) : (
                 <span>End Date</span>
               )}
@@ -78,7 +88,11 @@ function PaymentSchedule({ docId }: Props) {
           </PopoverContent>
         </Popover>
         <div>
-          <Input type="number" placeholder="# of Payments" />
+          <Input
+            type="number"
+            defaultValue={doc.rest?.paymentSplit ?? undefined}
+            placeholder="# of Payments"
+          />
         </div>
       </div>
     </>

@@ -1,5 +1,5 @@
 "use client";
-import { useStore } from "@/store";
+import { useDocumentStore } from "@/store";
 import React, { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/select";
 import { makeRandomId } from "@/lib/utils";
 function DocumentList() {
-  const addDoc = useStore((state) => state.addDocument);
+  const addDoc = useDocumentStore((state) => state.addDocument);
   const toast = useToast();
   //   const [id, setId] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -26,12 +26,12 @@ function DocumentList() {
     e.preventDefault();
     console.log("submitForm happening");
 
-    addDoc({
-      id: makeRandomId(10),
-      title: title,
-      type: "AOR",
-      year: new Date(),
-    });
+    // addDoc({
+    //   id: makeRandomId(10),
+    //   title: title,
+    //   type: "AOR",
+    //   year: new Date(),
+    // });
     // setId('')
     setTitle("");
   };
@@ -91,10 +91,3 @@ function DocumentList() {
 }
 
 export default DocumentList;
-{/* <Card>
-<CardHeader>
-  <CardTitle>Create a Document</CardTitle>
-</CardHeader>
-<CardContent>
-</CardContent>
-</Card> */}
