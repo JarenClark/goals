@@ -20,15 +20,9 @@ function ContactHTML({ h }: Props) {
             <br />
             President / CEO&nbsp;
             <br />
-            jtroxell@infinitylaboratories.com&nbsp;
+            Lorem, ipsum.&nbsp;
           </p>
-          <p>
-            Hank Nowak&nbsp;
-            <br />
-            SVP, Commercial Operations&nbsp;
-            <br />
-            hnowak@infinitylaboratories.com&nbsp;
-          </p>
+
           <p>
             Infinity Laboratories&nbsp;
             <br />

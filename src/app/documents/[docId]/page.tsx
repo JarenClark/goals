@@ -57,7 +57,7 @@ export default async function DocumentPage({
 
   const trimmed = { ...document };
   trimmed.content = {};
-  trimmed.team = null
+  trimmed.team = null;
   return (
     <ProtectedContent>
       <div className="p-1 flex justify-center">
@@ -79,6 +79,7 @@ export default async function DocumentPage({
       </div>
       <div className="flex justify-center">
         <DocFromState id={params.docId} />
+        {/** example of getting the documetn from state */}
       </div>
       {/* EDITOR */}
       <div className="flex w-screen overflow-x-hidden">
@@ -117,16 +118,9 @@ export default async function DocumentPage({
         {/* MAIN */}
         <div className="w-full lg:max-w-[66vw]">
           <ScrollArea className="h-[80vh]">
-            <div className="p-4">
-              {/**
-               *
-               *
-               * Just seeing the shape of our data
-               *
-               */}
-              <pre>{JSON.stringify(trimmed, null, 4)}</pre>
-              {/** COMPANY LOGOS */}
-              <div className="max-w-6xl">
+            <div className="p-4 max-w-[66vw]">
+              <div className="container mx-auto">
+                {/** COMPANY LOGOS */}
                 <div className="flex justify-between">
                   <Image
                     src={"/tn_logo.svg"}
@@ -135,26 +129,23 @@ export default async function DocumentPage({
                     alt={"That's Nice, LLC"}
                   ></Image>
 
-                  <img src={document.rest.logo} />
+                  <img style={{ maxWidth: "500px" }} src={document.rest.logo} />
                 </div>
-              </div>
 
-              <div className="w-[66vw]">
+                {/* CONTACT HTML */}
+                <ContactHTML h={document.rest.contactHTML} />
                 {/* DELIVERABLES */}
                 <DeliverablesTable content={document.content} />
-                <ContactHTML h={document.rest.contactHTML} />
-                <Card>
-                  <CardContent>
-                    {document?.company_ref ? (
-                      <div className="mb-4">
-                        <CompanyLinkName companyId={document.company_ref} />
-                      </div>
-                    ) : null}
-
-                    {/* <pre>{JSON.stringify(document, null, 2)}</pre> */}
-                  </CardContent>
-                </Card>
               </div>
+            </div>
+            <div className="max-w-4xl overflow-x-hidden">
+              {/**
+               *
+               *
+               * Just seeing the shape of our data
+               *
+               */}
+              <pre>{JSON.stringify(trimmed, null, 4)}</pre>
             </div>
           </ScrollArea>
         </div>
