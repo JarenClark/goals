@@ -28,8 +28,9 @@ export default async function DocumentsPage({
   // status filters
 
   // text search
+  const query = searchParams?.query || '';
 
-  // query
+  // db call
   const { data: docs, count } = await supabase
     .from("documents")
     .select("id, title, status, master", { count: "exact" })
@@ -46,7 +47,7 @@ export default async function DocumentsPage({
                 {count && count > 0 ? <small> ({count})</small> : null}
               </TypographyH1>
 
-              <div>
+              <div className="flex space-x-4">
                 <DocumentSearchInput />
               </div>
             </div>

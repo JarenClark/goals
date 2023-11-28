@@ -55,9 +55,14 @@ export default async function DocumentPage({
 
   if (!document) return null;
 
-  const trimmed = { ...document };
-  trimmed.content = {};
-  trimmed.team = null;
+  const { data: details } = await supabase
+  .from("document_details")
+  .select("*")
+  .eq("document_id", params.docId)
+  .single()
+  // const trimmed = { ...document };
+  // trimmed.content = {};
+  // trimmed.team = null;
   return (
     <ProtectedContent>
       <div className="p-1 flex justify-center">
@@ -93,7 +98,7 @@ export default async function DocumentPage({
                     <AccordionItem value="item-1">
                       <AccordionTrigger>Deliverables</AccordionTrigger>
                       <AccordionContent>
-                        <DeliverablesTable content={document.content} />
+                      <DeliverablesTable content={details.content} />
                       </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-2">
@@ -128,14 +133,20 @@ export default async function DocumentPage({
                     height={71}
                     alt={"That's Nice, LLC"}
                   ></Image>
-
-                  <img style={{ maxWidth: "500px" }} src={document.rest.logo} />
+                  {details.rest && details.rest.logo ? (
+                    <img
+                      style={{ maxWidth: "500px" }}
+                      src={details.rest.logo}
+                    />
+                  ) : null}
                 </div>
 
                 {/* CONTACT HTML */}
-                <ContactHTML h={document.rest.contactHTML} />
+                {details.rest && details.rest.contactHTML ? (
+                  <ContactHTML h={details.rest.contactHTML} />
+                ) : null}
                 {/* DELIVERABLES */}
-                <DeliverablesTable content={document.content} />
+                <DeliverablesTable content={details.content} />
               </div>
             </div>
             <div className="max-w-4xl overflow-x-hidden">
@@ -145,7 +156,17 @@ export default async function DocumentPage({
                * Just seeing the shape of our data
                *
                */}
-              <pre>{JSON.stringify(trimmed, null, 4)}</pre>
+               <TypographyH3>DOCUMENT:</TypographyH3>
+              <pre>{JSON.stringify(document, null, 4)}</pre>
+
+                            {/**
+               *
+               *
+               * Just seeing the shape of our data
+               *
+               */}
+                <TypographyH3>DOCUMENT DETAILS:</TypographyH3>
+              <pre>{JSON.stringify(details, null, 4)}</pre>
             </div>
           </ScrollArea>
         </div>

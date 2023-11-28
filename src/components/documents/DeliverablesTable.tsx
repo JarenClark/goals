@@ -15,6 +15,7 @@ import { USDollar } from "@/lib/utils";
 type Props = { content: any[] };
 
 function DeliverablesTable({ content }: Props) {
+  if (!content) return null;
   const total = content
     .filter((x) => x.deliverable == true)
     .reduce((acc, curr) => acc + +curr.price + +curr.passThrough, 0);
@@ -26,8 +27,12 @@ function DeliverablesTable({ content }: Props) {
           <TableRow className="bg-[#fadec7] hover:bg-[#fadec7] dark:bg-[#f4511e] dark:hover:bg-[#f4511e]">
             {/* <TableHead></TableHead> */}
             <TableHead colSpan={4}>Deliverables</TableHead>
-            <TableHead colSpan={1}align="right" className="text-right">Pass Through</TableHead>
-            <TableHead colSpan={1} align="right" className="text-right">Direct Spend</TableHead>
+            <TableHead colSpan={1} align="right" className="text-right">
+              Pass Through
+            </TableHead>
+            <TableHead colSpan={1} align="right" className="text-right">
+              Direct Spend
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -68,7 +73,9 @@ function DeliverablesTable({ content }: Props) {
                     : null}
                 </TableCell>
                 <TableCell colSpan={1} align="right">
-                  {section.price && section.price > 0 ? USDollar.format(section.price) : null}
+                  {section.price && section.price > 0
+                    ? USDollar.format(section.price)
+                    : null}
                 </TableCell>
               </TableRow>
             ))}
