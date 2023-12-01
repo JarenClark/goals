@@ -21,19 +21,20 @@ export function makeRandomId(length: number): string {
 
 // turns "John Smith" into "JS", etc...
 export function getInitials(name: any) {
-  let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
+  if (!name) return null;
+  let rgx = new RegExp(/(\p{L}{1})\p{L}+/, "gu");
 
   let initials = [...name.matchAll(rgx)] || [];
-  
+
   initials = (
-    (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
+    (initials.shift()?.[1] || "") + (initials.pop()?.[1] || "")
   ).toUpperCase();
 
-  return initials
+  return initials;
 }
 
 // formats currency
-export const USDollar = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
+export const USDollar = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
 });
