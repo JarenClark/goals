@@ -20,7 +20,7 @@ export default async function CompanyPage({
 
   return (
     <ProtectedContent>
-      <div className="container py-16">
+      <div className="container">
         <div className="mb-8">
           <TypographyH1>{company.title}</TypographyH1>
         </div>

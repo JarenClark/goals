@@ -26,8 +26,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import DisplayNameByOldID from "../team/DisplayNameByOldID";
-import { TypographyP } from "../ui/typography";
+import DisplayNameByOldID from "@/components/team/DisplayNameByOldID";
+import { TypographyP } from "@/components/ui/typography";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 

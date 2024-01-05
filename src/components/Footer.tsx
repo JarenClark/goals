@@ -9,11 +9,15 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Label } from "@/components/ui/label";
-
+import { PlusIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useUIstore } from "@/store";
+import AddNewItem from "./AddNewItem";
 type Props = {};
 
 function Footer({}: Props) {
   const pathname = usePathname();
+  const { toggleCreateModal } = useUIstore();
   // const supabase = createClientComponentClient();
   // const [isLoggedIn, setisLoggedIn] = useState<boolean>(false);
   // useEffect(() => {
@@ -26,16 +30,14 @@ function Footer({}: Props) {
   return (
     <footer className="border-t">
       <div className="container">
-        {pathname == "/" ? (
-          <div className="mb-4 flex justify-center">
-            <CreateDocument />
-          </div>
-        ) : (
-          <div className="flex justify-between py-4">
-            <Label>SOW Generator</Label>
-            <Label>That&apos;s Nice {new Date().getFullYear()}</Label>
-          </div>
-        )}
+        <div className="flex items-center justify-between py-4">
+          <Label>Goals&nbsp;&copy;{new Date().getFullYear()}</Label>
+          <AddNewItem />
+
+          {/* <Button variant="outline" size="icon" className="rounded-full" onClick={() => toggleCreateModal}>
+              <PlusIcon></PlusIcon>
+            </Button> */}
+        </div>
       </div>
     </footer>
   );

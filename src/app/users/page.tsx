@@ -21,7 +21,7 @@ export default async function Home() {
   return (
     <>
       <ProtectedContent>
-        <div className="container py-16">
+        <div className="container">
           <div className="mb-8">
             <div className="mb-2 flex items-center justify-between">
               <TypographyH1>Team Members</TypographyH1>

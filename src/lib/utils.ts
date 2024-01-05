@@ -5,6 +5,19 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+// generates an excerpt from html
+export function makeExcerpt(htmlContent: string): string {
+  const maxLength = 50;
+  const textContent = htmlContent.replace(/<[^>]*>/g, '');
+
+  const truncatedText =
+    textContent.length > maxLength
+      ? textContent.slice(0, maxLength - 3) + "..."
+      : textContent;
+
+  return truncatedText;
+}
+
 // generate random string of x length
 export function makeRandomId(length: number): string {
   let result = "";
@@ -17,6 +30,15 @@ export function makeRandomId(length: number): string {
     counter += 1;
   }
   return result;
+}
+
+// turn "John Smith" into  "John", etc..
+export function getFirstName(fullname: string) {
+  if (!fullname) return null;
+  if (fullname.indexOf(" ") > -1) {
+    return fullname.substring(0, fullname.indexOf(" "));
+  }
+  return fullname;
 }
 
 // turns "John Smith" into "JS", etc...

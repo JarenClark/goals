@@ -39,7 +39,7 @@ export default async function DocumentsPage({
   return (
     <>
       <ProtectedContent>
-        <div className="container py-16">
+        <div className="container">
           <div className="mb-8">
             <div className="flex mb-2 items-center justify-between">
               <TypographyH1>

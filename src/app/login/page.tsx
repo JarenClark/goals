@@ -9,6 +9,7 @@ import { redirect, useRouter } from "next/navigation";
 import { Loader2Icon } from "lucide-react";
 import Logo from "@/components/svg/Logo_SOW";
 import { Button } from "@/components/ui/button";
+import { TypographyH1, TypographyMuted, TypographyP } from "@/components/ui/typography";
 export default function Login() {
   const router = useRouter();
   const supabase = createClientComponentClient();
@@ -49,19 +50,18 @@ export default function Login() {
 
   // login view
   return (
-    <div className="flex-1 flex items-center min-h-[80vh] flex-col w-full px-8 sm:max-w-md justify-center py-20 mx-auto gap-2">
-      <Logo className="w-20 h-20 mb-8 " />
-      <div className="">
-        {/* <button className="rounded-md uppercase tracking-wide bg-[#12b796] hover:bg-[#0c8069] text-white px-16 py-4 flex justify-center items-center text-center">
-          Login
-        </button> */}
-        <Button
-          onClick={googleSignIn}
-          className="bg-[#12b796] hover:bg-[#0c8069] text-white px-16"
-        >
-          Login
-        </Button>
-      </div>
+    <div className="w-full flex justify-center">
+      <div className="mx-auto  flex items-center flex-col w-full px-8 justify-center py-20  gap-2">
+        <div className="text-center mb-8">
+          <TypographyH1 className="text-center">Goals</TypographyH1>
+          <TypographyMuted className="text-center max-w-sm mt-4">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere placeat dolorem est fugiat consequatur quasi.
+          </TypographyMuted>
+        </div>
+        <div className="">
+          <Button onClick={googleSignIn}>Login with Google</Button>
+        </div>
+      </div>{" "}
     </div>
   );
 }

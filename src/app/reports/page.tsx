@@ -6,7 +6,7 @@ export default async function ReportPage() {
   return (
     <>
       <ProtectedContent>
-        <div className="container py-16">
+        <div className="container">
           <div className="mb-8">
             <div className="mb-2 flex justify-between items-center">
               <TypographyH1>Reports</TypographyH1>

@@ -17,6 +17,9 @@ module.exports = {
     },
     extend: {
       colors: {
+        lime:'#B2F042',
+        purple:'#B286FD',
+        red:'#E55733',
         teal: "#1ab796",
         paleOrange: '#fadec7',
         darkOrange: '#f4511e',

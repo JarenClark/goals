@@ -1,70 +1,97 @@
 /* eslint-disable react/no-unescaped-entities */
 //react/no-unescaped-entities
 import React from "react";
-
+import { cn } from "@/lib/utils";
 type Props = {
   children: React.ReactNode;
+  className?: string;
 };
 
-export function TypographyH1({ children }: Props) {
+export function TypographyH1({ children, className }: Props) {
   return (
-    <h1 className="scroll-m-20 text-4xl font-semibold tracking-tight">
+    <h1
+      className={cn(
+        "scroll-m-20 text-4xl font-semibold tracking-tight",
+        className
+      )}
+    >
       {children}
     </h1>
   );
 }
-export function TypographyH2({ children }: Props) {
+export function TypographyH2({ children, className }: Props) {
   return (
-    <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+    <h2
+      className={cn(
+        "scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0",
+        className
+      )}
+    >
       {children}
     </h2>
   );
 }
-export function TypographyH3({ children }: Props) {
+export function TypographyH3({ children, className }: Props) {
   return (
-    <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+    <h3
+      className={cn(
+        "scroll-m-20 text-2xl font-semibold tracking-tight",
+        className
+      )}
+    >
       {children}
     </h3>
   );
 }
-export function TypographyH4({ children }: Props) {
+export function TypographyH4({ children, className }: Props) {
   return (
-    <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+    <h4
+      className={cn(
+        "scroll-m-20 text-xl font-semibold tracking-tight",
+        className
+      )}
+    >
       {children}
     </h4>
   );
 }
-export function TypographyP({ children }: Props) {
-  return <p className="leading-7 [&:not(:first-child)]:mt-6">{children}</p>;
-}
-export function TypographyList({ children }: Props) {
-  return <ul className="my-6 ml-6 list-disc [&>li]:mt-2">{children}</ul>;
-}
-export function TypographyInlineCode({ children }: Props) {
+export function TypographyP({ children, className }: Props) {
   return (
-    <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-      { children }
-    </code>
-  );
-}
-export function TypographyLead({ children }: Props) {
-  return (
-    <p className="text-xl text-muted-foreground">
-      { children }
+    <p className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}>
+      {children}
     </p>
   );
 }
-
-export function TypographyBlockquote({ children }: Props) {
+export function TypographyList({ children, className }: Props) {
   return (
-    <blockquote className="mt-6 border-l-2 pl-6 italic">
-      { children }
+    <ul className={cn("my-6 ml-6 list-disc [&>li]:mt-2", className)}>
+      {children}
+    </ul>
+  );
+}
+export function TypographyInlineCode({ children, className }: Props) {
+  return (
+    <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+      {children}
+    </code>
+  );
+}
+export function TypographyLead({ children, className }: Props) {
+  return (
+    <p className={cn("text-xl text-muted-foreground", className)}>{children}</p>
+  );
+}
+
+export function TypographyBlockquote({ children, className }: Props) {
+  return (
+    <blockquote className={cn("mt-6 border-l-2 pl-6 italic", className)}>
+      {children}
     </blockquote>
   );
 }
 
-export function TypographyMuted({ children }: Props) {
+export function TypographyMuted({ children, className }: Props) {
   return (
-    <p className="text-sm text-muted-foreground">Enter your email address.</p>
+    <p className={cn("text-sm text-muted-foreground", className)}>{children}</p>
   );
 }
