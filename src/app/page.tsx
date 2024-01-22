@@ -1,12 +1,14 @@
 import ProtectedContent from "@/components/ProtectedContent";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TypographyH1, TypographyLead } from "@/components/ui/typography";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 export default async function Home() {
   const supabase = createServerComponentClient({ cookies });
 
-  const { data: categories } = await supabase.from("categories").select("*");
+  // const { data: categories } = await supabase.from("categories").select("*");
+  const { data: collections } = await supabase.from("_collections").select("*");
 
   return (
     <>
@@ -20,20 +22,19 @@ export default async function Home() {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
               soluta laudantium id, vitae eligendi nam?
             </TypographyLead>
-            <ul className="flex flex-wrap space-x-2 my-4">
-              <li>
-                <Button className="bg-purple dark:bg-lime" size={"sm"}>
-                  All
-                </Button>
-              </li>
-              {categories?.map((cat, i) => (
-                <li key={i}>
-                  <Button className="bg-purple dark:bg-lime" size={"sm"}>
-                    {cat.name}
-                  </Button>
-                </li>
-              ))}
-            </ul>
+
+            <div className="mt-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Collections</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <pre>
+                    {JSON.stringify(collections, null,2)}
+                  </pre>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </ProtectedContent>
