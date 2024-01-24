@@ -12,11 +12,14 @@ export default async function Greeting() {
   if (!user || !user.user || !user.user.id) return null;
   const { data: profile } = await supabase
     .from("profiles")
-    .select("avatar_url, full_name")
+    .select("avatar_url, full_name, created_at")
     .eq("id", user.user.id)
     .single();
 
   if (!profile) return <DefaultGreeting />;
+
+  const datedate = new Date();
+  datedate.setDate(datedate.getDate() - 1);
   return (
     <>
       <div className="container">
@@ -27,7 +30,10 @@ export default async function Greeting() {
               {/* <AvatarFallback>{getInitials(profile.full_name)}</AvatarFallback> */}
             </Avatar>
           ) : null}
-          <TypographyH4>Hi, {getFirstName(profile.full_name)} 👋</TypographyH4>
+          <TypographyH4>
+            Welcome{new Date(profile.created_at) < datedate ? " Back" : null},{" "}
+            {getFirstName(profile.full_name)}
+          </TypographyH4>
         </div>
       </div>
     </>
@@ -45,4 +51,3 @@ function DefaultGreeting() {
     </>
   );
 }
-

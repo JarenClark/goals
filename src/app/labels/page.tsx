@@ -1,6 +1,6 @@
 //import CreateDocument from "@/components/CreateDocument";
 import type { Metadata } from "next";
-import DocumentList from "@/components/documents/DocumentList";
+
 import ProtectedContent from "@/components/ProtectedContent";
 //import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -10,8 +10,7 @@ import { TypographyH1, TypographyLead } from "@/components/ui/typography";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import DocumentSearchInput from "@/components/documents/DocumentSearchInput";
-import ProjectsTable from "@/components/projects/ProjectsTable";
+
 import {
   Card,
   CardContent,
@@ -37,7 +36,7 @@ export default async function CategoriesPage({
   const query = searchParams?.query || "";
 
   // db call
-  const { data: categories } = await supabase.from("categories").select("*");
+  const { data: labels } = await supabase.from("_labels").select("*");
   // .range(start, finish);
 
   return (
@@ -46,9 +45,8 @@ export default async function CategoriesPage({
         <div className="container">
           <div className="mb-8">
             <div className="flex mb-2 items-center justify-between">
-              <TypographyH1>Categories</TypographyH1>
+              <TypographyH1>Labels</TypographyH1>
             </div>
-
             <TypographyLead>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat,
               sit.
@@ -56,7 +54,7 @@ export default async function CategoriesPage({
           </div>
           {/* <pre>{JSON.stringify(categories, null, 2)}</pre> */}
           <ul className="flex flex-wrap max-w-3xl w-full -mx-2 items-stretch">
-            {categories?.map((cat, i) => (
+            {labels?.map((cat, i) => (
               <li key={i} className="px-2 w-1/2 lg:w-1/3 mb-4">
                 <Card className="hover:bg-black/10 dark:hover:bg-white/10">
                   <CardHeader>

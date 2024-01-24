@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { cookies } from "next/headers";
 import { redirect, useRouter } from "next/navigation";
 import { Loader2Icon } from "lucide-react";
-import Logo from "@/components/svg/Logo_SOW";
 import { Button } from "@/components/ui/button";
 import { TypographyH1, TypographyMuted, TypographyP } from "@/components/ui/typography";
 export default function Login() {

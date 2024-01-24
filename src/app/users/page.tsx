@@ -1,5 +1,5 @@
 import CreateDocument from "@/components/CreateDocument";
-import DocumentList from "@/components/documents/DocumentList";
+
 import ProtectedContent from "@/components/ProtectedContent";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";

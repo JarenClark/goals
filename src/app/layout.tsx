@@ -12,6 +12,7 @@ import { TypographyH2 } from "@/components/ui/typography";
 import Greeting from "@/components/Greeting";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import AddNewItem from "@/components/AddNewItem";
+import BreadCrumbs from "@/components/BreadCrumbs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,13 +55,13 @@ export default function RootLayout({
                     <Sidebar />
                   </div>                  
                   <main className="overflow-y-auto w-full">
-                    <Greeting />
-                    <ScrollArea className="h-[55vh]">{children}</ScrollArea>
+                    <BreadCrumbs />
+                    {children}
                   </main>
                 </div>
               </div>
             </div>
-            <Footer />
+            {/* <Footer /> */}
             <StateHelper />
           </div>
         </ThemeProvider>

@@ -15,7 +15,6 @@ import {
   ListChecks,
   MenuIcon,
 } from "lucide-react";
-import Logo from "@/components/svg/Logo_SOW";
 import ThemeToggle from "./ThemeToggle";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";

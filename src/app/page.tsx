@@ -1,3 +1,4 @@
+import Greeting from "@/components/Greeting";
 import ProtectedContent from "@/components/ProtectedContent";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,6 +13,7 @@ export default async function Home() {
 
   return (
     <>
+      <Greeting />
       <ProtectedContent>
         <div className="container">
           <div className="mb-8">
@@ -23,18 +25,6 @@ export default async function Home() {
               soluta laudantium id, vitae eligendi nam?
             </TypographyLead>
 
-            <div className="mt-8">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Collections</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <pre>
-                    {JSON.stringify(collections, null,2)}
-                  </pre>
-                </CardContent>
-              </Card>
-            </div>
           </div>
         </div>
       </ProtectedContent>

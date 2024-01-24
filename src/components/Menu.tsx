@@ -14,6 +14,8 @@ import {
   ListChecks,
   TagIcon,
   StickyNoteIcon,
+  LibraryIcon,
+  SettingsIcon,
 } from "lucide-react";
 
 import { useUIstore } from "@/store";
@@ -33,35 +35,21 @@ export default function Menu() {
       label: "Dashboard",
     },
     {
-      link: "/projects",
-      icon: <GoalIcon />,
-      label: "Projects",
+      link: "/collections",
+      icon: <LibraryIcon />,
+      label: "Collections",
     },
     {
-      link: "/tasks",
-      icon: <ListChecks />,
-      label: "Tasks",
-    },
-    {
-      link: "/categories",
+      link: "/labels",
       icon: <TagIcon />,
-      label: "Categories",
+      label: "Labels",
     },
     {
-      link: "/notes",
-      icon: <StickyNoteIcon />,
-      label: "Notes",
+      link: "/settings",
+      icon: <SettingsIcon />,
+      label: "Settings",
     },
-    // {
-    //   link: "/users",
-    //   icon: <UsersIcon />,
-    //   label: "Social",
-    // },
-    // {
-    //   link: "/reports",
-    //   icon: <BarChart2Icon />,
-    //   label: "Reports",
-    // },
+ 
   ];
   // if (!user) return null;
   return (
@@ -73,6 +61,40 @@ export default function Menu() {
   );
 }
 
+
+   // {
+    //   link: "/projects",
+    //   icon: <GoalIcon />,
+    //   label: "Projects",
+    // },
+    // {
+    //   link: "/tasks",
+    //   icon: <ListChecks />,
+    //   label: "Tasks",
+    // },
+    // {
+    //   link: "/categories",
+    //   icon: <TagIcon />,
+    //   label: "Categories",
+    // },
+    // {
+    //   link: "/notes",
+    //   icon: <StickyNoteIcon />,
+    //   label: "Notes",
+    // },
+    // {
+    //   link: "/users",
+    //   icon: <UsersIcon />,
+    //   label: "Social",
+    // },
+    // {
+    //   link: "/reports",
+    //   icon: <BarChart2Icon />,
+    //   label: "Reports",
+    // },
+
+
+    
 // {navIcons.map((item, i) => (
 //     <li key={i}>
 //       <TooltipProvider>

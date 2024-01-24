@@ -1,59 +1,63 @@
-import ProtectedContent from "@/components/ProtectedContent";
-import { Badge } from "@/components/ui/badge";
-import { TypographyH2, TypographyLead } from "@/components/ui/typography";
+import { Card, CardContent } from "@/components/ui/card";
+import { Code } from "bright";
+
+import {
+  TypographyH1,
+  TypographyH2,
+  TypographyLead,
+} from "@/components/ui/typography";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { ArrowLeftIcon } from "lucide-react";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import React from "react";
 
+import RenderContent from "@/components/RenderContent";
 type Props = {
-  children: React.ReactNode;
   params: {
     collectionId: string;
+    itemId: string;
   };
 };
 
-export default async function CollectionPageLayout({
-  children,
-  params,
-}: Props) {
+export default async function ItemPage({ params }: Props) {
+  //   const { theme } = useTheme();
   const supabase = createServerComponentClient({ cookies });
-  const { data: collection } = await supabase
-    .from("_collections")
-    .select("*")
-    .eq("id", params.collectionId)
-    .single();
-  const { data: items } = await supabase
+  const { data: item } = await supabase
     .from("_items")
     .select("*")
-    .eq("collection_id", params.collectionId);
+    .eq("id", params.itemId)
+    .single();
   return (
-    <ProtectedContent>
-      {collection && (
+    <>
+      {item && (
         <div className="container ">
           <div className="mb-8">
             <div className="flex  items-center space-x-2">
-              <Link href={"/collections"}>
+              <Link href={`/collections/${params.collectionId}`}>
                 <ArrowLeftIcon />
               </Link>
-              <TypographyH2>{collection.name}</TypographyH2>
+              <TypographyH2>{item.title}</TypographyH2>
             </div>
             <TypographyLead>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat,
               sit.
             </TypographyLead>
           </div>
-          <div>
+          <Card>
+            <CardContent>
+              {item.content && <RenderContent html={item.content} />}
+            </CardContent>
+          </Card>
+          {/* <div>
             <pre>{JSON.stringify(collection, null, 2)}</pre>
-          </div>
-          <div>
-          <pre>{JSON.stringify(items, null, 2)}</pre>
+          </div> */}
 
+          <div>
+            <pre>{JSON.stringify(item, null, 2)}</pre>
           </div>
-          {children}
         </div>
       )}
-    </ProtectedContent>
+    </>
   );
 }

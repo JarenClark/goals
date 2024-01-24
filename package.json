@@ -35,6 +35,7 @@
     "@supabase/ssr": "^0.0.10",
     "@supabase/supabase-js": "^2.38.4",
     "@tanstack/react-table": "^8.10.7",
+    "bright": "^0.8.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
