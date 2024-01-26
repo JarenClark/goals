@@ -3,14 +3,25 @@ import React from "react";
 import { usePathname, useParams } from "next/navigation";
 import Greeting from "./Greeting";
 import Link from "next/link";
-type Props = {};
+type Props = {
+  collectionId?: string;
+  itemId?: string;
+  labelId?: string;
+  // params?: {
+  //   collectionId?: string;
+  //   itemId?: string;
+  //   labelId?: string;
+  // };
+};
 
-function BreadCrumbs({}: Props) {
+function BreadCrumbs({  }: Props) {
   const paths = usePathname();
   const params = useParams<{ collectionId?: string; itemnId?: string }>();
 
   if (paths == "/") {
     return null;
+  }
+  if (params.collectionId) {
   }
   const pathNames = paths.split("/").filter((path) => path);
   return (

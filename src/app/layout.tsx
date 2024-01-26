@@ -36,6 +36,7 @@ export default function RootLayout({
   const headersList = headers();
   const header_url = headersList.get("x-url") || "";
 
+  console.log('header_url is', header_url)
   return (
     <html lang="en" data-theme={theme?.value}>
       <body className={inter.className + " overflow-x-hidden"}>

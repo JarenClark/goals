@@ -2,9 +2,15 @@ import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
+
+  // Store current request url in a custom header, which you can read later
+  // const requestHeaders = new Headers(request.headers);
+  // requestHeaders.set('x-url', request.url);
+  request.headers.set('x-url', request.url);
   let response = NextResponse.next({
     request: {
       headers: request.headers,
+
     },
   })
 

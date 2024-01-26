@@ -73,6 +73,23 @@ export const useNotestore = create<NoteState>((set) => ({
   },
 }));
 
+// export const useCollectionStore = create<any>((set) => ({
+//   notes: [],
+//   note: null,
+//   setNote: async (noteId) => {
+//     const { data: note } = await supabase
+//       .from("notes")
+//       .select("*")
+//       .eq("id", noteId)
+//       .single();
+//     set((state) => ({ note: { ...state.note, ...note } }));
+//   },
+//   resetNote: () => {
+//     console.log("resetting note");
+//     set(() => ({ note: null }));
+//   },
+// }));
+
 /****
  *
  *
