@@ -16,6 +16,8 @@ import {
   StickyNoteIcon,
   LibraryIcon,
   SettingsIcon,
+  PersonStandingIcon,
+  UserIcon,
 } from "lucide-react";
 
 import { useUIstore } from "@/store";
@@ -48,6 +50,11 @@ export default function Menu() {
       link: "/settings",
       icon: <SettingsIcon />,
       label: "Settings",
+    },
+    {
+      link: "/profile",
+      icon: <UserIcon />,
+      label: "Profile",
     },
  
   ];

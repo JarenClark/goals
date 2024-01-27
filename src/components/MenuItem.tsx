@@ -7,16 +7,17 @@ type Props = {
   link: string;
   label: string;
   icon: React.ReactElement;
+  children?: Props[];
 };
 
 function MenuItem({ link, label, icon }: Props) {
     const pathname = usePathname()
   return (
-    <li className={`hover:bg-foreground/10  rounded-md ${pathname == link ? 'bg-foreground/10': ''}`}>
+    <li className={` rounded-md ${pathname.indexOf(link) > -1 ? ' bg-lime text-black': ' hover:text-white text-muted-foreground'}`}>
       <Link href={link} className="flex items-center space-x-2 cursor-pointer py-1 px-2">
-        <>{icon}</>
+        <div className={` rounded-md p-1 ${pathname.indexOf(link) > -1 ? ' bg-lime text-black ': 'bg-muted'}`}>{icon}</div>
 
-        <Label>{label}</Label>
+        <Label className="cursor-pointer">{label}</Label>
       </Link>
     </li>
   );

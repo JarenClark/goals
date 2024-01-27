@@ -1,55 +1,43 @@
-"use client";
 import React from "react";
-import { usePathname, useParams } from "next/navigation";
-import Greeting from "./Greeting";
 import Link from "next/link";
+import { TypographyP } from "./ui/typography";
+type LinkItem = {
+  link?: string;
+  text?: string;
+};
 type Props = {
-  collectionId?: string;
-  itemId?: string;
-  labelId?: string;
-  // params?: {
-  //   collectionId?: string;
-  //   itemId?: string;
-  //   labelId?: string;
-  // };
+  linkItems: LinkItem[];
 };
 
-function BreadCrumbs({  }: Props) {
-  const paths = usePathname();
-  const params = useParams<{ collectionId?: string; itemnId?: string }>();
-
-  if (paths == "/") {
-    return null;
+export default function BreadCrumbs({ linkItems }: Props) {
+  function colorClassName(index: number): string {
+    if (index + 1 == linkItems.length) {
+      return "text-primary";
+    }
+    return "text-muted-foreground hover:text-primary";
   }
-  if (params.collectionId) {
-  }
-  const pathNames = paths.split("/").filter((path) => path);
   return (
-    <>
-      <div className="flex space-x-2">
-        <Link href={"/"}>Home</Link>
-
-        {/* if were on the collections path */}
-        {pathNames.indexOf("collections") > -1 ? (
-          <>
-            <span>/</span>
-            <Link href={"/collections"}>Collections</Link>
-            {/* if were in a specific collection path */}
-            {params.collectionId ? (
-              <>
-                <span>/</span>
-                <Link href={`/collections/${params.collectionId}`}>
-                  Collection Name
+    <ul className="flex items-center space-x-2 p-5 py-8">
+      {linkItems
+        .filter((x) => !!x.text)
+        .map((item, i) => (
+          <React.Fragment key={i}>
+            {i > 0 ? <div>/</div> : null}
+            <li>
+              {item.link ? (
+                <Link href={item.link} className={colorClassName(i)}>
+                  <TypographyP>{item.text}</TypographyP>
                 </Link>
-              </>
-            ) : null}
-          </>
-        ) : null}
-      </div>
-      <pre>{JSON.stringify(params, null, 2)}</pre>
-      <pre>{JSON.stringify(pathNames, null, 2)}</pre>
-    </>
+              ) : (
+                <span
+                  className={colorClassName(i)}
+                >
+                  <TypographyP>{item.text}</TypographyP>
+                </span>
+              )}
+            </li>
+          </React.Fragment>
+        ))}
+    </ul>
   );
 }
-
-export default BreadCrumbs;

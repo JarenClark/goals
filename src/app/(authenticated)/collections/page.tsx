@@ -1,3 +1,4 @@
+import BreadCrumbs from "@/components/BreadCrumbs";
 import ProtectedContent from "@/components/ProtectedContent";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -21,7 +22,15 @@ export default async function AllOfMyCollections({}: Props) {
   const { data: collections } = await supabase.from("_collections").select("*");
 
   return (
-    <ProtectedContent>
+    <>
+      <div className="mb-2 flex items-center justify-between">
+        <BreadCrumbs
+          linkItems={[
+            { link: "/", text: "Dashboard" },
+            { link: "/collections", text: "Collections" },
+          ]}
+        ></BreadCrumbs>
+      </div>
       <Card className=" rounded-xl relative">
         {/* <div className="absolute inset-0 bg-gradient-to-r from-[rgba(0,0,0,0.1)] dark:from-[rgba(255,255,255,0.1)]"></div> */}
         <CardHeader className="">
@@ -35,7 +44,6 @@ export default async function AllOfMyCollections({}: Props) {
         <Card>
           <CardContent>
             <Table>
-
               <TableBody>
                 {collections?.map((c, i) => (
                   <TableRow
@@ -52,6 +60,6 @@ export default async function AllOfMyCollections({}: Props) {
           </CardContent>
         </Card>
       </div>
-    </ProtectedContent>
+    </>
   );
 }

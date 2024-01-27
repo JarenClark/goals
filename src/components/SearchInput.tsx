@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef, Ref } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
@@ -10,7 +10,23 @@ export default function SearchInput({}: Props) {
   const searchParams = useSearchParams();
   const q = searchParams.get("query");
   const pathname = usePathname();
+  const ref = useRef<HTMLInputElement | null | undefined>();
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === '/' && ref.current) {
+        event.preventDefault();
+        ref.current.focus();
+      }
+    };
 
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []); // Empty dependency array to ensure the effect runs only once on mount
+
+  
   const { replace } = useRouter();
 
   function handleSearch(term: string) {
@@ -28,6 +44,7 @@ export default function SearchInput({}: Props) {
   return (
     <form>
       <Input
+        ref={ref as Ref<HTMLInputElement>}
         placeholder="Search"
         defaultValue={q as string}
         onChange={(e) => handleSearch(e.target.value)}

@@ -26,7 +26,11 @@ import {
 } from "@/components/ui/tooltip";
 import BackButton from "./BackButton";
 import Menu from "./Menu";
-async function Sidebar() {
+import Greeting from "./Greeting";
+import Avi from "./Avi";
+import SearchInput from "./SearchInput";
+import ProtectedContent from "./ProtectedContent";
+export default async function Sidebar() {
   const supabase = createServerComponentClient({ cookies });
   const {
     data: { user },
@@ -34,36 +38,28 @@ async function Sidebar() {
 
   if (!user) return null;
   return (
-    <div className="border-r min-w-[200px] pr-8">
-      <nav className="">
-        <Menu />
-      </nav>
-    </div>
+    <ProtectedContent>
+      <div className="border-r h-screen p-8  flex flex-col justify-between lg:min-w-[400px] pr-8">
+        <section>
+          <div className="flex flex-col space-y-4 mb-8 mt-10">
+            <Avi />
+
+            <SearchInput />
+          </div>
+
+          <nav className="">
+            <Menu />
+          </nav>
+        </section>
+        <div>
+          <div className="flex items-center space-x-2">
+            {/* <Label> Hey, {user.email}</Label> */}
+            <form action="/auth/sign-out" method="post">
+              <Button variant={"outline"}>Logout</Button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </ProtectedContent>
   );
 }
-
-export default Sidebar;
-
-// {navIcons.map((item, i) => (
-//     <li key={i}>
-//       <TooltipProvider>
-//         <Tooltip>
-//           <TooltipTrigger>
-//             <div className="flex items-center space-x-2">
-//               <Link
-//                 href={item.link}
-//                 className="flex items-center space-x-2"
-//               >
-//                 <>{item.icon}</>
-
-//                 <span>{item.tooltip}</span>
-//               </Link>
-//             </div>
-//           </TooltipTrigger>
-//           <TooltipContent>
-//             <p>{item.tooltip}</p>
-//           </TooltipContent>
-//         </Tooltip>
-//       </TooltipProvider>
-//     </li>
-//   ))}

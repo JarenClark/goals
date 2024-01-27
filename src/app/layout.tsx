@@ -4,7 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Sidebar from "@/components/Sidebar";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import NextTopLoader from "nextjs-toploader";
 import StateHelper from "@/components/StateHelper";
@@ -23,20 +23,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: // footerContent,
-{
+}: {
   children: React.ReactNode;
-  // footerContent?: React.ReactNode;
 }) {
   // theme stuff
   const cookieStore = cookies();
   const theme = cookieStore.get("theme");
 
   // pathname stuff
-  const headersList = headers();
-  const header_url = headersList.get("x-url") || "";
 
-  console.log('header_url is', header_url)
   return (
     <html lang="en" data-theme={theme?.value}>
       <body className={inter.className + " overflow-x-hidden"}>
@@ -47,24 +42,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NextTopLoader />
-          <div className="w-screen h-screen flex flex-col justify-between">
-            <div>
-              <Header />
-              <div className="container px-0">
-                <div className="flex mt-8">
-                  <div className="hidden lg:block">
-                    <Sidebar />
-                  </div>                  
-                  <main className="overflow-y-auto w-full">
-                    <BreadCrumbs />
-                    {children}
-                  </main>
-                </div>
-              </div>
-            </div>
-            {/* <Footer /> */}
-            <StateHelper />
-          </div>
+
+          {children}
         </ThemeProvider>
       </body>
     </html>

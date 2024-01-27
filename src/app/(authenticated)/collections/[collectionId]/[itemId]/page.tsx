@@ -13,25 +13,47 @@ import Link from "next/link";
 import React from "react";
 
 import RenderContent from "@/components/RenderContent";
+import BreadCrumbs from "@/components/BreadCrumbs";
 type Props = {
   params: {
     collectionId: string;
     itemId: string;
   };
 };
-
+type ItemType = {
+  title: string;
+  description: string;
+  content: string;
+  collection_id: string;
+  _collections: { name: string };
+};
 export default async function ItemPage({ params }: Props) {
   //   const { theme } = useTheme();
   const supabase = createServerComponentClient({ cookies });
-  const { data: item } = await supabase
+  const { data: item }: any = await supabase
     .from("_items")
-    .select("*")
+    .select("title, description, content,collection_id, _collections(name)")
     .eq("id", params.itemId)
     .single();
   return (
     <>
       {item && (
-        <div className="container ">
+        <div className=" ">
+          <div className="mb-2 flex items-center justify-between">
+            <BreadCrumbs
+              linkItems={[
+                { link: "/", text: "Dashboard" },
+                { link: "/collections", text: "Collections" },
+                {
+                  link: `/collections/${item.collection_id}`,
+                  text: item._collections.name,
+                },
+                {
+                  text: item.title,
+                },
+              ]}
+            ></BreadCrumbs>
+          </div>
           <div className="mb-8">
             <div className="flex  items-center space-x-2">
               <Link href={`/collections/${params.collectionId}`}>
