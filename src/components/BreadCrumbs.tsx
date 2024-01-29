@@ -11,9 +11,9 @@ type Props = {
 
 export default function BreadCrumbs({ linkItems }: Props) {
   function colorClassName(index: number): string {
-    if (index + 1 == linkItems.length) {
-      return "text-primary";
-    }
+    // if (index + 1 == linkItems.length) {
+    //   return "text-primary";
+    // }
     return "text-muted-foreground hover:text-primary";
   }
   return (

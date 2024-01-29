@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import CollectionSelectNavigation from "@/components/CollectionSelectNavigation";
 type Props = {
   params: {
     collectionId: string;
@@ -37,6 +38,9 @@ export default async function CollectionPage({ params }: Props) {
     .select("*")
     .eq("collection_id", params.collectionId);
 
+    // function handleSelectChange(x) {
+    //   console.log('new value is ,',x)
+    // }
   return (
     <>
       {collection && (
@@ -48,28 +52,29 @@ export default async function CollectionPage({ params }: Props) {
                   linkItems={[
                     { link: "/", text: "Dashboard" },
                     { link: "/collections", text: "Collections" },
-                    {
-                      link: `/collections/${params.collectionId}`,
-                      text: collection.name,
-                    },
+                    // {
+                    //   link: `/collections/${params.collectionId}`,
+                    //   text: collection.name,
+                    // },
                   ]}
                 ></BreadCrumbs>
                 {collections && collections.length > 1 ? (
-                  <Select defaultValue={params.collectionId}>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Select a fruit" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Collections</SelectLabel>
-                        {collections?.map((item, i) => (
-                          <SelectItem key={i} value={item.id}>
-                            {item.name}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                  <CollectionSelectNavigation current={params.collectionId} collections={collections}/>
+                  // <Select defaultValue={params.collectionId} onValueChange={(x) => handleSelectChange(x)}>
+                  //   <SelectTrigger className="w-[180px]">
+                  //     <SelectValue placeholder="Select a fruit" />
+                  //   </SelectTrigger>
+                  //   <SelectContent>
+                  //     <SelectGroup>
+                  //       <SelectLabel>Collections</SelectLabel>
+                  //       {collections?.map((item, i) => (
+                  //         <SelectItem key={i} value={item.id}>
+                  //           {item.name}
+                  //         </SelectItem>
+                  //       ))}
+                  //     </SelectGroup>
+                  //   </SelectContent>
+                  // </Select>
                 ) : (
                   <p>name of the collection</p>
                 )}
