@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Code } from "bright";
 
 import {
@@ -38,9 +38,9 @@ export default async function ItemPage({ params }: Props) {
   return (
     <>
       {item && (
-        <div className=" ">
+        <div className=" px-8 py-16">
           <div className="mb-2 flex items-center justify-between">
-            <BreadCrumbs
+            {/* <BreadCrumbs
               linkItems={[
                 { link: "/", text: "Dashboard" },
                 { link: "/collections", text: "Collections" },
@@ -52,20 +52,12 @@ export default async function ItemPage({ params }: Props) {
                   text: item.title,
                 },
               ]}
-            ></BreadCrumbs>
+            ></BreadCrumbs> */}
           </div>
-          <div className="mb-8">
-            <div className="flex  items-center space-x-2">
-              <Link href={`/collections/${params.collectionId}`}>
-                <ArrowLeftIcon />
-              </Link>
-              <TypographyH2>{item.title}</TypographyH2>
-            </div>
-            <TypographyLead>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat,
-              sit.
-            </TypographyLead>
+          <div className="mb-4">
+            <CardTitle>{item.title}</CardTitle>
           </div>
+
           <Card>
             <CardContent>
               {item.content && <RenderContent html={item.content} />}

@@ -16,6 +16,22 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import CollectionSelectNavigation from "@/components/CollectionSelectNavigation";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 type Props = {
   params: {
     collectionId: string;
@@ -38,16 +54,16 @@ export default async function CollectionPage({ params }: Props) {
     .select("*")
     .eq("collection_id", params.collectionId);
 
-    // function handleSelectChange(x) {
-    //   console.log('new value is ,',x)
-    // }
+  // function handleSelectChange(x) {
+  //   console.log('new value is ,',x)
+  // }
   return (
     <>
       {collection && (
-        <div className=" ">
+        <div className=" px-8 py-16">
           <div className="mb-8">
             <div className="mb-2 flex items-center justify-between">
-              <div className="inline-flex items-center space-x-2">
+              <div className="hidden md:inline-flex items-center space-x-2">
                 <BreadCrumbs
                   linkItems={[
                     { link: "/", text: "Dashboard" },
@@ -57,9 +73,14 @@ export default async function CollectionPage({ params }: Props) {
                     //   text: collection.name,
                     // },
                   ]}
-                ></BreadCrumbs>
+                />
+                <div className="text-muted-foreground">/</div>
                 {collections && collections.length > 1 ? (
-                  <CollectionSelectNavigation current={params.collectionId} collections={collections}/>
+                  <CollectionSelectNavigation
+                    current={params.collectionId}
+                    collections={collections}
+                  />
+                ) : (
                   // <Select defaultValue={params.collectionId} onValueChange={(x) => handleSelectChange(x)}>
                   //   <SelectTrigger className="w-[180px]">
                   //     <SelectValue placeholder="Select a fruit" />
@@ -75,30 +96,41 @@ export default async function CollectionPage({ params }: Props) {
                   //     </SelectGroup>
                   //   </SelectContent>
                   // </Select>
-                ) : (
-                  <p>name of the collection</p>
+                  <Label>{collection.name}</Label>
                 )}
               </div>
             </div>
-            <TypographyLead>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat,
-              sit.
-            </TypographyLead>
-          </div>
-          {/* <div>
-            <pre>{JSON.stringify(collection, null, 2)}</pre>
-          </div> */}
-          <ul>
-            {items?.map((item, i) => (
-              <li key={i}>
-                <Link href={`/collections/${params.collectionId}/${item.id}`}>
-                  {item.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div>
-            <pre>{JSON.stringify(items, null, 2)}</pre>
+            <div className="mb-4">
+              {" "}
+              <CardTitle>{collection.name}</CardTitle>
+            </div>
+            <Card>
+              {/* <CardHeader></CardHeader> */}
+              <CardContent>
+                <Table>
+                  <TableHead className="text-muted-foreground">
+                    <TableHeader>Title</TableHeader>
+                  </TableHead>
+                  <TableBody>
+                    {items?.map((item, i) => (
+                      <React.Fragment key={i}>
+                        <TableRow>
+                          <TableCell>
+                            <Link
+                            className="hover:text-underline"
+                              href={`/collections/${params.collectionId}/${item.id}`}
+                            >
+                              {item.title}
+                            </Link>
+                          </TableCell>
+                        </TableRow>
+                      </React.Fragment>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+              {/* <CardFooter></CardFooter> */}
+            </Card>
           </div>
         </div>
       )}

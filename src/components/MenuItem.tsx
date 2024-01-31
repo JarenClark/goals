@@ -13,9 +13,9 @@ type Props = {
 function MenuItem({ link, label, icon }: Props) {
     const pathname = usePathname()
   return (
-    <li className={` rounded-md ${pathname.indexOf(link) > -1 ? ' bg-lime text-black': ' hover:text-white text-muted-foreground'}`}>
+    <li className={` rounded-md ${pathname == link ? ' bg-lime text-black': ' hover:text-white text-muted-foreground'}`}>
       <Link href={link} className="flex items-center space-x-2 cursor-pointer py-1 px-2">
-        <div className={` rounded-md p-1 ${pathname.indexOf(link) > -1 ? ' bg-lime text-black ': 'bg-muted'}`}>{icon}</div>
+        <div className={` rounded-md p-1 ${pathname == link  ? ' bg-lime text-black ': 'bg-muted'}`}>{icon}</div>
 
         <Label className="cursor-pointer">{label}</Label>
       </Link>

@@ -18,8 +18,10 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import BreadCrumbs from "@/components/BreadCrumbs";
-import { ActivityIcon, LibraryIcon } from "lucide-react";
+import { ActivityIcon, LibraryIcon, PlusCircleIcon, PlusIcon } from "lucide-react";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import QuickAdd from "@/components/QuickAdd";
 export default async function Home() {
   const supabase = createServerComponentClient({ cookies });
   const { data: collections, count } = await supabase
@@ -27,22 +29,37 @@ export default async function Home() {
     .select("*", { count: "exact" });
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 gap-6 p-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 p-6">
         {/* Title */}
-        <div className=" col-span-1 lg:col-span-4">
-          <div className="py-6"></div>
+        <div className="pt-12 col-span-1 md:col-span-3 lg:col-span-6">
+
           <CardTitle>Dashboard</CardTitle>
         </div>
 
-        {/* Spacer */}
-        <div className="col-span-1 lg:col-span-2"></div>
-
-        {/* Overview Card */}
-
+        {/* Quick Add */}
         <Card className="border border-muted   lg:col-span-2">
           <CardHeader>
             <div className="flex space-x-4">
-              <div className="rounded-md bg-muted p-2">
+              <div className="rounded-md bg-muted flex items-center p-2">
+                <PlusIcon />
+              </div>
+              <div className="flex flex-col space-y-1">
+                <TypographyMuted>Quick Add</TypographyMuted>
+                <CardTitle>New Item</CardTitle>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <QuickAdd collections={collections ? collections : []}/>
+          </CardContent>
+          <CardFooter></CardFooter>
+        </Card>
+
+        {/* Overview Card */}
+        <Card className="border border-muted   lg:col-span-2">
+          <CardHeader>
+            <div className="flex space-x-4">
+              <div className="rounded-md flex items-center bg-muted p-2">
                 <ActivityIcon />
               </div>
               <div className="flex flex-col space-y-1">
@@ -61,10 +78,10 @@ export default async function Home() {
         </Card>
 
         {/* Recent Activity */}
-        <Card className="border border-muted lg:col-span-2">
+        {/* <Card className="border border-muted lg:col-span-2">
           <CardHeader>
             <div className="flex space-x-4">
-              <div className="rounded-md bg-muted p-2">
+              <div className="rounded-md bg-muted  flex items-center p-2">
                 <ActivityIcon />
               </div>
               <div className="flex flex-col space-y-1">
@@ -76,7 +93,7 @@ export default async function Home() {
           <CardContent>
             <Table className="border border-muted">
               <TableBody>
-                {collections?.slice(0,2).map((c, i) => (
+                {collections?.slice(0, 2).map((c, i) => (
                   <TableRow
                     key={i}
                     className="w-full md:w-1/2 lg:w-1/3 px-2 mb-4"
@@ -90,10 +107,10 @@ export default async function Home() {
             </Table>
           </CardContent>
           <CardFooter></CardFooter>
-        </Card>
+        </Card> */}
 
         {/* Collections */}
-        <Card className="border border-muted lg:col-span-4">
+        <Card className="border border-muted  col-span-1 md:col-span-3 lg:col-span-6 xl:col-span-4">
           <CardHeader>
             <div className="flex space-x-4">
               <div className="rounded-md bg-muted p-2">
@@ -125,10 +142,8 @@ export default async function Home() {
             </Table>
           </CardContent>
           <CardFooter>
-            <Button variant={"outline"}>
-              Add New
-            </Button>
-           </CardFooter>
+            <Button variant={"outline"}>Add New</Button>
+          </CardFooter>
         </Card>
       </div>
     </>

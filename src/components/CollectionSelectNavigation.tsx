@@ -28,7 +28,7 @@ function CollectionSelectNavigation({ current, collections }: Props) {
 
   return (
     <Select
-      defaultValue={params?.collectionId ? current.collectionId : null}
+      defaultValue={params?.collectionId ? params.collectionId : current.collectionId }
       onValueChange={(x) => handleSelectChange(x)}
     >
       <SelectTrigger className="w-[180px]">
@@ -36,7 +36,7 @@ function CollectionSelectNavigation({ current, collections }: Props) {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Collections</SelectLabel>
+          {/* <SelectLabel>Collections</SelectLabel> */}
           {collections?.map((item, i) => (
             <SelectItem key={i} value={item.id}>
               {item.name}

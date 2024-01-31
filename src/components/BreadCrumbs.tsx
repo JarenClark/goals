@@ -17,12 +17,12 @@ export default function BreadCrumbs({ linkItems }: Props) {
     return "text-muted-foreground hover:text-primary";
   }
   return (
-    <ul className="flex items-center space-x-2 p-5 py-8">
+    <ul className="flex items-center space-x-2">
       {linkItems
         .filter((x) => !!x.text)
         .map((item, i) => (
           <React.Fragment key={i}>
-            {i > 0 ? <div>/</div> : null}
+            {i > 0 ? <div className={"text-muted-foreground"}>/</div> : null}
             <li>
               {item.link ? (
                 <Link href={item.link} className={colorClassName(i)}>

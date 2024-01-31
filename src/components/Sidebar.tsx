@@ -30,6 +30,8 @@ import Greeting from "./Greeting";
 import Avi from "./Avi";
 import SearchInput from "./SearchInput";
 import ProtectedContent from "./ProtectedContent";
+import { useMediaQuery } from "@/hooks/use-media-query";
+
 export default async function Sidebar() {
   const supabase = createServerComponentClient({ cookies });
   const {
@@ -37,6 +39,7 @@ export default async function Sidebar() {
   } = await supabase.auth.getUser();
 
   if (!user) return null;
+
   return (
     <ProtectedContent>
       <div className="border-r h-screen p-8  flex flex-col justify-between lg:min-w-[400px] pr-8">
@@ -46,7 +49,6 @@ export default async function Sidebar() {
 
             <SearchInput />
           </div>
-
           <nav className="">
             <Menu />
           </nav>
@@ -57,6 +59,7 @@ export default async function Sidebar() {
             <form action="/auth/sign-out" method="post">
               <Button variant={"outline"}>Logout</Button>
             </form>
+            <ThemeToggle />
           </div>
         </div>
       </div>

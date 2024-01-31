@@ -9,10 +9,11 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Label } from "@/components/ui/label";
-import { PlusIcon } from "lucide-react";
+import { HomeIcon, LibraryIcon, PlusIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useUIstore } from "@/store";
 import AddNewItem from "./AddNewItem";
+import Link from "next/link";
 type Props = {};
 
 function Footer({}: Props) {
@@ -28,16 +29,24 @@ function Footer({}: Props) {
 
   // if(!isLoggedIn) return null
   return (
-    <footer className="border-t">
+    <footer className="border-t-2 fixed py-2 rounded-t-2xl bottom-0 left-0 w-screen bg-background">
       <div className="container">
-        <div className="flex items-center justify-between py-4">
-          <Label>Goals&nbsp;&copy;{new Date().getFullYear()}</Label>
-          <AddNewItem />
-
-          {/* <Button variant="outline" size="icon" className="rounded-full" onClick={() => toggleCreateModal}>
-              <PlusIcon></PlusIcon>
-            </Button> */}
-        </div>
+        <ul className="flex items-center justify-center space-x-2">
+        <li className="rounded-lg bg-muted">
+            <Link className="block p-2"href={"/"}>
+              <HomeIcon></HomeIcon>
+            </Link>
+          </li>
+          <li className="rounded-lg bg-muted">
+            <Link className="p-2 block" href={"/collections"}>
+              <LibraryIcon />
+            </Link>
+          </li>
+          <li></li>
+          <li className="rounded-lg bg-muted">
+            <AddNewItem />
+          </li>
+        </ul>
       </div>
     </footer>
   );

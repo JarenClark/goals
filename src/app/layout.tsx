@@ -13,7 +13,7 @@ import Greeting from "@/components/Greeting";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import AddNewItem from "@/components/AddNewItem";
 import BreadCrumbs from "@/components/BreadCrumbs";
-
+import { Toaster } from "@/components/ui/sonner"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -44,6 +44,8 @@ export default function RootLayout({
           <NextTopLoader />
 
           {children}
+          <Toaster />
+
         </ThemeProvider>
       </body>
     </html>
