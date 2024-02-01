@@ -24,9 +24,17 @@ import { Input } from "@/components/ui/input";
 import QuickAdd from "@/components/QuickAdd";
 export default async function Home() {
   const supabase = createServerComponentClient({ cookies });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   const { data: collections, count } = await supabase
     .from("_collections")
     .select("*", { count: "exact" });
+if(!user) return null
+    const { data: shared } = await supabase
+    .from("_collaborators")
+    .select("*, _collections(name)")
+    .eq("user_id", user.id);
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 p-6">
@@ -35,7 +43,11 @@ export default async function Home() {
 
           <CardTitle>Dashboard</CardTitle>
         </div>
+        {/* Shared */}
+        <div className="pt-12 col-span-1 md:col-span-3 lg:col-span-6">
 
+          <pre>{JSON.stringify(shared,null,2)}</pre>
+        </div>
         {/* Quick Add */}
         <Card className="border border-muted   lg:col-span-2">
           <CardHeader>

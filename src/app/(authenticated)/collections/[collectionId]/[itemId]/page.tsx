@@ -32,7 +32,7 @@ export default async function ItemPage({ params }: Props) {
   const supabase = createServerComponentClient({ cookies });
   const { data: item }: any = await supabase
     .from("_items")
-    .select("title, description, content,collection_id, _collections(name)")
+    .select("user_id,title, description, content,collection_id, _collections(name)")
     .eq("id", params.itemId)
     .single();
   return (

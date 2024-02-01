@@ -29,7 +29,7 @@ function Footer({}: Props) {
 
   // if(!isLoggedIn) return null
   return (
-    <footer className="border-t-2 fixed py-2 rounded-t-2xl bottom-0 left-0 w-screen bg-background">
+    <footer className="border-t-2 block sm:hidden fixed py-2 rounded-t-2xl bottom-0 left-0 w-screen bg-background">
       <div className="container">
         <ul className="flex items-center justify-center space-x-2">
         <li className="rounded-lg bg-muted">

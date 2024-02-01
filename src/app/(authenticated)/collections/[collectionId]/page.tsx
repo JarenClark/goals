@@ -27,7 +27,9 @@ import {
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -104,33 +106,42 @@ export default async function CollectionPage({ params }: Props) {
               {" "}
               <CardTitle>{collection.name}</CardTitle>
             </div>
-            <Card>
-              {/* <CardHeader></CardHeader> */}
-              <CardContent>
-                <Table>
-                  <TableHead className="text-muted-foreground">
-                    <TableHeader>Title</TableHeader>
-                  </TableHead>
-                  <TableBody>
-                    {items?.map((item, i) => (
-                      <React.Fragment key={i}>
-                        <TableRow>
-                          <TableCell>
-                            <Link
+
+            {items && items.length > 0 ? (
+              <Table className="border">
+                <TableHead className="text-muted-foreground">
+                  <TableHeader>Title</TableHeader>
+                </TableHead>
+                <TableBody>
+                  {items?.map((item, i) => (
+                    <React.Fragment key={i}>
+                      <TableRow>
+                        <TableCell>
+                          <Link
                             className="hover:text-underline"
-                              href={`/collections/${params.collectionId}/${item.id}`}
-                            >
-                              {item.title}
-                            </Link>
-                          </TableCell>
-                        </TableRow>
-                      </React.Fragment>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-              {/* <CardFooter></CardFooter> */}
-            </Card>
+                            href={`/collections/${params.collectionId}/${item.id}`}
+                          >
+                            {item.title}
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    </React.Fragment>
+                  ))}
+                </TableBody>
+              </Table>
+            ) : (
+              <>
+                <Card>
+                  {/* <CardHeader></CardHeader> */}
+                  <CardContent>
+                    <Table>
+                      <TableCaption>You have zero items.</TableCaption>
+                    </Table>
+                  </CardContent>
+                  {/* <CardFooter></CardFooter> */}
+                </Card>
+              </>
+            )}
           </div>
         </div>
       )}
