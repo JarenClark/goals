@@ -49,10 +49,10 @@ export default function Login() {
 
   // login view
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex items-center min-h-screen justify-center">
       <div className="mx-auto  flex items-center flex-col w-full px-8 justify-center py-20  gap-2">
         <div className="text-center mb-8">
-          <TypographyH1 className="text-center">Goals</TypographyH1>
+          <TypographyH1 className="text-center">Archives</TypographyH1>
           <TypographyMuted className="text-center max-w-sm mt-4">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere placeat dolorem est fugiat consequatur quasi.
           </TypographyMuted>

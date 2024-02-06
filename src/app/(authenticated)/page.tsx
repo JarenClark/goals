@@ -18,7 +18,12 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import BreadCrumbs from "@/components/BreadCrumbs";
-import { ActivityIcon, LibraryIcon, PlusCircleIcon, PlusIcon } from "lucide-react";
+import {
+  ActivityIcon,
+  LibraryIcon,
+  PlusCircleIcon,
+  PlusIcon,
+} from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import QuickAdd from "@/components/QuickAdd";
@@ -27,26 +32,27 @@ export default async function Home() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  if (!user) return null;
+
   const { data: collections, count } = await supabase
     .from("_collections")
-    .select("*", { count: "exact" });
-if(!user) return null
-    const { data: shared } = await supabase
+    .select("*", { count: "exact" })
+    .eq("user_id", user.id);
+  const { data: shared } = await supabase
     .from("_collaborators")
-    .select("*, _collections(name)")
+    .select("*, _collections(id,name)", { count: "exact" })
     .eq("user_id", user.id);
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 p-6">
         {/* Title */}
         <div className="pt-12 col-span-1 md:col-span-3 lg:col-span-6">
-
           <CardTitle>Dashboard</CardTitle>
         </div>
         {/* Shared */}
         <div className="pt-12 col-span-1 md:col-span-3 lg:col-span-6">
-
-          <pre>{JSON.stringify(shared,null,2)}</pre>
+          <pre>{JSON.stringify(shared, null, 2)}</pre>
         </div>
         {/* Quick Add */}
         <Card className="border border-muted   lg:col-span-2">
@@ -62,7 +68,7 @@ if(!user) return null
             </div>
           </CardHeader>
           <CardContent>
-            <QuickAdd collections={collections ? collections : []}/>
+            <QuickAdd collections={collections ? collections : []} />
           </CardContent>
           <CardFooter></CardFooter>
         </Card>
@@ -131,7 +137,8 @@ if(!user) return null
               <div className="flex flex-col space-y-1">
                 <TypographyMuted>Your Stuff</TypographyMuted>
                 <CardTitle>
-                  {count && count != 1 ? `${count + " "}` : ``}Collection
+                  {count && count != 1 ? `${count + " "}` : `${count} `}
+                  Collection
                   {count && count != 1 ? "s" : null}
                 </CardTitle>
               </div>
@@ -147,6 +154,23 @@ if(!user) return null
                   >
                     <TableCell>
                       <Link href={`/collections/${c.id}`}>{c.name}</Link>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <CardTitle className="mt-4 mb-2">Shared</CardTitle>
+            <Table className="border border-muted">
+              <TableBody>
+                {shared?.map((c, i) => (
+                  <TableRow
+                    key={i}
+                    className="w-full md:w-1/2 lg:w-1/3 px-2 mb-4"
+                  >
+                    <TableCell>
+                      <Link href={`/collections/${c._collections.id}`}>
+                        {c._collections.name}
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))}

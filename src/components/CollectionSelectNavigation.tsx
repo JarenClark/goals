@@ -22,9 +22,9 @@ function CollectionSelectNavigation({ current, collections }: Props) {
   function handleSelectChange(newCollectionId: string) {
     router.push(`/collections/${newCollectionId}`);
   }
-  useEffect(() => {
-    console.log("params:", JSON.stringify(params, null, 2));
-  }, [params]);
+  // useEffect(() => {
+  //   console.log("params:", JSON.stringify(params, null, 2));
+  // }, [params]);
 
   return (
     <Select
