@@ -11,6 +11,8 @@ import {
 import { Table, TableBody, TableRow, TableCell } from "@/components/ui/table";
 import {
   TypographyH1,
+  TypographyH3,
+  TypographyH4,
   TypographyLead,
   TypographyMuted,
 } from "@/components/ui/typography";
@@ -50,29 +52,33 @@ export default async function Home() {
         <div className="pt-12 col-span-1 md:col-span-3 lg:col-span-6">
           <CardTitle>Dashboard</CardTitle>
         </div>
-        {/* Shared */}
-        <div className="pt-12 col-span-1 md:col-span-3 lg:col-span-6">
-          <pre>{JSON.stringify(shared, null, 2)}</pre>
-        </div>
         {/* Quick Add */}
-        <Card className="border border-muted   lg:col-span-2">
-          <CardHeader>
-            <div className="flex space-x-4">
-              <div className="rounded-md bg-muted flex items-center p-2">
-                <PlusIcon />
+        {!!collections && collections.length > 0 ? (
+          <Card className="border border-muted   lg:col-span-2">
+            <CardHeader>
+              <div className="flex space-x-4">
+                <div className="rounded-md bg-muted flex items-center p-2">
+                  <PlusIcon />
+                </div>
+                <div className="flex flex-col space-y-1">
+                  <TypographyMuted>Quick Add</TypographyMuted>
+                  <CardTitle>New Item</CardTitle>
+                </div>
               </div>
-              <div className="flex flex-col space-y-1">
-                <TypographyMuted>Quick Add</TypographyMuted>
-                <CardTitle>New Item</CardTitle>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <QuickAdd collections={collections ? collections : []} />
-          </CardContent>
-          <CardFooter></CardFooter>
-        </Card>
-
+            </CardHeader>
+            <CardContent>
+              <QuickAdd collections={collections ? collections : []} />
+            </CardContent>
+            <CardFooter></CardFooter>
+          </Card>
+        ) : (
+          <Card>
+            <CardHeader></CardHeader>
+            <CardContent>
+              Create a collection to start adding items
+            </CardContent>
+          </Card>
+        )}
         {/* Overview Card */}
         <Card className="border border-muted   lg:col-span-2">
           <CardHeader>
@@ -159,23 +165,27 @@ export default async function Home() {
                 ))}
               </TableBody>
             </Table>
-            <CardTitle className="mt-4 mb-2">Shared</CardTitle>
-            <Table className="border border-muted">
-              <TableBody>
-                {shared?.map((c, i) => (
-                  <TableRow
-                    key={i}
-                    className="w-full md:w-1/2 lg:w-1/3 px-2 mb-4"
-                  >
-                    <TableCell>
-                      <Link href={`/collections/${c._collections.id}`}>
-                        {c._collections.name}
-                      </Link>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            {!!shared && (
+              <>
+                <TypographyH4 className="mt-4">Shared</TypographyH4>
+                <Table className="border border-muted">
+                  <TableBody>
+                    {shared?.map((c, i) => (
+                      <TableRow
+                        key={i}
+                        className="w-full md:w-1/2 lg:w-1/3 px-2 mb-4"
+                      >
+                        <TableCell>
+                          <Link href={`/collections/${c._collections.id}`}>
+                            {c._collections.name}
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </>
+            )}
           </CardContent>
           <CardFooter>
             <Button variant={"outline"}>Add New</Button>

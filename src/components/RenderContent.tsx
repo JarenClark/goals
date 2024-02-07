@@ -8,9 +8,9 @@ function RenderContent({ html }: Props) {
   //   const { theme, setTheme } = useTheme();
   return (
     <div>
-      <pre>
+      {/* <pre> */}
         <div dangerouslySetInnerHTML={{ __html: html }} />
-      </pre>
+      {/* </pre> */}
     </div>
   );
 }

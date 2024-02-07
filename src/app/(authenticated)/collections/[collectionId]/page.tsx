@@ -1,6 +1,10 @@
 import BreadCrumbs from "@/components/BreadCrumbs";
 import ProtectedContent from "@/components/ProtectedContent";
-import { TypographyH2, TypographyLead } from "@/components/ui/typography";
+import {
+  TypographyH2,
+  TypographyLead,
+  TypographyMuted,
+} from "@/components/ui/typography";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { ArrowLeftIcon } from "lucide-react";
 import { cookies } from "next/headers";
@@ -54,7 +58,9 @@ export default async function CollectionPage({ params }: Props) {
   const { data: items } = await supabase
     .from("_items")
     .select("*")
-    .eq("collection_id", params.collectionId);
+    .eq("collection_id", params.collectionId)
+    .is("parent_item", null);
+  // .eq("parent_item",null);
 
   // function handleSelectChange(x) {
   //   console.log('new value is ,',x)
@@ -65,10 +71,10 @@ export default async function CollectionPage({ params }: Props) {
         <div className=" px-8 py-16">
           <div className="mb-8">
             <div className="mb-2 flex items-center justify-between">
-              <div className="hidden md:inline-flex items-center space-x-2">
+              <div className="inline-flex  items-center space-x-2">
                 <BreadCrumbs
                   linkItems={[
-                    { link: "/", text: "Dashboard" },
+                    // { link: "/", text: "Dashboard" },
                     { link: "/collections", text: "Collections" },
                     // {
                     //   link: `/collections/${params.collectionId}`,
@@ -76,30 +82,33 @@ export default async function CollectionPage({ params }: Props) {
                     // },
                   ]}
                 />
-                <div className="text-muted-foreground">/</div>
-                {collections && collections.length > 1 ? (
-                  <CollectionSelectNavigation
-                    current={params.collectionId}
-                    collections={collections}
-                  />
-                ) : (
-                  // <Select defaultValue={params.collectionId} onValueChange={(x) => handleSelectChange(x)}>
-                  //   <SelectTrigger className="w-[180px]">
-                  //     <SelectValue placeholder="Select a fruit" />
-                  //   </SelectTrigger>
-                  //   <SelectContent>
-                  //     <SelectGroup>
-                  //       <SelectLabel>Collections</SelectLabel>
-                  //       {collections?.map((item, i) => (
-                  //         <SelectItem key={i} value={item.id}>
-                  //           {item.name}
-                  //         </SelectItem>
-                  //       ))}
-                  //     </SelectGroup>
-                  //   </SelectContent>
-                  // </Select>
-                  <Label>{collection.name}</Label>
-                )}
+                <div className="flex items-center space-x-2">
+                  <div className="text-muted-foreground">/</div>
+                  {collections && collections.length > 1 ? (
+                    <CollectionSelectNavigation
+                      key={params.collectionId}
+                      current={params.collectionId}
+                      collections={collections}
+                    />
+                  ) : (
+                    // <Select defaultValue={params.collectionId} onValueChange={(x) => handleSelectChange(x)}>
+                    //   <SelectTrigger className="w-[180px]">
+                    //     <SelectValue placeholder="Select a fruit" />
+                    //   </SelectTrigger>
+                    //   <SelectContent>
+                    //     <SelectGroup>
+                    //       <SelectLabel>Collections</SelectLabel>
+                    //       {collections?.map((item, i) => (
+                    //         <SelectItem key={i} value={item.id}>
+                    //           {item.name}
+                    //         </SelectItem>
+                    //       ))}
+                    //     </SelectGroup>
+                    //   </SelectContent>
+                    // </Select>
+                    <Label>{collection.name}</Label>
+                  )}
+                </div>
               </div>
             </div>
             <div className="mb-4">
@@ -107,11 +116,11 @@ export default async function CollectionPage({ params }: Props) {
               <CardTitle>{collection.name}</CardTitle>
             </div>
 
-            {items && items.length > 0 ? (
+            {!!items && items.length > 0 ? (
               <Table className="border">
-                <TableHead className="text-muted-foreground">
+                {/* <TableHead className="text-muted-foreground">
                   <TableHeader>Title</TableHeader>
-                </TableHead>
+                </TableHead> */}
                 <TableBody>
                   {items?.map((item, i) => (
                     <React.Fragment key={i}>
@@ -121,7 +130,7 @@ export default async function CollectionPage({ params }: Props) {
                             className="hover:text-underline"
                             href={`/collections/${params.collectionId}/${item.id}`}
                           >
-                            {item.title}
+                            {item.title} {item.parent_item}
                           </Link>
                         </TableCell>
                       </TableRow>
@@ -132,13 +141,11 @@ export default async function CollectionPage({ params }: Props) {
             ) : (
               <>
                 <Card>
-                  {/* <CardHeader></CardHeader> */}
-                  <CardContent>
-                    <Table>
-                      <TableCaption>You have zero items.</TableCaption>
-                    </Table>
+                  <CardHeader></CardHeader>
+                  <CardContent className="text-center">
+                    <TypographyMuted>You have zero items.</TypographyMuted>
                   </CardContent>
-                  {/* <CardFooter></CardFooter> */}
+                  <CardFooter></CardFooter>
                 </Card>
               </>
             )}

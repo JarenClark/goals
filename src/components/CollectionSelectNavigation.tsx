@@ -31,7 +31,7 @@ function CollectionSelectNavigation({ current, collections }: Props) {
       defaultValue={params?.collectionId ? params.collectionId : current.collectionId }
       onValueChange={(x) => handleSelectChange(x)}
     >
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="lg:w-[180px] w-[180px] truncate">
         <SelectValue placeholder="Select a Collection" />
       </SelectTrigger>
       <SelectContent>
