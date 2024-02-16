@@ -51,7 +51,7 @@ export default async function ItemPage({ params }: Props) {
             <BreadCrumbs
               linkItems={[
                 // { link: "/", text: "Dashboard" },
-                { link: "/collections", text: "Collections" },
+                { link: "/collections", text: "Boards" },
                 {
                   link: `/collections/${item.collection_id}`,
                   text: item._collections.name,

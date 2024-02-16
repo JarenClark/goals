@@ -36,7 +36,7 @@ function CollectionSelectNavigation({ current, collections }: Props) {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          {/* <SelectLabel>Collections</SelectLabel> */}
+          {/* <SelectLabel>Boards</SelectLabel> */}
           {collections?.map((item, i) => (
             <SelectItem key={i} value={item.id}>
               {item.name}

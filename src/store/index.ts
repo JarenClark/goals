@@ -43,6 +43,24 @@ export const useUIstore = create<UIstate>((set) => ({
   // },
 }));
 /**
+ * User info
+ *
+ */
+interface authState {
+  userId: string | null;
+  setUserId: (id?: string) => void;
+}
+export const useAuthStore = create<authState>((set) => ({
+  userId: null,
+  setUserId: (id) => {
+    if (id) {
+      set(() => ({ userId: id }));
+    } else {
+      set(() => ({ userId: null }));
+    }
+  },
+}));
+/**
  * Notes
  */
 interface Note {

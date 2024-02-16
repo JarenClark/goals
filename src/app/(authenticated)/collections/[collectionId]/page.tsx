@@ -38,6 +38,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import QuickAdd from "@/components/QuickAdd";
+import deleteItem from "../../actions/deleteItem";
+import { Button } from "@/components/ui/button";
 type Props = {
   params: {
     collectionId: string;
@@ -68,89 +71,118 @@ export default async function CollectionPage({ params }: Props) {
   return (
     <>
       {collection && (
-        <div className=" px-8 py-16">
-          <div className="mb-8">
-            <div className="mb-2 flex items-center justify-between">
-              <div className="inline-flex  items-center space-x-2">
-                <BreadCrumbs
-                  linkItems={[
-                    // { link: "/", text: "Dashboard" },
-                    { link: "/collections", text: "Collections" },
-                    // {
-                    //   link: `/collections/${params.collectionId}`,
-                    //   text: collection.name,
-                    // },
-                  ]}
-                />
-                <div className="flex items-center space-x-2">
-                  <div className="text-muted-foreground">/</div>
-                  {collections && collections.length > 1 ? (
-                    <CollectionSelectNavigation
-                      key={params.collectionId}
-                      current={params.collectionId}
-                      collections={collections}
-                    />
-                  ) : (
-                    // <Select defaultValue={params.collectionId} onValueChange={(x) => handleSelectChange(x)}>
-                    //   <SelectTrigger className="w-[180px]">
-                    //     <SelectValue placeholder="Select a fruit" />
-                    //   </SelectTrigger>
-                    //   <SelectContent>
-                    //     <SelectGroup>
-                    //       <SelectLabel>Collections</SelectLabel>
-                    //       {collections?.map((item, i) => (
-                    //         <SelectItem key={i} value={item.id}>
-                    //           {item.name}
-                    //         </SelectItem>
-                    //       ))}
-                    //     </SelectGroup>
-                    //   </SelectContent>
-                    // </Select>
-                    <Label>{collection.name}</Label>
-                  )}
+        <>
+          <div className=" px-8 py-16">
+            <div className="mb-8">
+              <div className="mb-2 flex items-center justify-between">
+                <div className="inline-flex  items-center space-x-2">
+                  <BreadCrumbs
+                    linkItems={[
+                      // { link: "/", text: "Dashboard" },
+                      { link: "/collections", text: "Boards" },
+                      // {
+                      //   link: `/collections/${params.collectionId}`,
+                      //   text: collection.name,
+                      // },
+                    ]}
+                  />
+                  <div className="flex items-center space-x-2">
+                    <div className="text-muted-foreground">/</div>
+                    {collections && collections.length > 1 ? (
+                      <CollectionSelectNavigation
+                        key={params.collectionId}
+                        current={params.collectionId}
+                        collections={collections}
+                      />
+                    ) : (
+                      // <Select defaultValue={params.collectionId} onValueChange={(x) => handleSelectChange(x)}>
+                      //   <SelectTrigger className="w-[180px]">
+                      //     <SelectValue placeholder="Select a fruit" />
+                      //   </SelectTrigger>
+                      //   <SelectContent>
+                      //     <SelectGroup>
+                      //       <SelectLabel>Boards</SelectLabel>
+                      //       {collections?.map((item, i) => (
+                      //         <SelectItem key={i} value={item.id}>
+                      //           {item.name}
+                      //         </SelectItem>
+                      //       ))}
+                      //     </SelectGroup>
+                      //   </SelectContent>
+                      // </Select>
+                      <Label>{collection.name}</Label>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="mb-4">
-              {" "}
-              <CardTitle>{collection.name}</CardTitle>
-            </div>
+              <div className="mb-4">
+                {" "}
+                <CardTitle>{collection.name}</CardTitle>
+              </div>
 
-            {!!items && items.length > 0 ? (
-              <Table className="border">
-                {/* <TableHead className="text-muted-foreground">
-                  <TableHeader>Title</TableHeader>
-                </TableHead> */}
-                <TableBody>
-                  {items?.map((item, i) => (
-                    <React.Fragment key={i}>
-                      <TableRow>
-                        <TableCell>
-                          <Link
-                            className="hover:text-underline"
-                            href={`/collections/${params.collectionId}/${item.id}`}
-                          >
-                            {item.title} {item.parent_item}
-                          </Link>
-                        </TableCell>
-                      </TableRow>
-                    </React.Fragment>
-                  ))}
-                </TableBody>
-              </Table>
-            ) : (
-              <>
-                <Card>
-                  <CardHeader></CardHeader>
-                  <CardContent className="text-center">
-                    <TypographyMuted>You have zero items.</TypographyMuted>
-                  </CardContent>
-                  <CardFooter></CardFooter>
-                </Card>
-              </>
-            )}
+              {!!items && items.length > 0 ? (
+                <div className="overflow-scroll">
+                  <Table className="border">
+                    {/* <TableHead className="text-muted-foreground">
+              <TableHeader>Title</TableHeader>
+            </TableHead> */}
+                    <TableBody>
+                      {items?.map((item, i) => (
+                        <React.Fragment key={i}>
+                          <TableRow>
+                            <TableCell>
+                              <Link
+                                className="hover:text-underline"
+                                href={`/collections/${params.collectionId}/${item.id}`}
+                              >
+                                {item.title} {item.parent_item}
+                              </Link>
+                            </TableCell>
+                            <TableCell>
+                              <form action={deleteItem}>
+                                <input
+                                  name="collection_id"
+                                  type="text"
+                                  value={params.collectionId}
+                                  className="hidden"
+                                />
+
+                                <input
+                                  name="id"
+                                  type="text"
+                                  value={item.id}
+                                  className="hidden"
+                                />
+                                <Button variant={'destructive'} type="submit">Delete</Button>
+                              </form>
+                            </TableCell>
+                          </TableRow>
+                        </React.Fragment>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              ) : (
+                <>
+                  <Card>
+                    <CardHeader></CardHeader>
+                    <CardContent className="text-center">
+                      <TypographyMuted>You have zero items.</TypographyMuted>
+                    </CardContent>
+                    <CardFooter></CardFooter>
+                  </Card>
+                </>
+              )}
+            </div>
           </div>
-        </div>
+          <Card>
+            <CardContent>
+              <QuickAdd
+                collections={collections ? collections : [collection]}
+              />
+            </CardContent>
+          </Card>
+        </>
       )}
     </>
   );

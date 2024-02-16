@@ -39,7 +39,7 @@ export default function Menu() {
     {
       link: "/collections",
       icon: <LibraryIcon />,
-      label: "Collections",
+      label: "Boards",
     },
     {
       link: "/labels",

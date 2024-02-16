@@ -17,7 +17,7 @@ import React from "react";
 
 type Props = {};
 
-export default async function AllOfMyCollections({}: Props) {
+export default async function AllOfMyBoards({}: Props) {
   const supabase = createServerComponentClient({ cookies });
   const { data: collections } = await supabase.from("_collections").select("*");
 
@@ -28,13 +28,13 @@ export default async function AllOfMyCollections({}: Props) {
           <BreadCrumbs
             linkItems={[
               { link: "/", text: "Dashboard" },
-              { link: "/collections", text: "Collections" },
+              { link: "/collections", text: "Boards" },
             ]}
           ></BreadCrumbs>
         </div>
         <div className="mb-4">
               {" "}
-              <CardTitle>Collections</CardTitle>
+              <CardTitle>Boards</CardTitle>
             </div>
 
         <div className=" ">

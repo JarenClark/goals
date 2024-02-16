@@ -75,7 +75,7 @@ export default async function Home() {
           <Card>
             <CardHeader></CardHeader>
             <CardContent>
-              Create a collection to start adding items
+              Create a board to start adding items
             </CardContent>
           </Card>
         )}
@@ -133,7 +133,7 @@ export default async function Home() {
           <CardFooter></CardFooter>
         </Card> */}
 
-        {/* Collections */}
+        {/* Boards */}
         <Card className="border border-muted  col-span-1 md:col-span-3 lg:col-span-6 xl:col-span-4">
           <CardHeader>
             <div className="flex space-x-4">
@@ -144,7 +144,7 @@ export default async function Home() {
                 <TypographyMuted>Your Stuff</TypographyMuted>
                 <CardTitle>
                   {count && count != 1 ? `${count + " "}` : `${count} `}
-                  Collection
+                  Board
                   {count && count != 1 ? "s" : null}
                 </CardTitle>
               </div>
@@ -167,7 +167,7 @@ export default async function Home() {
             </Table>
             {!!shared && (
               <>
-                <TypographyH4 className="mt-4">Shared</TypographyH4>
+                <TypographyH4 className="mt-4">Shared </TypographyH4>
                 <Table className="border border-muted">
                   <TableBody>
                     {shared?.map((c, i) => (

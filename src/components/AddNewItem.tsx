@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useUIstore } from "@/store";
 import { PlusIcon, XIcon } from "lucide-react";
+import QuickAdd from "./QuickAdd";
 function AddNewItem() {
   const { createModalIsOpen, toggleCreateModal } = useUIstore();
   return (
@@ -45,6 +46,7 @@ function AddNewItem() {
               account and remove your data from our servers.
             </DialogDescription>
           </DialogHeader>
+          {/* <QuickAdd collections={collections}/> */}
         </DialogContent>
       </Dialog>
     </>

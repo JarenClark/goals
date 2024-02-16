@@ -8,7 +8,11 @@ import { cookies } from "next/headers";
 import { redirect, useRouter } from "next/navigation";
 import { Loader2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { TypographyH1, TypographyMuted, TypographyP } from "@/components/ui/typography";
+import {
+  TypographyH1,
+  TypographyMuted,
+  TypographyP,
+} from "@/components/ui/typography";
 export default function Login() {
   const router = useRouter();
   const supabase = createClientComponentClient();
@@ -49,18 +53,25 @@ export default function Login() {
 
   // login view
   return (
-    <div className="w-full flex items-center min-h-screen justify-center">
-      <div className="mx-auto  flex items-center flex-col w-full px-8 justify-center py-20  gap-2">
-        <div className="text-center mb-8">
-          <TypographyH1 className="text-center">Archives</TypographyH1>
-          <TypographyMuted className="text-center max-w-sm mt-4">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere placeat dolorem est fugiat consequatur quasi.
-          </TypographyMuted>
+    <div className="flex flex-wrap lg:flex-nowrap">
+      <div
+        className="w-full lg:w-1/2 h-screen bg-cover bg-center"
+        style={{ backgroundImage: "url(/login_bg.jpg)" }}
+      ></div>
+      <div className="bg-muted w-full lg:w-1/2 h-screen flex flex-col justify-center items-center">
+        <div>
+          <div className="text-center mb-8 flex flex-col items-center justify-center">
+            <TypographyH1 className="text-center">Archives</TypographyH1>
+            {/* <TypographyMuted className="text-center max-w-sm mt-4">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere
+              placeat dolorem est fugiat consequatur quasi.
+            </TypographyMuted> */}
+          </div>
+          <div className="mx-auto flex justify-center">
+            <Button onClick={googleSignIn}>Login with Google</Button>
+          </div>
         </div>
-        <div className="">
-          <Button onClick={googleSignIn}>Login with Google</Button>
-        </div>
-      </div>{" "}
+      </div>
     </div>
   );
 }
