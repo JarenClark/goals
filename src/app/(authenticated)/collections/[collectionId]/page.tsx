@@ -41,6 +41,7 @@ import {
 import QuickAdd from "@/components/QuickAdd";
 import deleteItem from "../../actions/deleteItem";
 import { Button } from "@/components/ui/button";
+import ItemsTable from "@/components/ItemsTable";
 type Props = {
   params: {
     collectionId: string;
@@ -121,47 +122,9 @@ export default async function CollectionPage({ params }: Props) {
               </div>
 
               {!!items && items.length > 0 ? (
-                <div className="overflow-scroll">
-                  <Table className="border">
-                    {/* <TableHead className="text-muted-foreground">
-              <TableHeader>Title</TableHeader>
-            </TableHead> */}
-                    <TableBody>
-                      {items?.map((item, i) => (
-                        <React.Fragment key={i}>
-                          <TableRow>
-                            <TableCell>
-                              <Link
-                                className="hover:text-underline"
-                                href={`/collections/${params.collectionId}/${item.id}`}
-                              >
-                                {item.title} {item.parent_item}
-                              </Link>
-                            </TableCell>
-                            <TableCell>
-                              <form action={deleteItem}>
-                                <input
-                                  name="collection_id"
-                                  type="text"
-                                  value={params.collectionId}
-                                  className="hidden"
-                                />
-
-                                <input
-                                  name="id"
-                                  type="text"
-                                  value={item.id}
-                                  className="hidden"
-                                />
-                                <Button variant={'destructive'} type="submit">Delete</Button>
-                              </form>
-                            </TableCell>
-                          </TableRow>
-                        </React.Fragment>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
+                <>
+                  <ItemsTable items={items} />
+                </>
               ) : (
                 <>
                   <Card>

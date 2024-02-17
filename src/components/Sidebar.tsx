@@ -41,8 +41,8 @@ export default async function Sidebar() {
   if (!user) return null;
 
   return (
-    <ProtectedContent>
-      <div className="border-r h-screen p-8  flex flex-col justify-between lg:min-w-[400px] pr-8">
+    // <ProtectedContent>
+      <div className="bg-background border-r h-screen p-8  flex flex-col justify-between lg:min-w-[400px] pr-8">
         <section>
           <div className="flex flex-col space-y-4 mb-8 mt-10">
             <Avi />
@@ -63,6 +63,6 @@ export default async function Sidebar() {
           </div>
         </div>
       </div>
-    </ProtectedContent>
+    // </ProtectedContent>
   );
 }

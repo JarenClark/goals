@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import React from "react";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
@@ -18,6 +18,7 @@ import {
   SettingsIcon,
   PersonStandingIcon,
   UserIcon,
+  TableIcon,
 } from "lucide-react";
 
 import { useUIstore } from "@/store";
@@ -33,27 +34,27 @@ export default function Menu() {
   const navIcons = [
     {
       link: "/",
-      icon: <HomeIcon />,
-      label: "Dashboard",
+      icon: <HomeIcon className="w-5 h-5"/>,
+      label: "Home",
     },
     {
       link: "/collections",
-      icon: <LibraryIcon />,
+      icon: <TableIcon className="w-5 h-5"/>,
       label: "Boards",
     },
     {
       link: "/labels",
-      icon: <TagIcon />,
+      icon: <TagIcon className="w-5 h-5"/>,
       label: "Labels",
     },
     {
       link: "/settings",
-      icon: <SettingsIcon />,
+      icon: <SettingsIcon className="w-5 h-5"/>,
       label: "Settings",
     },
     {
       link: "/profile",
-      icon: <UserIcon />,
+      icon: <UserIcon className="w-5 h-5"/>,
       label: "Profile",
     },
  

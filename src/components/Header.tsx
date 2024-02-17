@@ -30,21 +30,34 @@ import NavDrawer from "./NavDrawer";
 import MenuToggle from "./MenuToggle";
 import { getInitials } from "@/lib/utils";
 import SearchInput from "./SearchInput";
-export default async function Header() {
+import BreadCrumbsForNav from "./BreadCrumbsForNav";
+type Props = {
+  children?: React.ReactNode;
+  params?: {
+    collection_id?: string;
+    item_id?: string;
+    label_id?: string;
+  };
+};
+export default async function Header({ children, params }: Props) {
   const supabase = createServerComponentClient({ cookies });
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data: picture } = await supabase.from("profiles").select("avatr_url");
+  const { data: picture } = await supabase
+    .from("profiles")
+    .select("avatar_url");
 
   return (
     <>
       <NavDrawer />
-      <header className="border-b">
-        <div className="container mx-auto">
+      <header className="border-b px-4">
+        <div className="">
           <nav className="flex items-center justify-between py-4">
             <div className="inline-flex space-x-2 items-center">
+              <BreadCrumbsForNav />
+              {/* <pre>{JSON.stringify(params, null, 2)}</pre> */}
               {/* {user && user.user_metadata && user.user_metadata.avatar_url && (
                 <>
                   <Avatar className="w-8 h-8">
@@ -58,10 +71,11 @@ export default async function Header() {
                   </Avatar>
                 </>
               )} */}
+              {children ? children : null}
               {user ? <MenuToggle /> : <div />}
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="hidden lg:flex items-center space-x-2">
               {user ? <SearchInput /> : <div />}
             </div>
 

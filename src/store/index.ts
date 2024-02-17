@@ -1,4 +1,6 @@
 import { create } from "zustand";
+//import { mountStoreDevtool } from 'simple-zustand-devtools';
+
 import {
   createClientComponentClient,
   // createServerComponentClient,
@@ -10,7 +12,12 @@ const supabase = createClientComponentClient();
 /**
  * UI of the app
  */
+interface BreadCrumb {
+  link: string;
+  title: string;
+}
 interface UIstate {
+  breadcrumbs: BreadCrumb[];
   sideNavIsOpen: boolean;
   createModalIsOpen: boolean;
   toggleCreateModal: (arg?: boolean) => void;
@@ -18,6 +25,7 @@ interface UIstate {
   // closeSideNav?: () => void;
 }
 const defaultUIstate = {
+  breadcrumbs: [],
   sideNavIsOpen: false,
   createModalIsOpen: false,
 };
@@ -57,6 +65,43 @@ export const useAuthStore = create<authState>((set) => ({
       set(() => ({ userId: id }));
     } else {
       set(() => ({ userId: null }));
+    }
+  },
+}));
+
+interface Item {
+  id: string;
+  title: string;
+  collection_id: string;
+}
+interface ItemState {
+  items: Item[];
+  item: Item | null;
+  setItems: () => void;
+  setItem: (id: string) => void;
+  clearItem: () => void;
+  deleteModalIsOpen: boolean;
+  setDeleteModalIsOpen: (arg?: boolean) => void;
+}
+export const useItemStore = create<ItemState>((set) => ({
+  items: [],
+  item: null,
+  setItem: async (id) => {
+    const { data: item } = await supabase
+      .from("_items")
+      .select("*")
+      .eq("id", id)
+      .single();
+    set(() => ({ item: item }));
+  },
+  setItems: async () => {},
+  clearItem: () => set(() => ({ item: null })),
+  deleteModalIsOpen: false,
+  setDeleteModalIsOpen: (arg) => {
+    if (arg) {
+      set(() => ({ deleteModalIsOpen: arg }));
+    } else {
+      set((state) => ({ deleteModalIsOpen: !state.deleteModalIsOpen }));
     }
   },
 }));
