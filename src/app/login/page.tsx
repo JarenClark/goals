@@ -55,10 +55,10 @@ export default function Login() {
   return (
     <div className="flex flex-wrap lg:flex-nowrap">
       <div
-        className="w-full lg:w-1/2 h-screen bg-cover bg-center"
+        className="w-full absolute inset-0 lg:relative lg:w-1/2 h-screen bg-cover bg-center"
         style={{ backgroundImage: "url(/login_bg.jpg)" }}
       ></div>
-      <div className="bg-muted w-full lg:w-1/2 h-screen flex flex-col justify-center items-center">
+      <div className="bg-transparent lg:bg-muted w-full relative lg:w-1/2 h-screen flex flex-col justify-center items-center">
         <div>
           <div className="text-center mb-8 flex flex-col items-center justify-center">
             <TypographyH1 className="text-center">Archives</TypographyH1>

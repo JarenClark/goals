@@ -75,11 +75,13 @@ interface Item {
   collection_id: string;
 }
 interface ItemState {
-  items: Item[];
+  items: Item[] | null;
   item: Item | null;
   setItems: () => void;
   setItem: (id: string) => void;
   clearItem: () => void;
+  createModalIsOpen: boolean;
+  setCreateModalIsOpen: (arg?: boolean) => void;
   deleteModalIsOpen: boolean;
   setDeleteModalIsOpen: (arg?: boolean) => void;
 }
@@ -94,7 +96,12 @@ export const useItemStore = create<ItemState>((set) => ({
       .single();
     set(() => ({ item: item }));
   },
-  setItems: async () => {},
+  setItems: async () => {
+    const { data: items } = await supabase
+    .from("_items")
+    .select("*");
+  set(() => ({ items: items }));
+  },
   clearItem: () => set(() => ({ item: null })),
   deleteModalIsOpen: false,
   setDeleteModalIsOpen: (arg) => {
@@ -102,6 +109,14 @@ export const useItemStore = create<ItemState>((set) => ({
       set(() => ({ deleteModalIsOpen: arg }));
     } else {
       set((state) => ({ deleteModalIsOpen: !state.deleteModalIsOpen }));
+    }
+  },
+  createModalIsOpen: false,
+  setCreateModalIsOpen: (arg) => {
+    if (arg) {
+      set(() => ({ createModalIsOpen: arg }));
+    } else {
+      set((state) => ({ createModalIsOpen: !state.createModalIsOpen }));
     }
   },
 }));

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Menu from "./Menu";
 
 // import {docMenuIs}
@@ -32,6 +32,11 @@ import {
 import DisplayNameByOldID from "@/components/team/DisplayNameByOldID";
 import { TypographyP } from "@/components/ui/typography";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { usePathname, useRouter } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import Link from "next/link";
+import ThemeToggle from "./ThemeToggle";
+import SearchInput from "./SearchInput";
 
 type Props = {};
 
@@ -40,6 +45,12 @@ function NavDrawer({}: Props) {
   //const toggle = useDocumentStore((state) => state.setDocMenuIsOpen);
   const sideNavIsOpen = useUIstore((state) => state.sideNavIsOpen);
   const toggleSideNav = useUIstore((state) => state.toggleSideNav);
+  //const router = useRouter();
+  // const pathname = usePathname()
+  // useEffect(() => {
+  //   toggleSideNav(false);
+  // }, [pathname]);
+
   return (
     <>
       <Sheet open={sideNavIsOpen}>
@@ -61,6 +72,7 @@ function NavDrawer({}: Props) {
             </SheetDescription>
           </SheetHeader>
           <div className="mt-4"></div>
+          <SearchInput /> 
           <Menu />
           {/* <Tabs defaultValue="details" className="">
             <TabsList className="grid w-full grid-cols-2">
@@ -80,7 +92,19 @@ function NavDrawer({}: Props) {
               </Card>
             </TabsContent>
           </Tabs> */}
-          <SheetFooter className="mt-auto"></SheetFooter>
+          <SheetFooter className="mt-auto">
+            <div className="inline-flex items-center space-x-2">
+              <div>
+                <div className="flex items-center space-x-2">
+                  {/* <Label> Hey, {user.email}</Label> */}
+                  <form action="/auth/sign-out" method="post">
+                    <Button variant={"outline"}>Logout</Button>
+                  </form>
+                </div>
+              </div>
+              <ThemeToggle />
+            </div>
+          </SheetFooter>
         </SheetContent>
       </Sheet>
     </>

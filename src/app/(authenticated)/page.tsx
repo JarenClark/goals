@@ -48,9 +48,9 @@ export default async function Home() {
     .eq("user_id", user.id);
   return (
     <>
-      <div className="bg-muted">
+      <div className="">
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
             {/* Title */}
             <div className="pt-12 col-span-1 md:col-span-3 lg:col-span-6">
               <CardTitle>Dashboard</CardTitle>

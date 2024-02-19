@@ -138,13 +138,6 @@ export default async function CollectionPage({ params }: Props) {
               )}
             </div>
           </div>
-          <Card>
-            <CardContent>
-              <QuickAdd
-                collections={collections ? collections : [collection]}
-              />
-            </CardContent>
-          </Card>
         </>
       )}
     </>

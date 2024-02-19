@@ -17,14 +17,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
-export default function DeleteItemModal({}) {
-  const { item, clearItem, deleteModalIsOpen, setDeleteModalIsOpen } =
+export default function CreateItemModal({}) {
+  const { item, clearItem, createModalIsOpen, setCreateModalIsOpen } =
     useItemStore();
-  if (!deleteModalIsOpen) return null;
+  if (!createModalIsOpen) return null;
   if (!item) return null;
   return (
     <>
-      <Dialog open={deleteModalIsOpen} onOpenChange={setDeleteModalIsOpen}>
+      <Dialog open={createModalIsOpen} onOpenChange={setCreateModalIsOpen}>
         <DialogTrigger asChild>
           <Button variant="outline">Edit Profile</Button>
         </DialogTrigger>
@@ -40,7 +40,7 @@ export default function DeleteItemModal({}) {
             action={async (formData: FormData) => {
               await deleteItem(formData).then((result) => {
 
-                setDeleteModalIsOpen(false)
+                setCreateModalIsOpen(false)
                 
                 toast.success("Item successfully deleted!")
                 clearItem()

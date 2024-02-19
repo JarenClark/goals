@@ -32,99 +32,56 @@ function ItemsTable({ heading, items }: Props) {
 
   return (
     <>
-      <Card>
-        <CardHeader>
-          <span onClick={() => clearItem()}>current item is</span>
-          <pre>{JSON.stringify(item, null, 2)}</pre>
-        </CardHeader>
-        <CardContent>
-          <Table className="border">
-            <TableBody>
-              {items?.map((item, i) => (
-                <React.Fragment key={i}>
-                  <TableRow>
-                    <TableCell>
-                      <Link
-                        className="hover:text-underline"
-                        href={`/collections/${item.collection_id}/${item.id}`}
+      <Table className="border">
+        <TableBody>
+          {items?.map((item, i) => (
+            <React.Fragment key={i}>
+              <TableRow>
+                <TableCell>
+                  <Link
+                    className="hover:text-underline"
+                    href={`/collections/${item.collection_id}/${item.id}`}
+                  >
+                    {item.title}
+                  </Link>
+                </TableCell>
+                <TableCell>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" className="h-8 w-8 p-0">
+                        <span className="sr-only">Open menu</span>
+                        <MoreHorizontalIcon className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      {/* <DropdownMenuLabel>Actions</DropdownMenuLabel> */}
+                      <DropdownMenuItem
+                        onClick={() =>
+                          navigator.clipboard.writeText(
+                            `/collections/${item.collection_id}/${item.id}`
+                          )
+                        }
                       >
-                        {item.title} {"item.parent_item"}
-                      </Link>
-                    </TableCell>
-                    <TableCell>
-                      <form action={deleteItem}>
-                        <input
-                        readOnly
-                          name="collection_id"
-                          type="text"
-                          value={item.collection_id}
-                          className="hidden"
-                        />
-                        <input
-                        readOnly
-                          name="title"
-                          type="text"
-                          value={item.title}
-                          className="hidden"
-                        />
-                        <input
-                        readOnly
-                          name="id"
-                          type="text"
-                          value={item.id}
-                          className="hidden"
-                        />
-                        <Button
-                          size={"sm"}
-                          variant={"destructive"}
-                          type="submit"
-                        >
-                          Delete
-                        </Button>
-                      </form>
-                    </TableCell>
-                    <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontalIcon className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          {/* <DropdownMenuLabel>Actions</DropdownMenuLabel> */}
-                          <DropdownMenuItem
-                            onClick={() =>
-                              navigator.clipboard.writeText(
-                                `/collections/${item.collection_id}/${item.id}`
-                              )
-                            }
-                          >
-                            Copy link
-                          </DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                          {/* <DropdownMenuItem>View customer</DropdownMenuItem> */}
-                          <DropdownMenuItem onClick={() => setItem(item.id)}>
-                            Set Item
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => {
-                              setItem(item.id);
-                              setDeleteModalIsOpen(true);
-                            }}
-                          >
-                            Delete Item
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
-                </React.Fragment>
-              ))}
-            </TableBody>
-          </Table>{" "}
-        </CardContent>
-      </Card>
+                        Copy link
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      {/* <DropdownMenuItem>View customer</DropdownMenuItem> */}
+                      <DropdownMenuItem
+                        onClick={() => {
+                          setItem(item.id);
+                          setDeleteModalIsOpen(true);
+                        }}
+                      >
+                        Delete Item
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TableCell>
+              </TableRow>
+            </React.Fragment>
+          ))}
+        </TableBody>
+      </Table>{" "}
       {/* <DeleteItemModal id={""} title={""} collection_id="" /> */}
     </>
   );

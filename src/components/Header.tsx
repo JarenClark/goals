@@ -58,7 +58,7 @@ export default async function Header({ children, params }: Props) {
             <div className="inline-flex space-x-2 items-center">
               <BreadCrumbsForNav />
               {/* <pre>{JSON.stringify(params, null, 2)}</pre> */}
-              {/* {user && user.user_metadata && user.user_metadata.avatar_url && (
+              {user && user.user_metadata && user.user_metadata.avatar_url && (
                 <>
                   <Avatar className="w-8 h-8">
                     <AvatarImage
@@ -70,33 +70,13 @@ export default async function Header({ children, params }: Props) {
                     </AvatarFallback>
                   </Avatar>
                 </>
-              )} */}
-              {children ? children : null}
-              {user ? <MenuToggle /> : <div />}
+              )}
             </div>
 
-            <div className="hidden lg:flex items-center space-x-2">
-              {user ? <SearchInput /> : <div />}
-            </div>
+
 
             <div className="inline-flex items-center space-x-2">
-              <div>
-                {user ? (
-                  <div className="flex items-center space-x-2">
-                    {/* <Label> Hey, {user.email}</Label> */}
-                    <form action="/auth/sign-out" method="post">
-                      <Button variant={"outline"}>Logout</Button>
-                    </form>
-                  </div>
-                ) : (
-                  <div>
-                    <Link href={"/login"}>
-                      <Button variant={"outline"}>Sign In</Button>
-                    </Link>
-                  </div>
-                )}
-              </div>
-              <ThemeToggle />
+            <MenuToggle />
             </div>
           </nav>
         </div>
