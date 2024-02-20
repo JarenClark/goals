@@ -71,75 +71,9 @@ export default async function CollectionPage({ params }: Props) {
   // }
   return (
     <>
-      {collection && (
-        <>
-          <div className=" px-8 py-16">
-            <div className="mb-8">
-              <div className="mb-2 flex items-center justify-between">
-                <div className="inline-flex  items-center space-x-2">
-                  <BreadCrumbs
-                    linkItems={[
-                      // { link: "/", text: "Dashboard" },
-                      { link: "/collections", text: "Boards" },
-                      // {
-                      //   link: `/collections/${params.collectionId}`,
-                      //   text: collection.name,
-                      // },
-                    ]}
-                  />
-                  <div className="flex items-center space-x-2">
-                    <div className="text-muted-foreground">/</div>
-                    {collections && collections.length > 1 ? (
-                      <CollectionSelectNavigation
-                        key={params.collectionId}
-                        current={params.collectionId}
-                        collections={collections}
-                      />
-                    ) : (
-                      // <Select defaultValue={params.collectionId} onValueChange={(x) => handleSelectChange(x)}>
-                      //   <SelectTrigger className="w-[180px]">
-                      //     <SelectValue placeholder="Select a fruit" />
-                      //   </SelectTrigger>
-                      //   <SelectContent>
-                      //     <SelectGroup>
-                      //       <SelectLabel>Boards</SelectLabel>
-                      //       {collections?.map((item, i) => (
-                      //         <SelectItem key={i} value={item.id}>
-                      //           {item.name}
-                      //         </SelectItem>
-                      //       ))}
-                      //     </SelectGroup>
-                      //   </SelectContent>
-                      // </Select>
-                      <Label>{collection.name}</Label>
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className="mb-4">
-                {" "}
-                <CardTitle>{collection.name}</CardTitle>
-              </div>
-
-              {!!items && items.length > 0 ? (
-                <>
-                  <ItemsTable items={items} />
-                </>
-              ) : (
-                <>
-                  <Card>
-                    <CardHeader></CardHeader>
-                    <CardContent className="text-center">
-                      <TypographyMuted>You have zero items.</TypographyMuted>
-                    </CardContent>
-                    <CardFooter></CardFooter>
-                  </Card>
-                </>
-              )}
-            </div>
-          </div>
-        </>
-      )}
+      <div className="container">
+        <code>This is page.tsx inside [collection_id]</code>
+      </div>
     </>
   );
 }

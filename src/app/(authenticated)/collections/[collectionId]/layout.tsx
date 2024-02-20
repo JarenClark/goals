@@ -9,9 +9,10 @@ import React from "react";
 type Props = {
   params: { collectionId: string };
   children: React.ReactNode;
+  childItem?: React.ReactNode;
 };
 
-export default async function CollectionLayout({ children, params }: Props) {
+export default async function CollectionLayout({ children, params, childItem }: Props) {
   const supabase = createServerComponentClient({ cookies });
 
   const { data: collections } = await supabase.from("_collections").select("*");
@@ -26,55 +27,58 @@ export default async function CollectionLayout({ children, params }: Props) {
     (x) => x.id == params.collectionId
   );
   return (
-    <div>
-      <div className="container pt-16 pb-8">
-        <div className="inline-flex mb-4 items-center space-x-2">
-          <BreadCrumbs
-            linkItems={[
-              // { link: "/", text: "Dashboard" },
-              { link: "/collections", text: "Boards" },
-              // {
-              //   link: `/collections/${params.collectionId}`,
-              //   text: collection.name,
-              // },
-            ]}
-          />
-          <div className="flex items-center space-x-2">
-            <div className="text-muted-foreground">/</div>
-            {collections && collections.length > 1 ? (
-              <CollectionSelectNavigation
-                key={params.collectionId}
-                current={params.collectionId}
-                collections={collections}
-              />
-            ) : (
-              // <Select defaultValue={params.collectionId} onValueChange={(x) => handleSelectChange(x)}>
-              //   <SelectTrigger className="w-[180px]">
-              //     <SelectValue placeholder="Select a fruit" />
-              //   </SelectTrigger>
-              //   <SelectContent>
-              //     <SelectGroup>
-              //       <SelectLabel>Boards</SelectLabel>
-              //       {collections?.map((item, i) => (
-              //         <SelectItem key={i} value={item.id}>
-              //           {item.name}
-              //         </SelectItem>
-              //       ))}
-              //     </SelectGroup>
-              //   </SelectContent>
-              // </Select>
-              <Label>{collection.name}</Label>
-            )}
+    <>
+      <div className="relative">
+        <div className="container pt-16 pb-8">
+          <div className="inline-flex mb-4 items-center space-x-2">
+            <BreadCrumbs
+              linkItems={[
+                // { link: "/", text: "Dashboard" },
+                { link: "/collections", text: "Boards" },
+                // {
+                //   link: `/collections/${params.collectionId}`,
+                //   text: collection.name,
+                // },
+              ]}
+            />
+            <div className="flex items-center space-x-2">
+              <div className="text-muted-foreground">/</div>
+              {collections && collections.length > 1 ? (
+                <CollectionSelectNavigation
+                  key={params.collectionId}
+                  current={params.collectionId}
+                  collections={collections}
+                />
+              ) : (
+                // <Select defaultValue={params.collectionId} onValueChange={(x) => handleSelectChange(x)}>
+                //   <SelectTrigger className="w-[180px]">
+                //     <SelectValue placeholder="Select a fruit" />
+                //   </SelectTrigger>
+                //   <SelectContent>
+                //     <SelectGroup>
+                //       <SelectLabel>Boards</SelectLabel>
+                //       {collections?.map((item, i) => (
+                //         <SelectItem key={i} value={item.id}>
+                //           {item.name}
+                //         </SelectItem>
+                //       ))}
+                //     </SelectGroup>
+                //   </SelectContent>
+                // </Select>
+                <Label>{collection.name}</Label>
+              )}
+            </div>
           </div>
-        </div>
 
-        {!!items && items.length > 0 ? (
-          <div className="">
-            <ItemsTable items={items} />
-          </div>
-        ) : null}
+          {!!items && items.length > 0 ? (
+            <div className="">
+              <ItemsTable items={items} />
+            </div>
+          ) : null}
+        </div>
+        {children}
       </div>
-      {children}
-    </div>
+      {childItem}
+    </>
   );
 }

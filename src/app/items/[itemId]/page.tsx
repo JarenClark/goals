@@ -16,6 +16,29 @@ import React from "react";
 import RenderContent from "@/components/RenderContent";
 import BreadCrumbs from "@/components/BreadCrumbs";
 import { Table, TableCell, TableRow } from "@/components/ui/table";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
+
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+// import { redirect } from "next/navigation";
+
 type Props = {
   params: {
     collectionId: string;
@@ -42,9 +65,27 @@ export default async function ItemPage({ params }: Props) {
     .from("_items")
     .select("title, content")
     .eq("parent_item", params.itemId);
-
+  function returnToCollection() {
+console.log('hello world')
+  }
   return (
     <>
+      {!!item ? (
+        <Sheet open={true} >
+          <SheetTrigger>Open</SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetClose>Cllose me</SheetClose>
+              <SheetTitle>Are you absolutely sure?</SheetTitle>
+              <SheetDescription>
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
+              </SheetDescription>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
+      ) : null}
+
       {item && (
         <div className=" px-8 py-16">
           <div className="mb-2 flex items-center justify-between">
@@ -56,9 +97,6 @@ export default async function ItemPage({ params }: Props) {
                   link: `/collections/${item.collection_id}`,
                   text: item._collections.name,
                 },
-                // {
-                //   text: item.title,
-                // },
               ]}
             ></BreadCrumbs>
           </div>
@@ -68,8 +106,7 @@ export default async function ItemPage({ params }: Props) {
           {item.content && (
             <Card>
               <CardHeader>
-              <TypographyMuted>Content</TypographyMuted>
-
+                <TypographyMuted>Content</TypographyMuted>
               </CardHeader>
               <CardContent>
                 <RenderContent html={item.content} />

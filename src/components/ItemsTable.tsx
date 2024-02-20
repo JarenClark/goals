@@ -45,7 +45,7 @@ function ItemsTable({ heading, items }: Props) {
                     {item.title}
                   </Link>
                 </TableCell>
-                <TableCell>
+                <TableCell align="right">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" className="h-8 w-8 p-0">
