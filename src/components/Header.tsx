@@ -34,21 +34,12 @@ import BreadCrumbsForNav from "./BreadCrumbsForNav";
 type Props = {
   children?: React.ReactNode;
   params?: {
-    collection_id?: string;
+    collectionId?: string;
     item_id?: string;
     label_id?: string;
   };
 };
 export default async function Header({ children, params }: Props) {
-  const supabase = createServerComponentClient({ cookies });
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const { data: picture } = await supabase
-    .from("profiles")
-    .select("avatar_url");
-
   return (
     <>
       <NavDrawer />
@@ -56,9 +47,9 @@ export default async function Header({ children, params }: Props) {
         <div className="">
           <nav className="flex items-center justify-between py-4">
             <div className="inline-flex space-x-2 items-center">
-              <BreadCrumbsForNav />
+              <BreadCrumbsForNav key={params?.collectionId}/>
               {/* <pre>{JSON.stringify(params, null, 2)}</pre> */}
-              {user && user.user_metadata && user.user_metadata.avatar_url && (
+              {/* {user && user.user_metadata && user.user_metadata.avatar_url && (
                 <>
                   <Avatar className="w-8 h-8">
                     <AvatarImage
@@ -70,7 +61,7 @@ export default async function Header({ children, params }: Props) {
                     </AvatarFallback>
                   </Avatar>
                 </>
-              )}
+              )} */}
             </div>
 
 

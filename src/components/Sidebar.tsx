@@ -42,7 +42,7 @@ export default async function Sidebar() {
 
   return (
     // <ProtectedContent>
-      <div className="bg-background border-r h-screen p-8  flex flex-col justify-between lg:min-w-[400px] pr-8">
+      <div className="bg-muted border-r h-screen p-8  flex flex-col justify-between lg:min-w-[400px] pr-8">
         <section>
           <div className="flex flex-col space-y-4 mb-8 mt-10">
             <Avi />

@@ -71,8 +71,7 @@ export default async function CollectionPage({ params }: Props) {
   // }
   return (
     <>
-      <div className="container">
-        <code>This is page.tsx inside [collection_id]</code>
+      <div className="relative">
       </div>
     </>
   );

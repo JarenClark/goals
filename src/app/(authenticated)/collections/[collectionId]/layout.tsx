@@ -9,14 +9,13 @@ import React from "react";
 type Props = {
   params: { collectionId: string };
   children: React.ReactNode;
-  childItem?: React.ReactNode;
 };
 
-export default async function CollectionLayout({ children, params, childItem }: Props) {
+export default async function CollectionLayout({ children, params }: Props) {
+
   const supabase = createServerComponentClient({ cookies });
 
   const { data: collections } = await supabase.from("_collections").select("*");
-
   const { data: items } = await supabase
     .from("_items")
     .select("*")
@@ -78,7 +77,6 @@ export default async function CollectionLayout({ children, params, childItem }: 
         </div>
         {children}
       </div>
-      {childItem}
     </>
   );
 }

@@ -69,6 +69,59 @@ export const useAuthStore = create<authState>((set) => ({
   },
 }));
 
+interface Collection {
+  id: string;
+  name: string;
+
+}
+interface CollectionState {
+  collections: Collection[] | null;
+  collection: Collection | null;
+  setCollections: () => void;
+  setCollection: (id: string) => void;
+  clearCollection: () => void;
+  createCollectionModalIsOpen: boolean;
+  setCreateModalIsOpen: (arg?: boolean) => void;
+  deleteCollectionModalIsOpen: boolean;
+  setDeleteModalIsOpen: (arg?: boolean) => void;
+}
+export const useCollectionStore = create<CollectionState>((set) => ({
+  collections: null,
+  collection: null,
+  setCollection: async (id) => {
+    const { data: collection } = await supabase
+      .from("_collections")
+      .select("*")
+      .eq("id", id)
+      .single();
+    set(() => ({ collection: collection }));
+  },
+  setCollections: async () => {
+    const { data: collections } = await supabase
+    .from("_collections")
+    .select("*");
+    console.log('setting collections')
+  set(() => ({ collections: collections }));
+  },
+  clearCollection: () => set(() => ({ collection: null })),
+  deleteCollectionModalIsOpen: false,
+  setDeleteModalIsOpen: (arg) => {
+    if (arg) {
+      set(() => ({ deleteCollectionModalIsOpen: arg }));
+    } else {
+      set((state) => ({ deleteCollectionModalIsOpen: !state.deleteCollectionModalIsOpen }));
+    }
+  },
+  createCollectionModalIsOpen: false,
+  setCreateModalIsOpen: (arg) => {
+    if (arg) {
+      set(() => ({ createCollectionModalIsOpen: arg }));
+    } else {
+      set((state) => ({ createCollectionModalIsOpen: !state.createCollectionModalIsOpen }));
+    }
+  },
+}));
+
 interface Item {
   id: string;
   title: string;
@@ -86,7 +139,7 @@ interface ItemState {
   setDeleteModalIsOpen: (arg?: boolean) => void;
 }
 export const useItemStore = create<ItemState>((set) => ({
-  items: [],
+  items: null,
   item: null,
   setItem: async (id) => {
     const { data: item } = await supabase
