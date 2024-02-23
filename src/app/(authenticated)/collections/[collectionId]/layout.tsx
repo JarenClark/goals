@@ -9,9 +9,10 @@ import React from "react";
 type Props = {
   params: { collectionId: string };
   children: React.ReactNode;
+  item?: React.ReactNode;
 };
 
-export default async function CollectionLayout({ children, params }: Props) {
+export default async function CollectionLayout(props: Props) {
 
   const supabase = createServerComponentClient({ cookies });
 
@@ -19,11 +20,11 @@ export default async function CollectionLayout({ children, params }: Props) {
   const { data: items } = await supabase
     .from("_items")
     .select("*")
-    .eq("collection_id", params.collectionId)
+    .eq("collection_id", props.params.collectionId)
     .is("parent_item", null);
 
   const collection = await collections?.find(
-    (x) => x.id == params.collectionId
+    (x) => x.id == props.params.collectionId
   );
   return (
     <>
@@ -44,8 +45,8 @@ export default async function CollectionLayout({ children, params }: Props) {
               <div className="text-muted-foreground">/</div>
               {collections && collections.length > 1 ? (
                 <CollectionSelectNavigation
-                  key={params.collectionId}
-                  current={params.collectionId}
+                  key={props.params.collectionId}
+                  current={props.params.collectionId}
                   collections={collections}
                 />
               ) : (
@@ -75,7 +76,9 @@ export default async function CollectionLayout({ children, params }: Props) {
             </div>
           ) : null}
         </div>
-        {children}
+        {props.children}
+        {props.item}
+        <div id="modal-root" />
       </div>
     </>
   );

@@ -56,11 +56,11 @@ export default function MenuItemDropdown({
             </div>
           </AccordionTrigger>
           <AccordionContent className="pb-0">
-            <ul className="pl-11 list-disc">
+            <ul className="pl-11 list-disc123">
               {childItems.map((child, j) => (
                 <li key={j}>
-                  <Link href={`/collections/${child.id}`} className={`${params.collectionId && params.collectionId == child.id ? `text-black dark:text-white` : `"hover:text-black dark:hover:text-white"`}`}>
-                    <div className="flex py-2">
+                  <Link href={`/collections/${child.id}`} className={`${params.collectionId && params.collectionId == child.id ? `text-black dark:text-white` : `"hover:text-black dark:hover:text-white"`} block`}>
+                    <div className="py-[2px]">
                       <Label>{child.name}</Label>
                     </div>
                   </Link>

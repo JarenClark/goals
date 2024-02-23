@@ -39,6 +39,7 @@ function ItemsTable({ heading, items }: Props) {
               <TableRow>
                 <TableCell>
                   <Link
+                  passHref
                     className="hover:text-underline"
                     href={`/collections/${item.collection_id}/${item.id}`}
                   >

@@ -35,6 +35,7 @@ export default function Menu() {
   const { collections, setCollections } = useCollectionStore();
   useEffect(() => {
     if (collections == null) {
+      console.log("collections == null");
       setCollections();
     }
   }, [collections]);
@@ -56,11 +57,11 @@ export default function Menu() {
       icon: <TagIcon className="w-5 h-5" />,
       label: "Labels",
     },
-    {
-      link: "/settings",
-      icon: <SettingsIcon className="w-5 h-5" />,
-      label: "Settings",
-    },
+    // {
+    //   link: "/settings",
+    //   icon: <SettingsIcon className="w-5 h-5" />,
+    //   label: "Settings",
+    // },
     {
       link: "/profile",
       icon: <UserIcon className="w-5 h-5" />,
@@ -72,7 +73,11 @@ export default function Menu() {
     <ul className="flex flex-col space-y-2">
       {navIcons.map((item, i) => (
         <React.Fragment key={i}>
-          {item.childItems ? <MenuItemDropdown {...item}/> : <MenuItem {...item} />}
+          {item.childItems ? (
+            <MenuItemDropdown {...item} />
+          ) : (
+            <MenuItem {...item} />
+          )}
         </React.Fragment>
       ))}
     </ul>

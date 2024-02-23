@@ -72,7 +72,6 @@ export const useAuthStore = create<authState>((set) => ({
 interface Collection {
   id: string;
   name: string;
-
 }
 interface CollectionState {
   collections: Collection[] | null;
@@ -98,10 +97,10 @@ export const useCollectionStore = create<CollectionState>((set) => ({
   },
   setCollections: async () => {
     const { data: collections } = await supabase
-    .from("_collections")
-    .select("*");
-    console.log('setting collections')
-  set(() => ({ collections: collections }));
+      .from("_collections")
+      .select("*");
+    console.log("setting collections");
+    set(() => ({ collections: collections }));
   },
   clearCollection: () => set(() => ({ collection: null })),
   deleteCollectionModalIsOpen: false,
@@ -109,7 +108,9 @@ export const useCollectionStore = create<CollectionState>((set) => ({
     if (arg) {
       set(() => ({ deleteCollectionModalIsOpen: arg }));
     } else {
-      set((state) => ({ deleteCollectionModalIsOpen: !state.deleteCollectionModalIsOpen }));
+      set((state) => ({
+        deleteCollectionModalIsOpen: !state.deleteCollectionModalIsOpen,
+      }));
     }
   },
   createCollectionModalIsOpen: false,
@@ -117,7 +118,9 @@ export const useCollectionStore = create<CollectionState>((set) => ({
     if (arg) {
       set(() => ({ createCollectionModalIsOpen: arg }));
     } else {
-      set((state) => ({ createCollectionModalIsOpen: !state.createCollectionModalIsOpen }));
+      set((state) => ({
+        createCollectionModalIsOpen: !state.createCollectionModalIsOpen,
+      }));
     }
   },
 }));
@@ -130,7 +133,7 @@ interface Item {
 interface ItemState {
   items: Item[] | null;
   item: Item | null;
-  setItems: () => void;
+  setItems: (collectionId?: string) => void;
   setItem: (id: string) => void;
   clearItem: () => void;
   createModalIsOpen: boolean;
@@ -149,11 +152,22 @@ export const useItemStore = create<ItemState>((set) => ({
       .single();
     set(() => ({ item: item }));
   },
-  setItems: async () => {
-    const { data: items } = await supabase
-    .from("_items")
-    .select("*");
-  set(() => ({ items: items }));
+  setItems: async (collectionId) => {
+    let query = supabase.from("_items").select("*");
+
+    if (collectionId) {
+      query = query.eq("collection_id", collectionId);
+    }
+
+    const { data: items, error } = await query;
+
+    if (error) {
+      // Handle error
+      console.error("Error fetching items:", error.message);
+      return;
+    }
+
+    set(() => ({ items: items }));
   },
   clearItem: () => set(() => ({ item: null })),
   deleteModalIsOpen: false,
