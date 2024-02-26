@@ -9,10 +9,6 @@ type Props = {};
 function BreadCrumbsForNav({}: Props) {
   const params = useParams();
   const pathname = usePathname();
-  //   return null;
-  // if(params.collectionId) {
-
-  // }
   const { collections, setCollections } = useCollectionStore();
   const { item, setItem } = useItemStore();
 

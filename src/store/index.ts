@@ -6,7 +6,7 @@ import {
   // createServerComponentClient,
 } from "@supabase/auth-helpers-nextjs";
 import { devtools } from "zustand/middleware";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 const supabase = createClientComponentClient();
 
 /**
@@ -133,6 +133,8 @@ interface Item {
 interface ItemState {
   items: Item[] | null;
   item: Item | null;
+  childItems:  Item[] | null;
+  setChildItems: (id: string) => void;
   setItems: (collectionId?: string) => void;
   setItem: (id: string) => void;
   clearItem: () => void;
@@ -144,6 +146,7 @@ interface ItemState {
 export const useItemStore = create<ItemState>((set) => ({
   items: null,
   item: null,
+  childItems: null,
   setItem: async (id) => {
     const { data: item } = await supabase
       .from("_items")
@@ -168,6 +171,13 @@ export const useItemStore = create<ItemState>((set) => ({
     }
 
     set(() => ({ items: items }));
+  },
+  setChildItems: async (id) => {
+    const { data: items } = await supabase
+      .from("_items")
+      .select("*")
+      .eq("parent_item", id)
+    set(() => ({ childItems: items }));
   },
   clearItem: () => set(() => ({ item: null })),
   deleteModalIsOpen: false,
