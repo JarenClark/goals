@@ -16,7 +16,7 @@ function MenuItem({ link, label, icon }: Props) {
       
       
       <Link href={link} className="flex items-center space-x-2 cursor-pointer py-1 px-2">
-        <div className={` rounded-md p-1 ${pathname == link  ? ' bg-background text-foreground ': 'bg-muted'}`}>{icon}</div>
+        <div className={` rounded-md p-1 ${pathname == link  ? ' bg-background text-foreground ': 'bg-black/5 dark:bg-white/5'}`}>{icon}</div>
 
         <Label className="cursor-pointer">{label}</Label>
       </Link>

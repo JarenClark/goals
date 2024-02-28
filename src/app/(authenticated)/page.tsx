@@ -60,7 +60,7 @@ export default async function Home() {
               <Card className="border border-muted   lg:col-span-2">
                 <CardHeader>
                   <div className="flex space-x-4">
-                    <div className="rounded-md bg-muted flex items-center p-2">
+                    <div className="rounded-md bg-black/5 dark:bg-white/5 flex items-center p-2">
                       <PlusIcon />
                     </div>
                     <div className="flex flex-col space-y-1">
@@ -75,7 +75,7 @@ export default async function Home() {
                 <CardFooter></CardFooter>
               </Card>
             ) : (
-              <Card className=" bg-muted ">
+              <Card className=" bg-black/5 dark:bg-white/5 ">
                 <CardHeader></CardHeader>
                 <CardContent>Create a board to start adding items</CardContent>
               </Card>
@@ -84,7 +84,7 @@ export default async function Home() {
             <Card className="border border-muted  lg:col-span-2">
               <CardHeader>
                 <div className="flex space-x-4">
-                  <div className="rounded-md flex items-center bg-muted p-2">
+                  <div className="rounded-md flex items-center bg-black/5 dark:bg-white/5 p-2">
                     <ActivityIcon />
                   </div>
                   <div className="flex flex-col space-y-1">
@@ -106,7 +106,7 @@ export default async function Home() {
             {/* <Card className="border border-muted lg:col-span-2">
           <CardHeader>
             <div className="flex space-x-4">
-              <div className="rounded-md bg-muted  flex items-center p-2">
+              <div className="rounded-md bg-black/5 dark:bg-white/5  flex items-center p-2">
                 <ActivityIcon />
               </div>
               <div className="flex flex-col space-y-1">
@@ -138,7 +138,7 @@ export default async function Home() {
             <Card className="border border-muted   col-span-1 md:col-span-3 lg:col-span-6 xl:col-span-4">
               <CardHeader>
                 <div className="flex space-x-4">
-                  <div className="rounded-md bg-muted  p-2">
+                  <div className="rounded-md bg-black/5 dark:bg-white/5  p-2">
                     <LibraryIcon />
                   </div>
                   <div className="flex flex-col space-y-1">

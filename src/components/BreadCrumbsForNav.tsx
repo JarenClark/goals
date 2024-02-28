@@ -4,6 +4,7 @@ import { useParams, usePathname } from "next/navigation";
 import CollectionSelectNavigation from "./CollectionSelectNavigation";
 import { useCollectionStore, useItemStore } from "@/store";
 import { Label } from "./ui/label";
+import Link from "next/link";
 type Props = {};
 
 function BreadCrumbsForNav({}: Props) {
@@ -16,13 +17,25 @@ function BreadCrumbsForNav({}: Props) {
     if (collections == null) {
       setCollections();
     }
-    if(item == null || item.id != params.itemId) {
-        setItem(params.itemId as string)
+    if (params.itemId) {
+      if (item == null || item.id != params.itemId) {
+        setItem(params.itemId as string);
+      }
     }
   }, [collections, item, params]);
   return (
-    <div className="flex items-center">
-        {/* Collection navigation */}
+    <div className="flex items-center space-x-2">
+      {pathname == "/" ? (
+        <Label>Home</Label>
+      ) : (
+        <React.Fragment>
+          <Link href={"/"}>
+            <Label>Home</Label>
+          </Link>
+          <span>/</span>
+        </React.Fragment>
+      )}
+      {/* Collection navigation */}
       {!!params.collectionId && !!collections && collections.length > 0 ? (
         <React.Fragment>
           {collections.length > 1 ? (
@@ -35,7 +48,7 @@ function BreadCrumbsForNav({}: Props) {
           )}
         </React.Fragment>
       ) : null}
-      {!!params.itemId ? <Label>{item?.title}</Label>: null}
+      {!!params.itemId ? <Label>{item?.title}</Label> : null}
     </div>
   );
 }

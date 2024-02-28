@@ -43,13 +43,13 @@ export default async function Header({ children, params }: Props) {
   return (
     <>
       <NavDrawer />
-      <header className="border-b px-4">
-        <div className="">
-          <nav className="flex items-center justify-between py-4">
-            <div className="inline-flex space-x-2 items-center">
-              <BreadCrumbsForNav key={params?.collectionId}/>
-              {/* <pre>{JSON.stringify(params, null, 2)}</pre> */}
-              {/* {user && user.user_metadata && user.user_metadata.avatar_url && (
+      <header className="border-b px-4 min-h-[80px] flex w-full items-center">
+        <nav className="flex w-screen items-center justify-between py-4">
+          <div className="inline-flex space-x-2 items-center">
+            <Label className="text-indigo-600 font-bold tracking-wide">Logo</Label>
+            <BreadCrumbsForNav key={params?.collectionId} />
+            {/* <pre>{JSON.stringify(params, null, 2)}</pre> */}
+            {/* {user && user.user_metadata && user.user_metadata.avatar_url && (
                 <>
                   <Avatar className="w-8 h-8">
                     <AvatarImage
@@ -62,15 +62,12 @@ export default async function Header({ children, params }: Props) {
                   </Avatar>
                 </>
               )} */}
-            </div>
+          </div>
 
-
-
-            <div className="inline-flex items-center space-x-2">
+          <div className="inline-flex items-center space-x-2">
             <MenuToggle />
-            </div>
-          </nav>
-        </div>
+          </div>
+        </nav>
       </header>
     </>
   );

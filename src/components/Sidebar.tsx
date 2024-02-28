@@ -42,10 +42,10 @@ export default async function Sidebar() {
 
   return (
     // <ProtectedContent>
-      <div className="bg-muted border-r h-screen p-8  flex flex-col justify-between lg:min-w-[400px] pr-8">
+      <div className="bg-black/5 dark:bg-white/5 border-r h-screen py-8 px-4  flex flex-col justify-between xl:min-w-[300px] pr-8">
         <section>
-          <div className="flex flex-col space-y-4 mb-8 mt-10">
-            <Avi />
+          <div className="flex flex-col space-y-4 mb-8 mt-16">
+
 
             <SearchInput />
           </div>
@@ -54,7 +54,8 @@ export default async function Sidebar() {
           </nav>
         </section>
         <div>
-          <div className="flex items-center space-x-2">
+        <Avi />
+          <div className="flex items-center space-x-2 mt-2">
             {/* <Label> Hey, {user.email}</Label> */}
             <form action="/auth/sign-out" method="post">
               <Button variant={"outline"}>Logout</Button>

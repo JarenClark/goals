@@ -46,7 +46,7 @@ export default function MenuItemDropdown({
                 className={` rounded-md p-1 ${
                   pathname == link
                     ? " bg-background text-foreground "
-                    : "bg-muted"
+                    : "bg-black/5 dark:bg-white/5"
                 }`}
               >
                 {icon}

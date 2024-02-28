@@ -41,11 +41,11 @@ export default function Menu() {
   }, [collections]);
 
   const navIcons = [
-    {
-      link: "/",
-      icon: <HomeIcon className="w-5 h-5" />,
-      label: "Home",
-    },
+    // {
+    //   link: "/",
+    //   icon: <HomeIcon className="w-5 h-5" />,
+    //   label: "Home",
+    // },
     {
       link: "/collections",
       icon: <FolderIcon className="w-5 h-5" />,
@@ -70,7 +70,12 @@ export default function Menu() {
   ];
   // if (!user) return null;
   return (
-    <ul className="flex flex-col space-y-2">
+    <ul className="flex flex-col space-y-1">
+      <MenuItem
+        link={"/"}
+        icon={<HomeIcon className="w-5 h-5" />}
+        label={"Home"}
+      />
       {navIcons.map((item, i) => (
         <React.Fragment key={i}>
           {item.childItems ? (

@@ -69,6 +69,7 @@ function ItemsTable({ heading, items }: Props) {
                       {/* <DropdownMenuItem>View customer</DropdownMenuItem> */}
                       <DropdownMenuItem
                         onClick={() => {
+                            console.log(`settting item ${item.id}`)
                           setItem(item.id);
                           setDeleteModalIsOpen(true);
                         }}

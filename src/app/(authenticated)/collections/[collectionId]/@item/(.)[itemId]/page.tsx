@@ -34,17 +34,20 @@ function InterceptedItemPage({ params }: Props) {
       {!!item && item.id == params.itemId ? (
         <Sheet open={true} onOpenChange={() => router.back()}>
           {/* <SheetTrigger>Open</SheetTrigger> */}
-          <SheetContent  className="w-screen bg-muted flex flex-col">
+          <SheetContent className="w-screen bg-black/5 dark:bg-white/5 flex flex-col">
             <SheetHeader>
-              <SheetTitle>{item?.title}</SheetTitle>
+              <SheetTitle className="text-left ">{item?.title}</SheetTitle>
               <SheetDescription>
                 This action cannot be undone. This will permanently delete your
                 account and remove your data from our servers.
               </SheetDescription>
             </SheetHeader>
+
+            <div></div>
+
             <SheetFooter className="mt-auto">
               <Button variant={"outline"}>Delete</Button>
-              </SheetFooter>
+            </SheetFooter>
           </SheetContent>
         </Sheet>
       ) : null}

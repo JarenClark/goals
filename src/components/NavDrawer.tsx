@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import Menu from "./Menu";
 
 // import {docMenuIs}
-import { useDocumentStore, useUIstore } from "@/store";
+import { useUIstore } from "@/store";
 import {
   Sheet,
   SheetClose,
@@ -46,16 +46,16 @@ function NavDrawer({}: Props) {
   const sideNavIsOpen = useUIstore((state) => state.sideNavIsOpen);
   const toggleSideNav = useUIstore((state) => state.toggleSideNav);
   //const router = useRouter();
-  // const pathname = usePathname()
-  // useEffect(() => {
-  //   toggleSideNav(false);
-  // }, [pathname]);
+  const pathname = usePathname()
+  useEffect(() => {
+    toggleSideNav(false);
+  }, [pathname]);
 
   return (
     <>
       <Sheet open={sideNavIsOpen}>
         {/* <SheetOverlay onClick={() => toggle(false)} /> */}
-        <SheetContent className=" h-full flex flex-col justify-between sm:max-w-sm md:max-w-md lg:max-w-lg bg-muted">
+        <SheetContent className=" h-full flex flex-col justify-between sm:max-w-sm md:max-w-md lg:max-w-lg bg-black/5 dark:bg-white/5">
           <SheetHeader className="pt-8">
             <SheetClose
               onClick={() => toggleSideNav()}

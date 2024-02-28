@@ -13,7 +13,6 @@ type Props = {
 };
 
 export default async function CollectionLayout(props: Props) {
-
   const supabase = createServerComponentClient({ cookies });
 
   const { data: collections } = await supabase.from("_collections").select("*");
@@ -28,58 +27,24 @@ export default async function CollectionLayout(props: Props) {
   );
   return (
     <>
-      <div className="relative">
-        <div className="container pt-16 pb-8">
-          <div className="inline-flex mb-4 items-center space-x-2">
-            <BreadCrumbs
-              linkItems={[
-                // { link: "/", text: "Dashboard" },
-                { link: "/collections", text: "Boards" },
-                // {
-                //   link: `/collections/${params.collectionId}`,
-                //   text: collection.name,
-                // },
-              ]}
-            />
-            <div className="flex items-center space-x-2">
-              <div className="text-muted-foreground">/</div>
-              {collections && collections.length > 1 ? (
-                <CollectionSelectNavigation
-                  key={props.params.collectionId}
-                  current={props.params.collectionId}
-                  collections={collections}
-                />
-              ) : (
-                // <Select defaultValue={params.collectionId} onValueChange={(x) => handleSelectChange(x)}>
-                //   <SelectTrigger className="w-[180px]">
-                //     <SelectValue placeholder="Select a fruit" />
-                //   </SelectTrigger>
-                //   <SelectContent>
-                //     <SelectGroup>
-                //       <SelectLabel>Boards</SelectLabel>
-                //       {collections?.map((item, i) => (
-                //         <SelectItem key={i} value={item.id}>
-                //           {item.name}
-                //         </SelectItem>
-                //       ))}
-                //     </SelectGroup>
-                //   </SelectContent>
-                // </Select>
-                <Label>{collection.name}</Label>
-              )}
-            </div>
-          </div>
-
+      <div className="relative h-screen">
+        <div className="flex h-full">
+            <div className="w-full lg:w-1/3 border-r h-full">
+            <div className="container pt-16 pb-8">
           {!!items && items.length > 0 ? (
             <div className="">
               <ItemsTable items={items} />
             </div>
           ) : null}
         </div>
-        {props.children}
+            </div>
+            <div className="w-full lg:w-2/3 h-full ">
+                {props.children}
+            </div>
+        </div>
         {props.item}
-        <div id="modal-root" />
       </div>
+      <div id="modal-root" />
     </>
   );
 }
