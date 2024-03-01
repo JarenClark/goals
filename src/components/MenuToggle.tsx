@@ -5,10 +5,10 @@ import { useUIstore } from "@/store";
 type Props = {};
 
 function MenuToggle({}: Props) {
-    const toggleSideNav = useUIstore((state) => state.toggleSideNav);
+  const {openSideNav } = useUIstore()
   return (
     <>
-      <div onClick={() => toggleSideNav()} className="cursor-pointer">
+      <div onClick={() => openSideNav()} className="cursor-pointer">
         <MenuIcon />
       </div>
     </>

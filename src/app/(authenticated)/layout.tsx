@@ -7,26 +7,36 @@ import DeleteItemModal from "@/components/modals/DeleteItemModal";
 import React from "react";
 
 type Props = {
+  params: any;
   children: React.ReactNode;
 };
 
-function RootLayout({ children }: Props) {
+function RootLayout({ children, params }: Props) {
+
   return (
     <>
       <ProtectedContent>
         <div className="min-h-screen flex flex-col justify-between">
           <div className="fixed top-0 left-0 w-screen bg-background z-10">
-            <Header />
+            {/* <Header params={params} {...params} /> */}
           </div>
           <div className="w-screen h-screen flex ">
             <div className="hidden xl:block">
               <Sidebar />
             </div>
             <div className=" w-full">
-              <main className="overflow-y-auto  w-full">{children}</main>{" "}
+              <main className="overflow-y-auto  w-full">
+                
+                {children}</main>{" "}
             </div>
             {/* <StateHelper /> */}
           </div>
+          <div className="py-20 bg-red-500">
+
+
+            <pre>{JSON.stringify(params,null,2)}</pre>
+          </div>
+
           <Footer />
         </div>
         {/* Our Modals */}

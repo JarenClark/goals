@@ -17,8 +17,9 @@ interface BreadCrumb {
     createModalIsOpen: boolean;
     toggleCreateModal: (arg?: boolean) => void;
     toggleSideNav: (arg?: boolean) => void;
-    // closeSideNav?: () => void;
-  }
+    closeSideNav: () => void;
+openSideNav: () => void  
+}
   const defaultUIstate = {
     breadcrumbs: [],
     sideNavIsOpen: false,
@@ -41,7 +42,10 @@ interface BreadCrumb {
         set((state) => ({ createModalIsOpen: !state.createModalIsOpen }));
       }
     },
-    // closeSideNav: () => {
-    //   set(() => ({ sideNavIsOpen: false }));
-    // },
+    closeSideNav: () => {
+      set(() => ({ sideNavIsOpen: false }));
+    },
+    openSideNav: () => {
+        set(() => ({ sideNavIsOpen: true }));
+      },
   }));

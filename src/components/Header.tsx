@@ -30,13 +30,16 @@ import NavDrawer from "./NavDrawer";
 import MenuToggle from "./MenuToggle";
 import { getInitials } from "@/lib/utils";
 import SearchInput from "./SearchInput";
+import { LayoutGrid } from "lucide-react";
+
 import BreadCrumbsForNav from "./BreadCrumbsForNav";
+import ItemTitleById from "./ItemTitleById";
 type Props = {
   children?: React.ReactNode;
   params?: {
     collectionId?: string;
-    item_id?: string;
-    label_id?: string;
+    itemId?: string;
+    labelId?: string;
   };
 };
 export default async function Header({ children, params }: Props) {
@@ -46,9 +49,13 @@ export default async function Header({ children, params }: Props) {
       <header className="border-b px-4 min-h-[80px] flex w-full items-center">
         <nav className="flex w-screen items-center justify-between py-4">
           <div className="inline-flex space-x-2 items-center">
-            <Label className="text-indigo-600 font-bold tracking-wide">Logo</Label>
+            <div className="bg-gradient-to-br from-pink-500 to-indigo-600 p-1 rounded-md text-white">
+              <LayoutGrid className="w-4 h-4" />
+            </div>
             <BreadCrumbsForNav key={params?.collectionId} />
             {/* <pre>{JSON.stringify(params, null, 2)}</pre> */}
+            <ItemTitleById id={params?.itemId}/>
+            <pre>{JSON.stringify(params,null,2)}</pre>
             {/* {user && user.user_metadata && user.user_metadata.avatar_url && (
                 <>
                   <Avatar className="w-8 h-8">

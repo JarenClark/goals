@@ -41,14 +41,12 @@ import SearchInput from "./SearchInput";
 type Props = {};
 
 function NavDrawer({}: Props) {
-  //const isOpen = useDocumentStore((state) => state.docMenuIsOpen);
-  //const toggle = useDocumentStore((state) => state.setDocMenuIsOpen);
-  const sideNavIsOpen = useUIstore((state) => state.sideNavIsOpen);
-  const toggleSideNav = useUIstore((state) => state.toggleSideNav);
-  //const router = useRouter();
-  const pathname = usePathname()
+
+  const { sideNavIsOpen, closeSideNav } = useUIstore();
+
+  const pathname = usePathname();
   useEffect(() => {
-    toggleSideNav(false);
+    closeSideNav();
   }, [pathname]);
 
   return (
@@ -58,7 +56,7 @@ function NavDrawer({}: Props) {
         <SheetContent className=" h-full flex flex-col justify-between sm:max-w-sm md:max-w-md lg:max-w-lg bg-black/5 dark:bg-white/5">
           <SheetHeader className="pt-8">
             <SheetClose
-              onClick={() => toggleSideNav()}
+              onClick={() => closeSideNav()}
               className="absolute right-6 top-6 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary"
             >
               <X className="h-4 w-4" />
@@ -72,7 +70,7 @@ function NavDrawer({}: Props) {
             </SheetDescription>
           </SheetHeader>
           <div className="mt-4"></div>
-          <SearchInput /> 
+          <SearchInput />
           <Menu />
           {/* <Tabs defaultValue="details" className="">
             <TabsList className="grid w-full grid-cols-2">

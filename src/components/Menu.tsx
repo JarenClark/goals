@@ -28,10 +28,6 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import MenuItemDropdown from "./MenuItemDropdown";
 export default function Menu() {
-  // const supabase = createServerComponentClient({ cookies });
-  // const { data: collections } = await supabase.from("_collections").select("*");
-
-  // const closeSideNav = useUIstore((state) => state.closeSideNav);
   const { collections, setCollections } = useCollectionStore();
   useEffect(() => {
     if (collections == null) {
