@@ -61,7 +61,7 @@ export default function Login() {
       <div className="bg-transparent lg:bg-black/5 dark:bg-white/5 w-full relative lg:w-1/2 h-screen flex flex-col justify-center items-center">
         <div>
           <div className="text-center mb-8 flex flex-col items-center justify-center">
-            <TypographyH1 className="text-center">Archives</TypographyH1>
+            <TypographyH1 className="text-center">Scratch Pad</TypographyH1>
             {/* <TypographyMuted className="text-center max-w-sm mt-4">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere
               placeat dolorem est fugiat consequatur quasi.

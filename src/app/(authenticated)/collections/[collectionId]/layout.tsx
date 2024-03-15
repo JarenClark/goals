@@ -2,11 +2,14 @@ import BreadCrumbs from "@/components/BreadCrumbs";
 import CollectionSelectNavigation from "@/components/CollectionSelectNavigation";
 import Header from "@/components/Header";
 import ItemsTable from "@/components/ItemsTable";
+import TruncatedContent from "@/components/TruncatedContent";
 import { Label } from "@/components/ui/label";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import React from "react";
+import { format } from "date-fns";
+import ActivePathOverlay from "@/components/ActivePathOverlay";
 
 type Props = {
   params: { collectionId: string; itemId?: string };
@@ -26,6 +29,7 @@ export default async function CollectionLayout({
     .select("*")
     .eq("collection_id", params.collectionId)
     .single();
+
   const { data: items } = await supabase
     .from("_items")
     .select("*")
@@ -70,12 +74,13 @@ export default async function CollectionLayout({
   }
 
   const groups = [
-    { label: "Today", items: todayItems },
-    { label: "This Week", items: thisWeekItems },
-    { label: "This Month", items: thisMonthItems },
-    { label: "Older", items: olderItems },
+    { label: "Today", items: todayItems, timeFormat: "hh:mm b" },
+    { label: "This Week", items: thisWeekItems, timeFormat: "EEEE" },
+    { label: "This Month", items: thisMonthItems, timeFormat: "MM/dd/yyyy" },
+    { label: "Older", items: olderItems, timeFormat: "MM/dd/yyyy" },
   ];
 
+  const filtered = groups.filter((x) => (x.items.length > 0 ? true : false));
   return (
     <>
       <div className="relative h-screen">
@@ -83,25 +88,38 @@ export default async function CollectionLayout({
         <div className="flex h-full">
           <div className="w-full  lg:w-1/3 border-r h-full">
             <ul>
-              {groups.map((group, i) => (
-                <React.Fragment key={i}>
-                  {group.items.length > 0 ? (
-                    <li className="p-4">
-                      <Label className="text-muted">{group.label}</Label>
-                      <ul>
-                        {group.items.map((item, j) => (
-                          <li key={j} className="p-2 px-3 text-sm">
-                            <Link
-                              href={`/collections/${params.collectionId}/${item.id}`}
-                            >
-                              {item.title}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                  ) : null}
-                </React.Fragment>
+              {filtered.map((group, i) => (
+                <li className="p-4" key={i}>
+                  {/* {filtered.length > 1 ? (
+                    ) : null} */}
+                  <Label className="text-black/50 dark:text-white/50">
+                    {group.label}
+                  </Label>
+
+                  <ul>
+                    {group.items.map((item, j) => (
+                      <li key={j} className="text-sm relative">
+                        <Link
+                          className="relative p-2 px-3 rounded-lg overflow-hidden block"
+                          href={`/collections/${params.collectionId}/${item.id}`}
+                        >
+                            <ActivePathOverlay link={`/collections/${params.collectionId}/${item.id}`} />
+                          <Label>{item.title}</Label>
+                          <div className="flex space-x-2 text-black/50 dark:text-white/50">
+                            <time className="text-foreground text-[0.75rem]">
+                              {format(
+                                new Date(item.updated_at),
+                                group.timeFormat
+                              )}
+                            </time>
+                            <TruncatedContent content={item.content} />
+                          </div>
+                          {/* <pre>{JSON.stringify(item.content, null, 2)}</pre> */}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
               ))}
             </ul>
           </div>

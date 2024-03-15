@@ -20,6 +20,9 @@ import {
   UserIcon,
   TableIcon,
   FolderIcon,
+  OrbitIcon,
+  BoxesIcon,
+  PlusIcon
 } from "lucide-react";
 
 import { useCollectionStore, useUIstore } from "@/store";
@@ -42,12 +45,7 @@ export default function Menu() {
     //   icon: <HomeIcon className="w-5 h-5" />,
     //   label: "Home",
     // },
-    {
-      link: "/collections",
-      icon: <FolderIcon className="w-5 h-5" />,
-      label: "Folders",
-      childItems: collections ? collections : null,
-    },
+
     {
       link: "/labels",
       icon: <TagIcon className="w-5 h-5" />,
@@ -58,11 +56,17 @@ export default function Menu() {
     //   icon: <SettingsIcon className="w-5 h-5" />,
     //   label: "Settings",
     // },
-    {
-      link: "/profile",
-      icon: <UserIcon className="w-5 h-5" />,
-      label: "Profile",
-    },
+    // {
+    //   link: "/profile",
+    //   icon: <UserIcon className="w-5 h-5" />,
+    //   label: "Profile",
+    // },
+    // {
+    //   link: "/collections",
+    //   icon: <OrbitIcon className="w-5 h-5" />,
+    //   label: "Collections",
+    //   childItems: collections ? collections : null,
+    // },
   ];
   // if (!user) return null;
   return (
@@ -81,6 +85,29 @@ export default function Menu() {
           )}
         </React.Fragment>
       ))}
+      <li className="border-t py-2">
+        <div className="flex justify-between">
+          <div className="mb-2 text-muted-foreground flex items-center space-x-2">
+            <BoxesIcon className="w-5 h-5" />
+            <Label>Collections</Label>
+          </div>
+          <button className="text-muted-foreground hover:text-white hover:bg-muted flex items-center space-x-1 rounded-full pl-1 pr-3 p-1">
+            <PlusIcon className="w-4 h-4"></PlusIcon>
+            <Label className="text-[12px]">New</Label>
+          </button>
+        </div>
+        <ul className="pl-5">
+          <li>
+            {collections?.map((c, i) => (
+              <Link href={`/collections/${c.id}`}>
+                <div className="flex py-1">
+                  <Label className="text-muted-foreground hover:text-white">{c.name}</Label>
+                </div>
+              </Link>
+            ))}
+          </li>
+        </ul>
+      </li>
     </ul>
   );
 }

@@ -33,7 +33,7 @@ import SearchInput from "./SearchInput";
 import { LayoutGrid } from "lucide-react";
 
 import BreadCrumbsForNav from "./BreadCrumbsForNav";
-import ItemTitleById from "./ItemTitleById";
+//import ItemTitleById from "./ItemTitleById";
 type Props = {
   children?: React.ReactNode;
   params?: {
@@ -54,8 +54,6 @@ export default async function Header({ children, params }: Props) {
             </div>
             <BreadCrumbsForNav key={params?.collectionId} />
             {/* <pre>{JSON.stringify(params, null, 2)}</pre> */}
-            <ItemTitleById id={params?.itemId}/>
-            <pre>{JSON.stringify(params,null,2)}</pre>
             {/* {user && user.user_metadata && user.user_metadata.avatar_url && (
                 <>
                   <Avatar className="w-8 h-8">

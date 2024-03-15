@@ -63,7 +63,7 @@ function NavDrawer({}: Props) {
               <span className="sr-only">Close</span>
             </SheetClose>
 
-            <SheetTitle>Goals</SheetTitle>
+            <SheetTitle>Scratch Pad</SheetTitle>
             <SheetDescription>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima
               maxime doloribus culpa!{" "}
