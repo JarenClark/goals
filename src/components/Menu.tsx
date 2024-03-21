@@ -22,7 +22,12 @@ import {
   FolderIcon,
   OrbitIcon,
   BoxesIcon,
-  PlusIcon
+  Images,
+  ImageIcon,
+  PlusIcon,
+  TagsIcon,
+  ContainerIcon,
+  LinkIcon,
 } from "lucide-react";
 
 import { useCollectionStore, useUIstore } from "@/store";
@@ -78,17 +83,13 @@ export default function Menu() {
       />
       {navIcons.map((item, i) => (
         <React.Fragment key={i}>
-          {item.childItems ? (
-            <MenuItemDropdown {...item} />
-          ) : (
-            <MenuItem {...item} />
-          )}
+          <MenuItem {...item} />
         </React.Fragment>
       ))}
       <li className="border-t py-2">
-        <div className="flex justify-between">
-          <div className="mb-2 text-muted-foreground flex items-center space-x-2">
-            <BoxesIcon className="w-5 h-5" />
+        <div className="flex  mb-2 justify-between">
+          <div className=" text-muted-foreground flex items-center space-x-2">
+            {/* <BoxesIcon className="w-5 h-5" /> */}
             <Label>Collections</Label>
           </div>
           <button className="text-muted-foreground hover:text-white hover:bg-muted flex items-center space-x-1 rounded-full pl-1 pr-3 p-1">
@@ -96,16 +97,36 @@ export default function Menu() {
             <Label className="text-[12px]">New</Label>
           </button>
         </div>
-        <ul className="pl-5">
-          <li>
-            {collections?.map((c, i) => (
+        <ul className="pl-5 space-y-3">
+          {collections?.map((c, i) => (
+            <li key={i}>
               <Link href={`/collections/${c.id}`}>
-                <div className="flex py-1">
-                  <Label className="text-muted-foreground hover:text-white">{c.name}</Label>
+                <div className="flex  space-x-1 text-muted-foreground hover:text-white">
+                  <BoxesIcon className="w-4 h-4" />
+
+                  <Label className="text-muted-foreground hover:text-white">
+                    {c.name}
+                  </Label>
                 </div>
               </Link>
-            ))}
-          </li>
+            </li>
+          ))}
+
+          <MenuItem
+            link={"/"}
+            label={"Links"}
+            icon={<LinkIcon className="w-4 h-4" />}
+          />
+          <MenuItem
+            link={"/"}
+            label={"Media"}
+            icon={<ContainerIcon className="w-4 h-4" />}
+          />
+          <MenuItem
+            link={"/"}
+            label={"Labels"}
+            icon={<TagsIcon className="w-4 h-4" />}
+          />
         </ul>
       </li>
     </ul>

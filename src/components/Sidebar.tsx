@@ -42,7 +42,7 @@ export default async function Sidebar() {
 
   return (
     // <ProtectedContent>
-      <div className="bg-black/5 dark:bg-white/5 border-r h-screen py-8 px-4  flex flex-col justify-between xl:min-w-[300px] pr-8">
+      <div className="bg-black/5 dark:bg-white/5 border-r h-screen py-8 px-4  flex flex-col justify-between xl:min-w-[300px]">
         <section>
           <div className="flex flex-col space-y-4 mb-8 mt-16">
 
