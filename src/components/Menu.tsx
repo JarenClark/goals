@@ -22,7 +22,7 @@ import {
   FolderIcon,
   OrbitIcon,
   BoxesIcon,
-  Images,
+  // Images,
   ImageIcon,
   PlusIcon,
   TagsIcon,
@@ -37,6 +37,7 @@ import { cookies } from "next/headers";
 import MenuItemDropdown from "./MenuItemDropdown";
 export default function Menu() {
   const { collections, setCollections } = useCollectionStore();
+  
   useEffect(() => {
     if (collections == null) {
       console.log("collections == null");
