@@ -60,3 +60,14 @@ export const USDollar = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
+
+
+// color array and a cycler
+
+export const palette = ['#6366f1','#14b8a6', '#d946ef', '#0ea5e9']
+export function paletteCycler(num: number):string {
+  if(num < (palette.length -1)) {
+    return palette[num]
+  }
+  return paletteCycler(num - palette.length)
+}
