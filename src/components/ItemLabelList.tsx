@@ -7,21 +7,20 @@ type Props = { itemId: string };
 
 export default async function ItemLabelList({ itemId }: Props) {
   const supabase = createServerComponentClient({ cookies });
-  const { data: tags } = await supabase
+  const { data: item_tags }: any = await supabase
     .from("_item_labels")
     .select("id, _labels(id,name)")
     .eq("item_id", itemId);
 
-  // return (
-  //     <p>{JSON.stringify(tags)}</p>
-  // )
+    //const itemTags: ItemTag[] | null = item_tags ? item_tags : null
+
   return (
     <ul className="flex flex-wrap">
-      {tags?.map((tag, i) => (
+      {item_tags?.map((tag: { id:string,_labels: { id: string, name: string } }, i: number) => (
         <React.Fragment key={i}>
           {tag._labels && tag._labels.name ? (
             <li key={i} className="mr-1 mb-1">
-              <Badge>{tag._labels.name as String}</Badge>
+              <Badge>{tag._labels.name}</Badge>
             </li>
           ) : null}
         </React.Fragment>

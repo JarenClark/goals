@@ -54,46 +54,46 @@ export default async function CollectionLayout({
   //     (x) => x.id == params.collectionId
   //   );
 
-  const now = new Date();
-  const today = new Date(now);
-  today.setHours(0, 0, 0, 0); // Set time to the beginning of the day
+  // const now = new Date();
+  // const today = new Date(now);
+  // today.setHours(0, 0, 0, 0); // Set time to the beginning of the day
 
-  const thisWeek = new Date(now);
-  thisWeek.setDate(thisWeek.getDate() - now.getDay()); // Set date to the first day of the week
-  thisWeek.setHours(0, 0, 0, 0); // Set time to the beginning of the day
+  // const thisWeek = new Date(now);
+  // thisWeek.setDate(thisWeek.getDate() - now.getDay()); // Set date to the first day of the week
+  // thisWeek.setHours(0, 0, 0, 0); // Set time to the beginning of the day
 
-  const thisMonth = new Date(now);
-  thisMonth.setDate(1); // Set date to the first day of the month
-  thisMonth.setHours(0, 0, 0, 0); // Set time to the beginning of the day
+  // const thisMonth = new Date(now);
+  // thisMonth.setDate(1); // Set date to the first day of the month
+  // thisMonth.setHours(0, 0, 0, 0); // Set time to the beginning of the day
 
-  const todayItems: any[] = [];
-  const thisWeekItems: any[] = [];
-  const thisMonthItems: any[] = [];
-  const olderItems: any[] = [];
-  if (!!items) {
-    items.forEach((item) => {
-      const updatedAt = new Date(item.updated_at);
+  // const todayItems: any[] = [];
+  // const thisWeekItems: any[] = [];
+  // const thisMonthItems: any[] = [];
+  // const olderItems: any[] = [];
+  // if (!!items) {
+  //   items.forEach((item) => {
+  //     const updatedAt = new Date(item.updated_at);
 
-      if (updatedAt >= today) {
-        todayItems.push(item);
-      } else if (updatedAt >= thisWeek) {
-        thisWeekItems.push(item);
-      } else if (updatedAt >= thisMonth) {
-        thisMonthItems.push(item);
-      } else {
-        olderItems.push(item);
-      }
-    });
-  }
+  //     if (updatedAt >= today) {
+  //       todayItems.push(item);
+  //     } else if (updatedAt >= thisWeek) {
+  //       thisWeekItems.push(item);
+  //     } else if (updatedAt >= thisMonth) {
+  //       thisMonthItems.push(item);
+  //     } else {
+  //       olderItems.push(item);
+  //     }
+  //   });
+  // }
 
-  const groups = [
-    { label: "Today", items: todayItems, timeFormat: "hh:mm b" },
-    { label: "This Week", items: thisWeekItems, timeFormat: "EEEE" },
-    { label: "This Month", items: thisMonthItems, timeFormat: "MM/dd/yyyy" },
-    { label: "Older", items: olderItems, timeFormat: "MM/dd/yyyy" },
-  ];
+  // const groups = [
+  //   { label: "Today", items: todayItems, timeFormat: "hh:mm b" },
+  //   { label: "This Week", items: thisWeekItems, timeFormat: "EEEE" },
+  //   { label: "This Month", items: thisMonthItems, timeFormat: "MM/dd/yyyy" },
+  //   { label: "Older", items: olderItems, timeFormat: "MM/dd/yyyy" },
+  // ];
 
-  const filtered = groups.filter((x) => (x.items.length > 0 ? true : false));
+  //const filtered = groups.filter((x) => (x.items.length > 0 ? true : false));
   return (
     <>
       <div className="relative h-screen">
