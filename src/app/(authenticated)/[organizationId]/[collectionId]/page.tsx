@@ -2,7 +2,7 @@ import BreadCrumbs from "@/components/BreadCrumbs";
 import CollectionSelectNavigation from "@/components/CollectionSelectNavigation";
 import Header from "@/components/Header";
 import ItemsTable from "@/components/ItemsTable";
-import TruncatedContent from "@/components/TruncatedContent";
+import ContentPreview from "@/components/ContentPreview";
 import { Label } from "@/components/ui/label";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
@@ -32,7 +32,7 @@ import {
 } from "@/components/ui/card";
 
 type Props = {
-  params: { collectionId: string; itemId?: string };
+  params: { organizationId:string; collectionId: string; itemId?: string };
   children: React.ReactNode;
   item?: React.ReactNode;
 };
@@ -92,46 +92,57 @@ export default async function CollectionLayout({
         {!!items ? (
           <div className="px-4 py-2">
             {/* Gallery  */}
+            <CardTitle className="ml-2 mt-16">Gallery</CardTitle>
             <ul className="flex items-stretch flex-wrap -mx-1">
               {items.map((item, i) => (
                 <li
                   className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4  p-1 min-h-[300px]"
                   key={i}
                 >
-                  <Card className="min-h-[300px]">
-                    <CardHeader>
-                    <time className="text-foreground text-[0.75rem]">
-                              {format(
-                                new Date(item.updated_at), "MM/dd/yyyy"
-                              )}
-                            </time>
-                      {/* <div>
-                        <div className="mb-2 px-1 inline-flex rounded-full text-xs bg-purple/50 border border-purple">
-                          {collection.name}
+                  <Link className="group" href={`/${params.organizationId}/${collection.id}/${item.id}`}>
+                  <Card className="min-h-[300px] flex flex-col justify-between">
+                    <div>
+                      <CardHeader>
+                        {/* <time className="text-foreground text-[0.75rem]">
+                          {format(new Date(item.updated_at), "MM/dd/yyyy")}
+                        </time> */}
+                        <div>
+                          <div className="mb-2 py-0.5 px-1 inline-flex items-center space-x-1 rounded-full text-xs text-purple bg-purple/20 border border-purple">
+                            <BoxesIcon className="w-3 h-3" />
+                            <span>{collection.name}</span>
+                          </div>
                         </div>
-                      </div> */}
-                      <CardTitle className="text-xl">{item.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent></CardContent>
+                        <CardTitle className="text-lg opacity-60 group-hover:opacity-100">{item.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ContentPreview content={item.content} length={75} />
+                      </CardContent>
+                    </div>
+
                     <CardFooter>
                       <ItemLabelList itemId={item.id} />
                     </CardFooter>
                   </Card>
+                  </Link>
                 </li>
               ))}
             </ul>
             {/* List  */}
-            <ul className="-mx-3">
+            <CardTitle className="mt-16 ml-2">List</CardTitle>
+
+            <ul className="">
               {items.map((item, i) => (
-                <li className="w-full p-2" key={i}>
-                  <div className="flex rounded-lg border p-4">
-                    <Label>{item.title}</Label>
+                <li className="w-full" key={i}>
+                  <div className="flex py-2 space-x-2">
+                    <CardTitle className="text-lg">{item.title}</CardTitle>
+
                     <ItemLabelList itemId={item.id} />
                   </div>
                 </li>
               ))}
             </ul>
             {/* Table */}
+            <CardTitle className="mt-16 ml-2">Table</CardTitle>
           </div>
         ) : null}
         {item}

@@ -63,8 +63,10 @@ export const USDollar = new Intl.NumberFormat("en-US", {
 
 
 // color array and a cycler
-
-export const palette = ['#6366f1','#14b8a6', '#d946ef', '#0ea5e9']
+// fuschia-500 d946ef
+//violet-500 #8b5cf6
+// blue-500 3b82f6
+export const palette = ['#d946ef','##8b5cf6', '#3b82f6',]
 export function paletteCycler(num: number):string {
   if(num < (palette.length -1)) {
     return palette[num]

@@ -5,6 +5,7 @@ const supabase = createClientComponentClient();
 interface Collection {
   id: string;
   name: string;
+  organizationId: string;
 }
 interface CollectionState {
   collections: Collection[] | null;

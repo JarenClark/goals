@@ -17,7 +17,7 @@ export default async function ItemLabelList({ itemId }: Props) {
   if (!item_tags || item_tags.length == 0) return null;
 
   return (
-    <ul className="flex flex-wrap mt-6">
+    <ul className="flex flex-wrap ">
       {item_tags?.map(
         (
           tag: { id: string; _labels: { id: string; name: string } },

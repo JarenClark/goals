@@ -12,7 +12,6 @@ type Props = {
 };
 
 function RootLayout({ children, params }: Props) {
-
   return (
     <>
       <ProtectedContent>
@@ -26,21 +25,15 @@ function RootLayout({ children, params }: Props) {
             </div>
             <div className=" w-full">
               <main className="overflow-y-auto  w-full">
-                
                 {children}</main>{" "}
             </div>
             {/* <StateHelper /> */}
           </div>
-          <div className="py-20 bg-red-500">
-
-
-            <pre>{JSON.stringify(params,null,2)}</pre>
-          </div>
-
           <Footer />
         </div>
         {/* Our Modals */}
         <DeleteItemModal />
+        {/* End Our Modals */}
       </ProtectedContent>
     </>
   );
