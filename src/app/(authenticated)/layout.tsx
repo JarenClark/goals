@@ -21,11 +21,12 @@ function RootLayout({ children, params }: Props) {
           </div>
           <div className="w-screen h-screen flex ">
             <div className="hidden xl:block">
-              <Sidebar />
+              <Sidebar params={params}/>
             </div>
             <div className=" w-full">
               <main className="overflow-y-auto  w-full">
-                {children}</main>{" "}
+                {children}
+                </main>
             </div>
             {/* <StateHelper /> */}
           </div>

@@ -30,9 +30,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import CollectionHeader from "@/components/collection/CollectionHeader";
 
 type Props = {
-  params: { organizationId:string; collectionId: string; itemId?: string };
+  params: { organizationId: string; collectionId: string; itemId?: string };
   children: React.ReactNode;
   item?: React.ReactNode;
 };
@@ -50,25 +52,20 @@ export default async function CollectionLayout({
     .eq("id", params.collectionId)
     .single();
 
+  const PAGE = 1;
+  const ITEMS_PER_PAGE = 8;
   const { data: items, count } = await supabase
     .from("_items")
     .select("*", { count: "exact" })
     .eq("collection_id", params.collectionId)
     .order("updated_at", { ascending: false })
-    .is("parent_item", null);
+    .range((PAGE - 1) * ITEMS_PER_PAGE, ITEMS_PER_PAGE * PAGE - 1);
 
+  if (!collection && !items) return null;
   return (
     <>
       <div className="relative h-screen">
-        <div className="flex w-full justify-between px-4 py-4 border-b">
-          <div className="flex items-center  space-x-2 text-white">
-            <BoxesIcon className="w-5 h-5" />
-            <TypographyH3>{collection.name}</TypographyH3>{" "}
-          </div>
-          <div className="text-muted-foreground flex space-x-0">
-            <Ellipsis />
-          </div>
-        </div>
+<CollectionHeader id={collection.id} name={collection.name}/>
 
         <div className="flex w-full justify-between px-4 py-2 border-b">
           <div className="flex items-center  space-x-2 text-white">
@@ -76,57 +73,69 @@ export default async function CollectionLayout({
               {count} {count == 1 ? "Entry" : "Entries"}
             </Label>
           </div>
-          <ul className="text-muted-foreground flex space-x-1">
-            <li>
-              <ListIcon />
-            </li>
-            <li>
-              <Grid2X2Icon />
-            </li>
-            <li>
-              <Table2Icon />
-            </li>
-          </ul>
+          <div className="flex space-x-2 items-center">
+
+
+            <ul className="text-muted-foreground flex space-x-1">
+              <li>
+                <ListIcon />
+              </li>
+              <li>
+                <Grid2X2Icon />
+              </li>
+              <li>
+                <Table2Icon />
+              </li>
+            </ul>
+            <Button>New Item</Button>
+          </div>
         </div>
 
         {!!items ? (
           <div className="px-4 py-2">
             {/* Gallery  */}
             <CardTitle className="ml-2 mt-16">Gallery</CardTitle>
+            {/* <div className="mx-auto max-w-6xl"> */}
             <ul className="flex items-stretch flex-wrap -mx-1">
               {items.map((item, i) => (
                 <li
                   className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4  p-1 min-h-[300px]"
                   key={i}
                 >
-                  <Link className="group" href={`/${params.organizationId}/${collection.id}/${item.id}`}>
-                  <Card className="min-h-[300px] flex flex-col justify-between">
-                    <div>
-                      <CardHeader>
-                        {/* <time className="text-foreground text-[0.75rem]">
+                  <Link
+                    className="group"
+                    href={`/${params.organizationId}/${collection.id}/${item.id}`}
+                  >
+                    <Card className="min-h-[300px] flex flex-col justify-between">
+                      <div>
+                        <CardHeader>
+                          {/* <time className="text-foreground text-[0.75rem]">
                           {format(new Date(item.updated_at), "MM/dd/yyyy")}
                         </time> */}
-                        <div>
-                          <div className="mb-2 py-0.5 px-1 inline-flex items-center space-x-1 rounded-full text-xs text-purple bg-purple/20 border border-purple">
-                            <BoxesIcon className="w-3 h-3" />
-                            <span>{collection.name}</span>
+                          <div>
+                            <div className="mb-2 py-0.5 px-1 inline-flex items-center space-x-1 rounded-full text-xs text-purple bg-purple/20 border border-purple">
+                              <BoxesIcon className="w-3 h-3" />
+                              <span>{collection.name}</span>
+                            </div>
                           </div>
-                        </div>
-                        <CardTitle className="text-lg opacity-60 group-hover:opacity-100">{item.title}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <ContentPreview content={item.content} length={75} />
-                      </CardContent>
-                    </div>
+                          <CardTitle className="text-lg opacity-60 group-hover:opacity-100">
+                            {item.title}
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <ContentPreview content={item.content} length={75} />
+                        </CardContent>
+                      </div>
 
-                    <CardFooter>
-                      <ItemLabelList itemId={item.id} />
-                    </CardFooter>
-                  </Card>
+                      <CardFooter>
+                        <ItemLabelList itemId={item.id} />
+                      </CardFooter>
+                    </Card>
                   </Link>
                 </li>
               ))}
             </ul>
+            {/* </div> */}
             {/* List  */}
             <CardTitle className="mt-16 ml-2">List</CardTitle>
 

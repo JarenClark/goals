@@ -1,6 +1,8 @@
 export * from "./use-collection-store";
 export * from "./use-item-store";
 export * from "./use-ui-store";
+export * from "./use-space-store";
+
 import { create } from "zustand";
 //import { mountStoreDevtool } from 'simple-zustand-devtools';
 

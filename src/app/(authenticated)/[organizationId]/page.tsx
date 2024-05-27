@@ -1,4 +1,4 @@
-import { TypographyH1 } from "@/components/ui/typography";
+import { TypographyH1, TypographyH3 } from "@/components/ui/typography";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
@@ -23,20 +23,23 @@ export default async function OrganizationHomepage({ params }: Props) {
     .select("*")
     .eq("organization_id", params.organizationId);
 
+    const { data: items } = await supabase
+    .from("_items")
+    .select("*")
+    //.eq("organization_id", params.organizationId);
+
   return (
     <div>
       <div className="container p-8">
         <div className="mb-8">
           <TypographyH1>{org.name}</TypographyH1>
         </div>
-        {JSON.stringify(org, null, 2)}
-        <br />
-        4e864f7c-1dad-4ed0-83a8-e9e9df8ec6df
-        <ul>
+        <TypographyH3>Your Collections</TypographyH3>
+        <ul className="list-disc pl-4">
           {collections ? (
             <React.Fragment>
               {collections.map((col, i) => (
-                <li key={i}>
+                <li key={i} className="text-white hover:text-indigo">
                   <Link href={`/${params.organizationId}/${col.id}`}>
                     {col.name}
                   </Link>

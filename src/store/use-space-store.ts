@@ -23,7 +23,7 @@ export const useSpaceStore = create<SpaceState>((set) => ({
   space: null,
   setSpace: async (id) => {
     const { data: space } = await supabase
-      .from("_spaces")
+      .from("_organizations")
       .select("*")
       .eq("id", id)
       .single();
@@ -31,7 +31,7 @@ export const useSpaceStore = create<SpaceState>((set) => ({
   },
   setSpaces: async () => {
     const { data: spaces } = await supabase
-      .from("_spaces")
+      .from("_organizations")
       .select("*");
     console.log("setting spaces");
     set(() => ({ spaces: spaces }));

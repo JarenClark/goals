@@ -31,8 +31,15 @@ import Avi from "./Avi";
 import SearchInput from "./SearchInput";
 import ProtectedContent from "./ProtectedContent";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { SpaceNavigator } from "@/components/SpaceNavigator";
 
-export default async function Sidebar() {
+type Props = {
+  params: {
+    organizationId?: string;
+  };
+};
+
+export default async function Sidebar({ params }: Props) {
   const supabase = createServerComponentClient({ cookies });
   const {
     data: { user },
@@ -40,18 +47,25 @@ export default async function Sidebar() {
 
   if (!user) return null;
 
+  // const { data: spaces } = await supabase
+  // .from("_organizations")
+  // .select("*");
+
+  // console.log('spaces are ', JSON.stringify(spaces,null,2))
   return (
     // <ProtectedContent>
     <div className="bg-black/5 dark:bg-white/5 border-r h-screen py-8 px-4  flex flex-col justify-between xl:min-w-[300px]">
-     {/* SPACE NAVIGATOR */}
+      {/* SPACE NAVIGATOR */}
+     
+        <SpaceNavigator />
+     
+
       <section>
         <div className="flex flex-col space-y-4 mb-8 mt-16">
           <SearchInput />
         </div>
         <Link href={"/4e864f7c-1dad-4ed0-83a8-e9e9df8ec6df"}>
-          <p className="mb-8">
-            <code>4e864f7c-1dad-4ed0-83a8-e9e9df8ec6df</code>
-          </p>
+          <p className="mb-8">Jaren's Kingdom</p>
         </Link>
         <nav className="">
           <Menu />
