@@ -41,11 +41,13 @@ type Props = {
   currentSpace?: string;
 };
 export function SpaceNavigator({ currentSpace }: Props) {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+    const router = useRouter();
+    const params = useParams();
 
-  const router = useRouter();
-  const params = useParams();
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState(params.organizationId ?? '');
+
+
 
   const { spaces, space, setSpaces, setSpace } = useSpaceStore();
   useEffect(() => {
@@ -53,8 +55,12 @@ export function SpaceNavigator({ currentSpace }: Props) {
       setSpace(params.organizationId as string);
     }
     setSpaces();
-  }, []);
+  }, [spaces, params]);
 
+  useEffect(() => {
+router.push(`/${value}`)
+  }, [value])
+  
   return (
     <>
       <Popover open={open} onOpenChange={setOpen}>
@@ -65,7 +71,8 @@ export function SpaceNavigator({ currentSpace }: Props) {
             aria-expanded={open}
             className="w-[200px] justify-between"
           >
-            {value ? "there" : "Select Space..."}
+            {space?.name}
+            {/* {value && spaces ? spaces.find(x => x.id == value)?.name : "Select Space..."} */}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -77,7 +84,11 @@ export function SpaceNavigator({ currentSpace }: Props) {
             {spaces && spaces.length > 0 ? (
               <CommandGroup>
                 {spaces?.map((spaceItem, i) => (
-                  <CommandItem key={spaceItem.id} value={spaceItem.id}>
+                  <CommandItem key={spaceItem.id} value={spaceItem.id}
+                  onSelect={(currentValue) => {
+                    setValue(currentValue === value ? "" : currentValue)
+                    setOpen(false)
+                  }}>
                     <Check
                       className={cn(
                         "mr-2 h-4 w-4",
@@ -94,7 +105,6 @@ export function SpaceNavigator({ currentSpace }: Props) {
           </Command>
         </PopoverContent>
       </Popover>
-      <CollectionSelectNavigation current=""/>
       {/* <p className="my-8">{JSON.stringify(spaces, null, 2)}</p> */}
     </>
   );

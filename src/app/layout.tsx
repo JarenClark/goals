@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Sidebar from "@/components/Sidebar";
 import { cookies } from "next/headers";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import NextTopLoader from "nextjs-toploader";
-import StateHelper from "@/components/StateHelper";
-import { TypographyH2 } from "@/components/ui/typography";
-import Greeting from "@/components/Greeting";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import AddNewItem from "@/components/AddNewItem";
-import BreadCrumbs from "@/components/BreadCrumbs";
-import { Toaster } from "@/components/ui/sonner"
+import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
+
+import { Toaster } from "@/components/ui/sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -33,21 +26,22 @@ export default function RootLayout({
   // pathname stuff
 
   return (
-    <html lang="en" data-theme={theme?.value}>
-      <body className={inter.className + " overflow-x-hidden"}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NextTopLoader />
+    <ReactQueryClientProvider>
+      <html lang="en" data-theme={theme?.value}>
+        <body className={inter.className + " overflow-x-hidden"}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NextTopLoader />
 
-          {children}
-          <Toaster />
-
-        </ThemeProvider>
-      </body>
-    </html>
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ReactQueryClientProvider>
   );
 }

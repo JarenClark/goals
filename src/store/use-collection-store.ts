@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useSpaceStore } from "./use-space-store";
+
 const supabase = createClientComponentClient();
 
 interface Collection {
@@ -13,6 +15,7 @@ interface CollectionState {
   setCollections: () => void;
   setCollection: (id: string) => void;
   clearCollection: () => void;
+  clearCollections: () => void;
   createCollectionModalIsOpen: boolean;
   setCreateModalIsOpen: (arg?: boolean) => void;
   deleteCollectionModalIsOpen: boolean;
@@ -37,6 +40,7 @@ export const useCollectionStore = create<CollectionState>((set) => ({
     set(() => ({ collections: collections }));
   },
   clearCollection: () => set(() => ({ collection: null })),
+  clearCollections: () => set(() => ({ collections: null })),
   deleteCollectionModalIsOpen: false,
   setDeleteModalIsOpen: (arg) => {
     if (arg) {

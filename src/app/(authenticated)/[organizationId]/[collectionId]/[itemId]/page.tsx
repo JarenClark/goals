@@ -24,6 +24,8 @@ export default async function ItemPage({ params }: Props) {
     .select("*")
     .eq("id", params.collectionId)
     .single();
+
+    if(!item) return null
   return (
     <>
       <ItemHeader

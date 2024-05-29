@@ -55,23 +55,19 @@ export default async function Sidebar({ params }: Props) {
   return (
     // <ProtectedContent>
     <div className="bg-black/5 dark:bg-white/5 border-r h-screen py-8 px-4  flex flex-col justify-between xl:min-w-[300px]">
-      {/* SPACE NAVIGATOR */}
      
-        <SpaceNavigator />
-     
-
       <section>
+      <SpaceNavigator />
         <div className="flex flex-col space-y-4 mb-8 mt-16">
           <SearchInput />
         </div>
-        <Link href={"/4e864f7c-1dad-4ed0-83a8-e9e9df8ec6df"}>
-          <p className="mb-8">Jaren's Kingdom</p>
-        </Link>
+
         <nav className="">
           <Menu />
         </nav>
       </section>
-      <div>
+
+      <section>
         <Avi />
         <div className="flex items-center space-x-2 mt-2">
           {/* <Label> Hey, {user.email}</Label> */}
@@ -80,7 +76,7 @@ export default async function Sidebar({ params }: Props) {
           </form>
           <ThemeToggle />
         </div>
-      </div>
+      </section>
     </div>
     // </ProtectedContent>
   );
