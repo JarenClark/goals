@@ -11,7 +11,7 @@ type Props = {
   collectionId: string;
 };
 
-function CollectionLink({ collectionId }: Props) {
+export default function CollectionLink({ collectionId }: Props) {
     if(!collectionId) return null
   const supabase = useSupabaseBrowser();
 
@@ -26,5 +26,3 @@ function CollectionLink({ collectionId }: Props) {
     </Link>
   );
 }
-
-export default CollectionLink;

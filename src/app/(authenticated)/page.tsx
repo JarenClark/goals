@@ -38,6 +38,7 @@ export default async function Home() {
 
   if (!user) return null;
 
+  const { data: spaces } = await supabase.from("_organizations").select("*");
   const { data: collections, count } = await supabase
     .from("_collections")
     .select("*", { count: "exact" })
@@ -55,6 +56,26 @@ export default async function Home() {
             <div className="pt-12 col-span-1 md:col-span-3 lg:col-span-6">
               <CardTitle>Dashboard</CardTitle>
             </div>
+            <div className="pt-12 col-span-1 md:col-span-3 lg:col-span-6">
+              <CardTitle>Your Spaces</CardTitle>
+            </div>
+            <ul className=" col-span-1 md:col-span-3 lg:col-span-6">
+              {spaces?.map((space, i) => (
+                <li
+                  key={i}
+                  className="group overflow-hidden border-b-2 border-white dark:border-black last:border-none first:rounded-t-xl last:rounded-b-xl"
+                >
+                  <Link href={`/${space.id}`}>
+                    <div className="flex justify-between bg-black/5 px-4 py-4 dark:bg-white/5 ">
+                     <span className="translate-x-0 group-hover:translate-x-2 transition duration-300">
+
+                     {space.name}
+                     </span>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
             {/* Quick Add */}
             {!!collections && collections.length > 0 ? (
               <Card className="border border-muted   lg:col-span-2">

@@ -1,7 +1,13 @@
+/**
+ * 
+ * 
+ * THIS IS NOT COMPLETE - DOING THIS SERVER SIDE FOR NOW
+ */
+
 import { paginationRange } from "@/utils/pagination-range";
 import { TypedSupabaseClient } from "@/utils/types";
 
-export function getItemsByCollection(
+export function getRecentItemsForSpace(
   client: TypedSupabaseClient,
   collectionId: string,
   page?: number
