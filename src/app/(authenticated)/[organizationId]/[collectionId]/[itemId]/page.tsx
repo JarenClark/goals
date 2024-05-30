@@ -18,8 +18,10 @@ export default async function CountryPage({ params }: { params: { itemId: string
     // Neat! Serialization is now as easy as passing props.
     // HydrationBoundary is a Client Component, so hydration will happen there.
     <HydrationBoundary state={dehydrate(queryClient)}>
+      
       {/* <Country id={params.id} /> */}
       <ItemHeader itemId={params.itemId} />
+
     </HydrationBoundary>
   )
 }

@@ -1,6 +1,6 @@
 import BreadCrumbs from "@/components/BreadCrumbs";
 import CollectionSelectNavigation from "@/components/CollectionSelectNavigation";
-import Header from "@/components/Header";
+
 import ItemsTable from "@/components/ItemsTable";
 import ContentPreview from "@/components/ContentPreview";
 import { Label } from "@/components/ui/label";
@@ -32,16 +32,22 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import CollectionHeader from "@/components/collection/CollectionHeader";
+import ItemCard from "@/components/item/ItemCard";
 
 type Props = {
   params: { organizationId: string; collectionId: string; itemId?: string };
   children: React.ReactNode;
   item?: React.ReactNode;
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
 };
 
 export default async function CollectionLayout({
   params,
   item,
+  searchParams,
   children,
 }: Props) {
   const supabase = createServerComponentClient({ cookies });
@@ -52,8 +58,10 @@ export default async function CollectionLayout({
     .eq("id", params.collectionId)
     .single();
 
-  const PAGE = 1;
+  const query = searchParams?.query || "";
+  const PAGE = Number(searchParams?.page) || 1;
   const ITEMS_PER_PAGE = 8;
+
   const { data: items, count } = await supabase
     .from("_items")
     .select("*", { count: "exact" })
@@ -65,7 +73,7 @@ export default async function CollectionLayout({
   return (
     <>
       <div className="relative h-screen">
-<CollectionHeader id={collection.id} name={collection.name}/>
+        <CollectionHeader id={collection.id} name={collection.name} />
 
         <div className="flex w-full justify-between px-4 py-2 border-b">
           <div className="flex items-center  space-x-2 text-white">
@@ -74,8 +82,6 @@ export default async function CollectionLayout({
             </Label>
           </div>
           <div className="flex space-x-2 items-center">
-
-
             <ul className="text-muted-foreground flex space-x-1">
               <li>
                 <ListIcon />
@@ -98,64 +104,55 @@ export default async function CollectionLayout({
             {/* <div className="mx-auto max-w-6xl"> */}
             <ul className="flex items-stretch flex-wrap -mx-1">
               {items.map((item, i) => (
-                <li
-                  className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4  p-1 min-h-[300px]"
+                <ItemCard
                   key={i}
-                >
-                  <Link
-                    className="group"
-                    href={`/${params.organizationId}/${collection.id}/${item.id}`}
-                  >
-                    <Card className="min-h-[300px] flex flex-col justify-between">
-                      <div>
-                        <CardHeader>
-                          {/* <time className="text-foreground text-[0.75rem]">
-                          {format(new Date(item.updated_at), "MM/dd/yyyy")}
-                        </time> */}
-                          <div>
-                            <div className="mb-2 py-0.5 px-1 inline-flex items-center space-x-1 rounded-full text-xs text-purple bg-purple/20 border border-purple">
-                              <BoxesIcon className="w-3 h-3" />
-                              <span>{collection.name}</span>
-                            </div>
-                          </div>
-                          <CardTitle className="text-lg opacity-60 group-hover:opacity-100">
-                            {item.title}
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <ContentPreview content={item.content} length={75} />
-                        </CardContent>
-                      </div>
-
-                      <CardFooter>
-                        <ItemLabelList itemId={item.id} />
-                      </CardFooter>
-                    </Card>
-                  </Link>
-                </li>
+                  itemId={item.id}
+                  collectionId={item.collection_id}
+                  organizationId={params.organizationId}
+                  title={item.title}
+                />
               ))}
             </ul>
             {/* </div> */}
             {/* List  */}
-            <CardTitle className="mt-16 ml-2">List</CardTitle>
+            {/* <CardTitle className="mt-16 ml-2">List</CardTitle>
 
             <ul className="">
               {items.map((item, i) => (
                 <li className="w-full" key={i}>
                   <div className="flex py-2 space-x-2">
                     <CardTitle className="text-lg">{item.title}</CardTitle>
-
                     <ItemLabelList itemId={item.id} />
                   </div>
                 </li>
               ))}
-            </ul>
+            </ul> */}
             {/* Table */}
-            <CardTitle className="mt-16 ml-2">Table</CardTitle>
+            {/* <CardTitle className="mt-16 ml-2">Table</CardTitle> */}
           </div>
         ) : null}
         {item}
       </div>
+
+      {count && count > ITEMS_PER_PAGE ? (
+        <div className="flex justify-center">
+          <Link
+            href={`/${params.organizationId}/${params.collectionId}?page=${
+              PAGE - 1
+            }`}
+          >
+            PREV
+          </Link>
+          <span>{PAGE}</span>
+          <Link
+            href={`/${params.organizationId}/${params.collectionId}?page=${
+              PAGE + 1
+            }`}
+          >
+            NEXT
+          </Link>
+        </div>
+      ) : null}
       <div id="modal-root" />
     </>
   );

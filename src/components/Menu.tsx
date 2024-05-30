@@ -35,9 +35,10 @@ import MenuItem from "./MenuItem";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import MenuItemDropdown from "./MenuItemDropdown";
+import { useParams } from "next/navigation";
 export default function Menu() {
   const { collections, setCollections } = useCollectionStore();
-  
+  const params = useParams()
   useEffect(() => {
     if (collections == null) {
       console.log("collections == null");
@@ -45,35 +46,7 @@ export default function Menu() {
     }
   }, [collections]);
 
-  const navIcons = [
-    // {
-    //   link: "/",
-    //   icon: <HomeIcon className="w-5 h-5" />,
-    //   label: "Home",
-    // },
 
-    {
-      link: "/labels",
-      icon: <TagIcon className="w-5 h-5" />,
-      label: "Labels",
-    },
-    // {
-    //   link: "/settings",
-    //   icon: <SettingsIcon className="w-5 h-5" />,
-    //   label: "Settings",
-    // },
-    // {
-    //   link: "/profile",
-    //   icon: <UserIcon className="w-5 h-5" />,
-    //   label: "Profile",
-    // },
-    // {
-    //   link: "/collections",
-    //   icon: <OrbitIcon className="w-5 h-5" />,
-    //   label: "Collections",
-    //   childItems: collections ? collections : null,
-    // },
-  ];
   // if (!user) return null;
   return (
     <ul className="flex flex-col space-y-1">
@@ -82,11 +55,6 @@ export default function Menu() {
         icon={<HomeIcon className="w-5 h-5" />}
         label={"Home"}
       />
-      {navIcons.map((item, i) => (
-        <React.Fragment key={i}>
-          <MenuItem {...item} />
-        </React.Fragment>
-      ))}
       <li className="border-t py-2">
         <div className="flex  mb-2 justify-between">
           <div className=" text-muted-foreground flex items-center space-x-2">

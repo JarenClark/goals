@@ -29,7 +29,6 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import QuickAdd from "@/components/QuickAdd";
-import Header from "@/components/Header";
 export default async function Home() {
   const supabase = createServerComponentClient({ cookies });
   const {
@@ -155,64 +154,7 @@ export default async function Home() {
           <CardFooter></CardFooter>
         </Card> */}
 
-            {/* Boards */}
-            <Card className="border border-muted   col-span-1 md:col-span-3 lg:col-span-6 xl:col-span-4">
-              <CardHeader>
-                <div className="flex space-x-4">
-                  <div className="rounded-md bg-black/5 dark:bg-white/5  p-2">
-                    <LibraryIcon />
-                  </div>
-                  <div className="flex flex-col space-y-1">
-                    <TypographyMuted>Your Stuff</TypographyMuted>
-                    <CardTitle>
-                      {count && count != 1 ? `${count + " "}` : `${count} `}
-                      Board
-                      {count && count != 1 ? "s" : null}
-                    </CardTitle>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Table className="border border-muted">
-                  <TableBody>
-                    {collections?.map((c, i) => (
-                      <TableRow
-                        key={i}
-                        className="w-full md:w-1/2 lg:w-1/3 px-2 mb-4"
-                      >
-                        <TableCell>
-                          <Link href={`/collections/${c.id}`}>{c.name}</Link>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-                {!!shared && (
-                  <>
-                    <TypographyH4 className="mt-4">Shared </TypographyH4>
-                    <Table className="border border-muted">
-                      <TableBody>
-                        {shared?.map((c, i) => (
-                          <TableRow
-                            key={i}
-                            className="w-full md:w-1/2 lg:w-1/3 px-2 mb-4"
-                          >
-                            <TableCell>
-                              <Link href={`/collections/${c._collections.id}`}>
-                                {c._collections.name}
-                              </Link>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </>
-                )}
-              </CardContent>
-              <CardFooter>
-                <Button variant={"outline"}>Add New</Button>
-              </CardFooter>
-            </Card>
+
           </div>
         </div>
       </div>
