@@ -25,7 +25,7 @@ function ItemPageNormal({ params }: Props) {
   return (
     <div className="container pt-16 pb-8">
       <CardTitle>{item.title}</CardTitle>
-      <div className="bg-black/5 dark:bg-white/5 p-8 rounded-xl max-w-[600px] overflow-hidden">
+      <div className="old-bg-black/5 old-dark:bg-white/5 bg-secondary p-8 rounded-xl max-w-[600px] overflow-hidden">
        <code>
         <pre>{JSON.stringify(item,null,2)}</pre>
         </code>

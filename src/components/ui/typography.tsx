@@ -71,7 +71,7 @@ export function TypographyList({ children, className }: Props) {
 }
 export function TypographyInlineCode({ children, className }: Props) {
   return (
-    <code className="relative rounded bg-black/5 dark:bg-white/5 px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+    <code className="relative rounded old-bg-black/5 old-dark:bg-white/5 bg-secondary px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
       {children}
     </code>
   );

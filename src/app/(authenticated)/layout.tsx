@@ -1,5 +1,5 @@
 import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+//import Header from "@/components/Header";
 import MainMenu from "@/components/MainMenu";
 import ProtectedContent from "@/components/ProtectedContent";
 import Sidebar from "@/components/Sidebar";

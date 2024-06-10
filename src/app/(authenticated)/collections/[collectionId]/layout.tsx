@@ -1,6 +1,5 @@
 import BreadCrumbs from "@/components/BreadCrumbs";
 import CollectionSelectNavigation from "@/components/CollectionSelectNavigation";
-import Header from "@/components/Header";
 import ItemsTable from "@/components/ItemsTable";
 import TruncatedContent from "@/components/TruncatedContent";
 import { Label } from "@/components/ui/label";
@@ -84,7 +83,7 @@ export default async function CollectionLayout({
   return (
     <>
       <div className="relative h-screen">
-        <Header />
+  
         <div className="flex h-full">
           <div className="w-full  lg:w-1/3 border-r h-full">
             <ul>

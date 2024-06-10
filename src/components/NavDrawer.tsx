@@ -53,7 +53,7 @@ function NavDrawer({}: Props) {
     <>
       <Sheet open={sideNavIsOpen}>
         {/* <SheetOverlay onClick={() => toggle(false)} /> */}
-        <SheetContent className=" h-full flex flex-col justify-between sm:max-w-sm md:max-w-md lg:max-w-lg bg-black/5 dark:bg-white/5">
+        <SheetContent className=" h-full flex flex-col justify-between sm:max-w-sm md:max-w-md lg:max-w-lg old-bg-black/5 old-dark:bg-white/5 bg-secondary">
           <SheetHeader className="pt-8">
             <SheetClose
               onClick={() => closeSideNav()}

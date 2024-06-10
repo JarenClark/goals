@@ -80,7 +80,7 @@ export default async function Home() {
               <Card className="border border-muted   lg:col-span-2">
                 <CardHeader>
                   <div className="flex space-x-4">
-                    <div className="rounded-md bg-black/5 dark:bg-white/5 flex items-center p-2">
+                    <div className="rounded-md old-bg-black/5 old-dark:bg-white/5 bg-secondary flex items-center p-2">
                       <PlusIcon />
                     </div>
                     <div className="flex flex-col space-y-1">
@@ -95,7 +95,7 @@ export default async function Home() {
                 <CardFooter></CardFooter>
               </Card>
             ) : (
-              <Card className=" bg-black/5 dark:bg-white/5 ">
+              <Card className=" old-bg-black/5 old-dark:bg-white/5 bg-secondary ">
                 <CardHeader></CardHeader>
                 <CardContent>Create a board to start adding items</CardContent>
               </Card>
@@ -104,7 +104,7 @@ export default async function Home() {
             <Card className="border border-muted  lg:col-span-2">
               <CardHeader>
                 <div className="flex space-x-4">
-                  <div className="rounded-md flex items-center bg-black/5 dark:bg-white/5 p-2">
+                  <div className="rounded-md flex items-center old-bg-black/5 old-dark:bg-white/5 bg-secondary p-2">
                     <ActivityIcon />
                   </div>
                   <div className="flex flex-col space-y-1">
@@ -126,7 +126,7 @@ export default async function Home() {
             {/* <Card className="border border-muted lg:col-span-2">
           <CardHeader>
             <div className="flex space-x-4">
-              <div className="rounded-md bg-black/5 dark:bg-white/5  flex items-center p-2">
+              <div className="rounded-md old-bg-black/5 old-dark:bg-white/5 bg-secondary  flex items-center p-2">
                 <ActivityIcon />
               </div>
               <div className="flex flex-col space-y-1">

@@ -33,6 +33,7 @@ import {
 import { Button } from "@/components/ui/button";
 import CollectionHeader from "@/components/collection/CollectionHeader";
 import ItemCard from "@/components/item/ItemCard";
+import Header from "@/components/common/Header";
 
 type Props = {
   params: { organizationId: string; collectionId: string; itemId?: string };
@@ -73,6 +74,13 @@ export default async function CollectionLayout({
   return (
     <>
       <div className="relative h-screen">
+        <Header
+          breadCrumbs={[
+            { id: collection.id, title: 'COL', param: "Col" },
+            { id: collection.id, title: 'ITEM', param: "Item" },
+            { id: collection.id, title: 'ORG', param: "Org" },
+          ]}
+        />
         <CollectionHeader id={collection.id} name={collection.name} />
 
         <div className="flex w-full justify-between px-4 py-2 border-b">
@@ -113,6 +121,7 @@ export default async function CollectionLayout({
                 />
               ))}
             </ul>
+            <div className="h-screen"></div>
             {/* </div> */}
             {/* List  */}
             {/* <CardTitle className="mt-16 ml-2">List</CardTitle>

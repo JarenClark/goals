@@ -54,7 +54,7 @@ export default async function Sidebar({ params }: Props) {
   // console.log('spaces are ', JSON.stringify(spaces,null,2))
   return (
     // <ProtectedContent>
-    <div className="bg-black/5 dark:bg-white/5 border-r h-screen py-8 px-4  flex flex-col justify-between xl:min-w-[300px]">
+    <div className="old-bg-black/5 old-dark:bg-white/5 bg-secondary border-r h-screen py-8 px-4  flex flex-col justify-between xl:min-w-[300px]">
      
       <section>
       <SpaceNavigator />

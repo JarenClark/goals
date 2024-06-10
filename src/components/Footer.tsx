@@ -32,18 +32,18 @@ function Footer({}: Props) {
     <footer className="border-t-2 block sm:hidden fixed py-2 rounded-t-2xl bottom-0 left-0 w-screen bg-background">
       <div className="container">
         <ul className="flex items-center justify-center space-x-2">
-        <li className="rounded-lg bg-black/5 dark:bg-white/5">
+        <li className="rounded-lg old-bg-black/5 old-dark:bg-white/5 bg-secondary">
             <Link className="block p-2"href={"/"}>
               <HomeIcon></HomeIcon>
             </Link>
           </li>
-          <li className="rounded-lg bg-black/5 dark:bg-white/5">
+          <li className="rounded-lg old-bg-black/5 old-dark:bg-white/5 bg-secondary">
             <Link className="p-2 block" href={"/collections"}>
               <LibraryIcon />
             </Link>
           </li>
           <li></li>
-          <li className="rounded-lg bg-black/5 dark:bg-white/5">
+          <li className="rounded-lg old-bg-black/5 old-dark:bg-white/5 bg-secondary">
             <AddNewItem />
           </li>
         </ul>

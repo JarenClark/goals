@@ -8,7 +8,7 @@ function ActivePathOverlay({ link }: Props) {
   const pathname = usePathname();
   if (pathname == link) {
     return (
-      <div className=" pointer-events-none absolute inset-0 bg-black/5 dark:bg-white/5"></div>
+      <div className=" pointer-events-none absolute inset-0 old-bg-black/5 old-dark:bg-white/5 bg-secondary"></div>
     );
   }
   return null;
